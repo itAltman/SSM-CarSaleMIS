@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="FlyCloud-Mapper" />
+        <module name="FlyCloud-Pojo" />
+        <module name="FlyCloud-Service" />
+        <module name="FlyCloud-Util" />
+        <module name="FlyCloud-Web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="FlyCloud-Mapper" target="1.5" />
+      <module name="FlyCloud-parent" target="1.5" />
+      <module name="FlyCloud-Pojo" target="1.5" />
+      <module name="FlyCloud-Service" target="1.5" />
+      <module name="FlyCloud-Util" target="1.5" />
+      <module name="FlyCloud-Web" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

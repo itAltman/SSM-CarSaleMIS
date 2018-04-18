@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="FlyCloud-Web:war">
+    <output-path>$PROJECT_DIR$/FlyCloud-Web/target</output-path>
+    <root id="archive" name="FlyCloud-parent.war">
+      <element id="artifact" artifact-name="FlyCloud-Web:war exploded" />
+    </root>
+  </artifact>
+</component>

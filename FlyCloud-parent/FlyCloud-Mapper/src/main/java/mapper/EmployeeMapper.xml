@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ssm.mapper.EmployeeMapper" >
+  <resultMap id="BaseResultMap" type="ssm.pojo.Employee" >
+    <id column="empId" property="empid" jdbcType="INTEGER" />
+    <result column="positionId" property="positionid" jdbcType="INTEGER" />
+    <result column="companyId" property="companyid" jdbcType="INTEGER" />
+    <result column="empName" property="empname" jdbcType="VARCHAR" />
+    <result column="empPhone" property="empphone" jdbcType="DECIMAL" />
+    <result column="empPassword" property="emppassword" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    empId, positionId, companyId, empName, empPhone, empPassword
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="ssm.pojo.EmployeeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from employee
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from employee
+    where empId = #{empid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from employee
+    where empId = #{empid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="ssm.pojo.EmployeeExample" >
+    delete from employee
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="ssm.pojo.Employee" >
+    insert into employee (empId, positionId, companyId, 
+      empName, empPhone, empPassword
+      )
+    values (#{empid,jdbcType=INTEGER}, #{positionid,jdbcType=INTEGER}, #{companyid,jdbcType=INTEGER}, 
+      #{empname,jdbcType=VARCHAR}, #{empphone,jdbcType=DECIMAL}, #{emppassword,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="ssm.pojo.Employee" >
+    insert into employee
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="empid != null" >
+        empId,
+      </if>
+      <if test="positionid != null" >
+        positionId,
+      </if>
+      <if test="companyid != null" >
+        companyId,
+      </if>
+      <if test="empname != null" >
+        empName,
+      </if>
+      <if test="empphone != null" >
+        empPhone,
+      </if>
+      <if test="emppassword != null" >
+        empPassword,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="empid != null" >
+        #{empid,jdbcType=INTEGER},
+      </if>
+      <if test="positionid != null" >
+        #{positionid,jdbcType=INTEGER},
+      </if>
+      <if test="companyid != null" >
+        #{companyid,jdbcType=INTEGER},
+      </if>
+      <if test="empname != null" >
+        #{empname,jdbcType=VARCHAR},
+      </if>
+      <if test="empphone != null" >
+        #{empphone,jdbcType=DECIMAL},
+      </if>
+      <if test="emppassword != null" >
+        #{emppassword,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="ssm.pojo.EmployeeExample" resultType="java.lang.Integer" >
+    select count(*) from employee
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update employee
+    <set >
+      <if test="record.empid != null" >
+        empId = #{record.empid,jdbcType=INTEGER},
+      </if>
+      <if test="record.positionid != null" >
+        positionId = #{record.positionid,jdbcType=INTEGER},
+      </if>
+      <if test="record.companyid != null" >
+        companyId = #{record.companyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.empname != null" >
+        empName = #{record.empname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.empphone != null" >
+        empPhone = #{record.empphone,jdbcType=DECIMAL},
+      </if>
+      <if test="record.emppassword != null" >
+        empPassword = #{record.emppassword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update employee
+    set empId = #{record.empid,jdbcType=INTEGER},
+      positionId = #{record.positionid,jdbcType=INTEGER},
+      companyId = #{record.companyid,jdbcType=INTEGER},
+      empName = #{record.empname,jdbcType=VARCHAR},
+      empPhone = #{record.empphone,jdbcType=DECIMAL},
+      empPassword = #{record.emppassword,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="ssm.pojo.Employee" >
+    update employee
+    <set >
+      <if test="positionid != null" >
+        positionId = #{positionid,jdbcType=INTEGER},
+      </if>
+      <if test="companyid != null" >
+        companyId = #{companyid,jdbcType=INTEGER},
+      </if>
+      <if test="empname != null" >
+        empName = #{empname,jdbcType=VARCHAR},
+      </if>
+      <if test="empphone != null" >
+        empPhone = #{empphone,jdbcType=DECIMAL},
+      </if>
+      <if test="emppassword != null" >
+        empPassword = #{emppassword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where empId = #{empid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ssm.pojo.Employee" >
+    update employee
+    set positionId = #{positionid,jdbcType=INTEGER},
+      companyId = #{companyid,jdbcType=INTEGER},
+      empName = #{empname,jdbcType=VARCHAR},
+      empPhone = #{empphone,jdbcType=DECIMAL},
+      empPassword = #{emppassword,jdbcType=VARCHAR}
+    where empId = #{empid,jdbcType=INTEGER}
+  </update>
+</mapper>

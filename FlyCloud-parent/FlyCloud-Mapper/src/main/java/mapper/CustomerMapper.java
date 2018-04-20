@@ -1,10 +1,9 @@
 package mapper;
 
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import pojo.Customer;
 import pojo.CustomerExample;
-
-import java.util.List;
 
 public interface CustomerMapper {
     int countByExample(CustomerExample example);

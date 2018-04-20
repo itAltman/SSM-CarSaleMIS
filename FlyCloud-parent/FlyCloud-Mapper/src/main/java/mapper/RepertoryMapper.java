@@ -1,10 +1,9 @@
 package mapper;
 
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import pojo.Repertory;
 import pojo.RepertoryExample;
-
-import java.util.List;
 
 public interface RepertoryMapper {
     int countByExample(RepertoryExample example);

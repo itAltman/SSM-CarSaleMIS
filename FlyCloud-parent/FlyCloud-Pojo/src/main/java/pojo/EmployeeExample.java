@@ -483,6 +483,66 @@ public class EmployeeExample {
             addCriterion("empPassword not between", value1, value2, "emppassword");
             return (Criteria) this;
         }
+
+        public Criteria andEmpsaleryIsNull() {
+            addCriterion("empSalery is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmpsaleryIsNotNull() {
+            addCriterion("empSalery is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmpsaleryEqualTo(Integer value) {
+            addCriterion("empSalery =", value, "empsalery");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmpsaleryNotEqualTo(Integer value) {
+            addCriterion("empSalery <>", value, "empsalery");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmpsaleryGreaterThan(Integer value) {
+            addCriterion("empSalery >", value, "empsalery");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmpsaleryGreaterThanOrEqualTo(Integer value) {
+            addCriterion("empSalery >=", value, "empsalery");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmpsaleryLessThan(Integer value) {
+            addCriterion("empSalery <", value, "empsalery");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmpsaleryLessThanOrEqualTo(Integer value) {
+            addCriterion("empSalery <=", value, "empsalery");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmpsaleryIn(List<Integer> values) {
+            addCriterion("empSalery in", values, "empsalery");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmpsaleryNotIn(List<Integer> values) {
+            addCriterion("empSalery not in", values, "empsalery");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmpsaleryBetween(Integer value1, Integer value2) {
+            addCriterion("empSalery between", value1, value2, "empsalery");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmpsaleryNotBetween(Integer value1, Integer value2) {
+            addCriterion("empSalery not between", value1, value2, "empsalery");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

@@ -7,6 +7,8 @@ public class Financing {
 
     private Integer repertoryid;
 
+    private Integer companyid;
+
     private Long financingmoney;
 
     private Short financingtype;
@@ -33,6 +35,14 @@ public class Financing {
 
     public void setRepertoryid(Integer repertoryid) {
         this.repertoryid = repertoryid;
+    }
+
+    public Integer getCompanyid() {
+        return companyid;
+    }
+
+    public void setCompanyid(Integer companyid) {
+        this.companyid = companyid;
     }
 
     public Long getFinancingmoney() {

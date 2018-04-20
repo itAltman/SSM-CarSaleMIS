@@ -13,6 +13,8 @@ public class Employee {
 
     private String emppassword;
 
+    private Integer empsalery;
+
     public Integer getEmpid() {
         return empid;
     }
@@ -59,5 +61,13 @@ public class Employee {
 
     public void setEmppassword(String emppassword) {
         this.emppassword = emppassword == null ? null : emppassword.trim();
+    }
+
+    public Integer getEmpsalery() {
+        return empsalery;
+    }
+
+    public void setEmpsalery(Integer empsalery) {
+        this.empsalery = empsalery;
     }
 }

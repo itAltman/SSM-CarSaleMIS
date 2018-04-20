@@ -1,10 +1,9 @@
 package mapper;
 
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import pojo.Carseries;
 import pojo.CarseriesExample;
-
-import java.util.List;
 
 public interface CarseriesMapper {
     int countByExample(CarseriesExample example);

@@ -30,13 +30,4 @@ public class Position {
     public void setPositionlevel(Short positionlevel) {
         this.positionlevel = positionlevel;
     }
-
-    @Override
-    public String toString() {
-        return "Position{" +
-                "positionid=" + positionid +
-                ", positionname='" + positionname + '\'' +
-                ", positionlevel=" + positionlevel +
-                '}';
-    }
 }

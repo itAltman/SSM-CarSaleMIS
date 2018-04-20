@@ -1,16 +1,9 @@
 package mapper;
-/**
- * @description: 职位表的dao层
- * @author: Altman
- * @date: 2018-04-15
- *
-**/
 
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import pojo.Position;
 import pojo.PositionExample;
-
-import java.util.List;
 
 public interface PositionMapper {
     int countByExample(PositionExample example);

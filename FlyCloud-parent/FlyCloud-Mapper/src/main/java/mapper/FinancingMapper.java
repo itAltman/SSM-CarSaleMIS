@@ -1,10 +1,9 @@
 package mapper;
 
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import pojo.Financing;
 import pojo.FinancingExample;
-
-import java.util.List;
 
 public interface FinancingMapper {
     int countByExample(FinancingExample example);

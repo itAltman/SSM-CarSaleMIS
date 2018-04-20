@@ -1,14 +1,18 @@
 ﻿/*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2018-04-14 11:15:44                          */
+/* Created on:     2018-04-20 10:13:10                          */
 /*==============================================================*/
 
 
+drop table if exists AdminLog;
+
 drop table if exists CarBrand;
 
-drop table if exists car;
+drop table if exists CarOrder;
 
-drop table if exists carseries;
+drop table if exists CarSeries;
+
+drop table if exists car;
 
 drop table if exists company;
 
@@ -25,17 +29,60 @@ drop table if exists repertory;
 drop table if exists sale;
 
 /*==============================================================*/
+/* Table: AdminLog                                              */
+/*==============================================================*/
+create table AdminLog
+(
+   logId                int not null comment '日志编号',
+   empId                int comment '员工编号',
+   companyId            int comment '公司编号',
+   logContent           varchar(50) not null comment '操作内容',
+   logTime              timestamp not null comment '操作时间',
+   primary key (logId)
+);
+
+alter table AdminLog comment '日志表';
+
+/*==============================================================*/
 /* Table: CarBrand                                              */
 /*==============================================================*/
 create table CarBrand
 (
    brandId              int not null auto_increment comment '品牌编号',
-   brandNmae            varchar(32) not null comment '品牌名称',
+   brandName            varchar(32) not null comment '品牌名称',
    brandNum             varchar(2) not null comment '品牌序号',
    primary key (brandId)
 );
 
 alter table CarBrand comment '汽车品牌表';
+
+/*==============================================================*/
+/* Table: CarOrder                                              */
+/*==============================================================*/
+create table CarOrder
+(
+   orderId              int not null comment '订单编号',
+   carId                int comment '汽车编号',
+   companyId            int comment '公司编号',
+   orderNum             numeric(1,0) comment '车辆数量',
+   orderType            numeric(1,0) comment '订单状态（1：未审核、2：已审核）',
+   primary key (orderId)
+);
+
+alter table CarOrder comment '订单表';
+
+/*==============================================================*/
+/* Table: CarSeries                                             */
+/*==============================================================*/
+create table CarSeries
+(
+   seriesId             int not null auto_increment comment '车系编号',
+   brandId              int not null comment '品牌编号',
+   seriesName           varchar(32) not null comment '车系名称',
+   primary key (seriesId)
+);
+
+alter table CarSeries comment '汽车车系表';
 
 /*==============================================================*/
 /* Table: car                                                   */
@@ -51,19 +98,6 @@ create table car
 );
 
 alter table car comment '汽车表';
-
-/*==============================================================*/
-/* Table: carseries                                             */
-/*==============================================================*/
-create table carseries
-(
-   seriesId             int not null auto_increment comment '车系编号',
-   brandId              int not null comment '品牌编号',
-   seriesName           varchar(32) not null comment '车系名称',
-   primary key (seriesId)
-);
-
-alter table carseries comment '汽车车系表';
 
 /*==============================================================*/
 /* Table: company                                               */
@@ -106,6 +140,7 @@ create table employee
    empName              varchar(10) not null comment '员工姓名',
    empPhone             numeric(11,0) comment '登录手机',
    empPassword          varchar(50) comment '登录密码',
+   empSalery            numeric(5,0) comment '员工工资',
    primary key (empId)
 );
 
@@ -119,6 +154,7 @@ create table financing
    financingId          int not null auto_increment comment '财务编号',
    saleId               int comment '销售编号',
    repertoryId          int comment '库存编号',
+   companyId            int comment '公司编号',
    financingMoney       numeric(10,0) comment '涉及金额',
    financingType        numeric(1,0) comment '财务状态（1：收入，2：支出）',
    primary key (financingId)
@@ -164,6 +200,7 @@ create table sale
    customerId           int not null comment '客户编号',
    carId                int not null comment '汽车编号',
    empId                int not null comment '员工编号',
+   companyId            int comment '公司编号',
    saleCurPrice         numeric(8,0) not null comment '销售价格',
    saleNum              numeric(2,0) not null comment '销售数量',
    saleType             numeric(1,0) not null comment '销售状态（1、未付款，2、已付款）',
@@ -172,11 +209,23 @@ create table sale
 
 alter table sale comment '销售表';
 
-alter table car add constraint FK_seriesId foreign key (seriesId)
-      references carseries (seriesId) on delete restrict on update restrict;
+alter table AdminLog add constraint FK_companyId_log foreign key (companyId)
+      references company (companyId) on delete restrict on update restrict;
 
-alter table carseries add constraint FK_brandId foreign key (brandId)
+alter table AdminLog add constraint FK_empId_log foreign key (empId)
+      references employee (empId) on delete restrict on update restrict;
+
+alter table CarOrder add constraint FK_carId_order foreign key (carId)
+      references car (carId) on delete restrict on update restrict;
+
+alter table CarOrder add constraint FK_companyId_order foreign key (companyId)
+      references company (companyId) on delete restrict on update restrict;
+
+alter table CarSeries add constraint FK_brandId foreign key (brandId)
       references CarBrand (brandId) on delete restrict on update restrict;
+
+alter table car add constraint FK_seriesId foreign key (seriesId)
+      references CarSeries (seriesId) on delete restrict on update restrict;
 
 alter table customer add constraint FK_companyId_cus foreign key (companyId)
       references company (companyId) on delete restrict on update restrict;
@@ -186,6 +235,9 @@ alter table employee add constraint FK_companyId_emp foreign key (companyId)
 
 alter table employee add constraint FK_positionId foreign key (positionId)
       references position (positionId) on delete restrict on update restrict;
+
+alter table financing add constraint FK_companyId_financing foreign key (companyId)
+      references company (companyId) on delete restrict on update restrict;
 
 alter table financing add constraint FK_repertoryId foreign key (repertoryId)
       references repertory (repertoryId) on delete restrict on update restrict;
@@ -202,9 +254,12 @@ alter table repertory add constraint FK_companyId_repertory foreign key (company
 alter table sale add constraint FK_carId_sale foreign key (carId)
       references car (carId) on delete restrict on update restrict;
 
+alter table sale add constraint FK_companyId_sale foreign key (companyId)
+      references company (companyId) on delete restrict on update restrict;
+
 alter table sale add constraint FK_customerId foreign key (customerId)
       references customer (customerId) on delete restrict on update restrict;
 
-alter table sale add constraint FK_empId foreign key (empId)
+alter table sale add constraint FK_empId_sale foreign key (empId)
       references employee (empId) on delete restrict on update restrict;
 

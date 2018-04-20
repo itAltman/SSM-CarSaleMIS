@@ -1,32 +1,32 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="ssm.mapper.CarMapper" >
-  <resultMap id="BaseResultMap" type="ssm.pojo.Car" >
-    <id column="carId" property="carid" jdbcType="INTEGER" />
-    <result column="seriesId" property="seriesid" jdbcType="INTEGER" />
-    <result column="carName" property="carname" jdbcType="VARCHAR" />
-    <result column="carPrice" property="carprice" jdbcType="DECIMAL" />
-    <result column="carTime" property="cartime" jdbcType="DATE" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.CarMapper">
+  <resultMap id="BaseResultMap" type="pojo.Car">
+    <id column="carId" jdbcType="INTEGER" property="carid" />
+    <result column="seriesId" jdbcType="INTEGER" property="seriesid" />
+    <result column="carName" jdbcType="VARCHAR" property="carname" />
+    <result column="carPrice" jdbcType="DECIMAL" property="carprice" />
+    <result column="carTime" jdbcType="DATE" property="cartime" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -37,25 +37,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -66,141 +66,348 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     carId, seriesId, carName, carPrice, carTime
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="ssm.pojo.CarExample" >
+  <select id="selectByExample" parameterType="pojo.CarExample" resultMap="BaseResultMap">
     select
-    <if test="distinct" >
+    <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
     from car
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null" >
+    <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from car
     where carId = #{carid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from car
     where carId = #{carid,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="ssm.pojo.CarExample" >
+  <delete id="deleteByExample" parameterType="pojo.CarExample">
     delete from car
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="ssm.pojo.Car" >
+  <insert id="insert" parameterType="pojo.Car">
     insert into car (carId, seriesId, carName, 
       carPrice, carTime)
     values (#{carid,jdbcType=INTEGER}, #{seriesid,jdbcType=INTEGER}, #{carname,jdbcType=VARCHAR}, 
       #{carprice,jdbcType=DECIMAL}, #{cartime,jdbcType=DATE})
   </insert>
-  <insert id="insertSelective" parameterType="ssm.pojo.Car" >
+  <insert id="insertSelective" parameterType="pojo.Car">
     insert into car
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="carid != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="carid != null">
         carId,
       </if>
-      <if test="seriesid != null" >
+      <if test="seriesid != null">
         seriesId,
       </if>
-      <if test="carname != null" >
+      <if test="carname != null">
         carName,
       </if>
-      <if test="carprice != null" >
+      <if test="carprice != null">
         carPrice,
       </if>
-      <if test="cartime != null" >
+      <if test="cartime != null">
         carTime,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="carid != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="carid != null">
         #{carid,jdbcType=INTEGER},
       </if>
-      <if test="seriesid != null" >
+      <if test="seriesid != null">
         #{seriesid,jdbcType=INTEGER},
       </if>
-      <if test="carname != null" >
+      <if test="carname != null">
         #{carname,jdbcType=VARCHAR},
       </if>
-      <if test="carprice != null" >
+      <if test="carprice != null">
         #{carprice,jdbcType=DECIMAL},
       </if>
-      <if test="cartime != null" >
+      <if test="cartime != null">
         #{cartime,jdbcType=DATE},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="ssm.pojo.CarExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="pojo.CarExample" resultType="java.lang.Integer">
     select count(*) from car
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+  <update id="updateByExampleSelective" parameterType="map">
     update car
-    <set >
-      <if test="record.carid != null" >
+    <set>
+      <if test="record.carid != null">
         carId = #{record.carid,jdbcType=INTEGER},
       </if>
-      <if test="record.seriesid != null" >
+      <if test="record.seriesid != null">
         seriesId = #{record.seriesid,jdbcType=INTEGER},
       </if>
-      <if test="record.carname != null" >
+      <if test="record.carname != null">
         carName = #{record.carname,jdbcType=VARCHAR},
       </if>
-      <if test="record.carprice != null" >
+      <if test="record.carprice != null">
         carPrice = #{record.carprice,jdbcType=DECIMAL},
       </if>
-      <if test="record.cartime != null" >
+      <if test="record.cartime != null">
         carTime = #{record.cartime,jdbcType=DATE},
       </if>
     </set>
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map" >
+  <update id="updateByExample" parameterType="map">
     update car
     set carId = #{record.carid,jdbcType=INTEGER},
       seriesId = #{record.seriesid,jdbcType=INTEGER},
       carName = #{record.carname,jdbcType=VARCHAR},
       carPrice = #{record.carprice,jdbcType=DECIMAL},
       carTime = #{record.cartime,jdbcType=DATE}
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="ssm.pojo.Car" >
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.Car">
     update car
-    <set >
-      <if test="seriesid != null" >
+    <set>
+      <if test="seriesid != null">
         seriesId = #{seriesid,jdbcType=INTEGER},
       </if>
-      <if test="carname != null" >
+      <if test="carname != null">
         carName = #{carname,jdbcType=VARCHAR},
       </if>
-      <if test="carprice != null" >
+      <if test="carprice != null">
         carPrice = #{carprice,jdbcType=DECIMAL},
       </if>
-      <if test="cartime != null" >
+      <if test="cartime != null">
         carTime = #{cartime,jdbcType=DATE},
       </if>
     </set>
     where carId = #{carid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="ssm.pojo.Car" >
+  <update id="updateByPrimaryKey" parameterType="pojo.Car">
+    update car
+    set seriesId = #{seriesid,jdbcType=INTEGER},
+      carName = #{carname,jdbcType=VARCHAR},
+      carPrice = #{carprice,jdbcType=DECIMAL},
+      carTime = #{cartime,jdbcType=DATE}
+    where carId = #{carid,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="ssm.pojo.Car">
+    <id column="carId" jdbcType="INTEGER" property="carid" />
+    <result column="seriesId" jdbcType="INTEGER" property="seriesid" />
+    <result column="carName" jdbcType="VARCHAR" property="carname" />
+    <result column="carPrice" jdbcType="DECIMAL" property="carprice" />
+    <result column="carTime" jdbcType="DATE" property="cartime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    carId, seriesId, carName, carPrice, carTime
+  </sql>
+  <select id="selectByExample" parameterType="ssm.pojo.CarExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from car
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from car
+    where carId = #{carid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from car
+    where carId = #{carid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="ssm.pojo.CarExample">
+    delete from car
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="ssm.pojo.Car">
+    insert into car (carId, seriesId, carName, 
+      carPrice, carTime)
+    values (#{carid,jdbcType=INTEGER}, #{seriesid,jdbcType=INTEGER}, #{carname,jdbcType=VARCHAR}, 
+      #{carprice,jdbcType=DECIMAL}, #{cartime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="ssm.pojo.Car">
+    insert into car
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="carid != null">
+        carId,
+      </if>
+      <if test="seriesid != null">
+        seriesId,
+      </if>
+      <if test="carname != null">
+        carName,
+      </if>
+      <if test="carprice != null">
+        carPrice,
+      </if>
+      <if test="cartime != null">
+        carTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="carid != null">
+        #{carid,jdbcType=INTEGER},
+      </if>
+      <if test="seriesid != null">
+        #{seriesid,jdbcType=INTEGER},
+      </if>
+      <if test="carname != null">
+        #{carname,jdbcType=VARCHAR},
+      </if>
+      <if test="carprice != null">
+        #{carprice,jdbcType=DECIMAL},
+      </if>
+      <if test="cartime != null">
+        #{cartime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="ssm.pojo.CarExample" resultType="java.lang.Integer">
+    select count(*) from car
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update car
+    <set>
+      <if test="record.carid != null">
+        carId = #{record.carid,jdbcType=INTEGER},
+      </if>
+      <if test="record.seriesid != null">
+        seriesId = #{record.seriesid,jdbcType=INTEGER},
+      </if>
+      <if test="record.carname != null">
+        carName = #{record.carname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carprice != null">
+        carPrice = #{record.carprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cartime != null">
+        carTime = #{record.cartime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update car
+    set carId = #{record.carid,jdbcType=INTEGER},
+      seriesId = #{record.seriesid,jdbcType=INTEGER},
+      carName = #{record.carname,jdbcType=VARCHAR},
+      carPrice = #{record.carprice,jdbcType=DECIMAL},
+      carTime = #{record.cartime,jdbcType=DATE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="ssm.pojo.Car">
+    update car
+    <set>
+      <if test="seriesid != null">
+        seriesId = #{seriesid,jdbcType=INTEGER},
+      </if>
+      <if test="carname != null">
+        carName = #{carname,jdbcType=VARCHAR},
+      </if>
+      <if test="carprice != null">
+        carPrice = #{carprice,jdbcType=DECIMAL},
+      </if>
+      <if test="cartime != null">
+        carTime = #{cartime,jdbcType=DATE},
+      </if>
+    </set>
+    where carId = #{carid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ssm.pojo.Car">
     update car
     set seriesId = #{seriesid,jdbcType=INTEGER},
       carName = #{carname,jdbcType=VARCHAR},

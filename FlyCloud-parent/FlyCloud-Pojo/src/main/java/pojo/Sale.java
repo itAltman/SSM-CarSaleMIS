@@ -9,6 +9,8 @@ public class Sale {
 
     private Integer empid;
 
+    private Integer companyid;
+
     private Integer salecurprice;
 
     private Short salenum;
@@ -45,6 +47,14 @@ public class Sale {
 
     public void setEmpid(Integer empid) {
         this.empid = empid;
+    }
+
+    public Integer getCompanyid() {
+        return companyid;
+    }
+
+    public void setCompanyid(Integer companyid) {
+        this.companyid = companyid;
     }
 
     public Integer getSalecurprice() {

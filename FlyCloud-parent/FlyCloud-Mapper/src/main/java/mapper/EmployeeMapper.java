@@ -1,10 +1,9 @@
 package mapper;
 
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import pojo.Employee;
 import pojo.EmployeeExample;
-
-import java.util.List;
 
 public interface EmployeeMapper {
     int countByExample(EmployeeExample example);

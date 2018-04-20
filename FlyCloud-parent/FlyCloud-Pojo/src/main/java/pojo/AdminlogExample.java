@@ -1,16 +1,17 @@
 package pojo;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class FinancingExample {
+public class AdminlogExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public FinancingExample() {
+    public AdminlogExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -104,183 +105,123 @@ public class FinancingExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andFinancingidIsNull() {
-            addCriterion("financingId is null");
+        public Criteria andLogidIsNull() {
+            addCriterion("logId is null");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingidIsNotNull() {
-            addCriterion("financingId is not null");
+        public Criteria andLogidIsNotNull() {
+            addCriterion("logId is not null");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingidEqualTo(Integer value) {
-            addCriterion("financingId =", value, "financingid");
+        public Criteria andLogidEqualTo(Integer value) {
+            addCriterion("logId =", value, "logid");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingidNotEqualTo(Integer value) {
-            addCriterion("financingId <>", value, "financingid");
+        public Criteria andLogidNotEqualTo(Integer value) {
+            addCriterion("logId <>", value, "logid");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingidGreaterThan(Integer value) {
-            addCriterion("financingId >", value, "financingid");
+        public Criteria andLogidGreaterThan(Integer value) {
+            addCriterion("logId >", value, "logid");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("financingId >=", value, "financingid");
+        public Criteria andLogidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("logId >=", value, "logid");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingidLessThan(Integer value) {
-            addCriterion("financingId <", value, "financingid");
+        public Criteria andLogidLessThan(Integer value) {
+            addCriterion("logId <", value, "logid");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingidLessThanOrEqualTo(Integer value) {
-            addCriterion("financingId <=", value, "financingid");
+        public Criteria andLogidLessThanOrEqualTo(Integer value) {
+            addCriterion("logId <=", value, "logid");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingidIn(List<Integer> values) {
-            addCriterion("financingId in", values, "financingid");
+        public Criteria andLogidIn(List<Integer> values) {
+            addCriterion("logId in", values, "logid");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingidNotIn(List<Integer> values) {
-            addCriterion("financingId not in", values, "financingid");
+        public Criteria andLogidNotIn(List<Integer> values) {
+            addCriterion("logId not in", values, "logid");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingidBetween(Integer value1, Integer value2) {
-            addCriterion("financingId between", value1, value2, "financingid");
+        public Criteria andLogidBetween(Integer value1, Integer value2) {
+            addCriterion("logId between", value1, value2, "logid");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingidNotBetween(Integer value1, Integer value2) {
-            addCriterion("financingId not between", value1, value2, "financingid");
+        public Criteria andLogidNotBetween(Integer value1, Integer value2) {
+            addCriterion("logId not between", value1, value2, "logid");
             return (Criteria) this;
         }
 
-        public Criteria andSaleidIsNull() {
-            addCriterion("saleId is null");
+        public Criteria andEmpidIsNull() {
+            addCriterion("empId is null");
             return (Criteria) this;
         }
 
-        public Criteria andSaleidIsNotNull() {
-            addCriterion("saleId is not null");
+        public Criteria andEmpidIsNotNull() {
+            addCriterion("empId is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSaleidEqualTo(Integer value) {
-            addCriterion("saleId =", value, "saleid");
+        public Criteria andEmpidEqualTo(Integer value) {
+            addCriterion("empId =", value, "empid");
             return (Criteria) this;
         }
 
-        public Criteria andSaleidNotEqualTo(Integer value) {
-            addCriterion("saleId <>", value, "saleid");
+        public Criteria andEmpidNotEqualTo(Integer value) {
+            addCriterion("empId <>", value, "empid");
             return (Criteria) this;
         }
 
-        public Criteria andSaleidGreaterThan(Integer value) {
-            addCriterion("saleId >", value, "saleid");
+        public Criteria andEmpidGreaterThan(Integer value) {
+            addCriterion("empId >", value, "empid");
             return (Criteria) this;
         }
 
-        public Criteria andSaleidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("saleId >=", value, "saleid");
+        public Criteria andEmpidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("empId >=", value, "empid");
             return (Criteria) this;
         }
 
-        public Criteria andSaleidLessThan(Integer value) {
-            addCriterion("saleId <", value, "saleid");
+        public Criteria andEmpidLessThan(Integer value) {
+            addCriterion("empId <", value, "empid");
             return (Criteria) this;
         }
 
-        public Criteria andSaleidLessThanOrEqualTo(Integer value) {
-            addCriterion("saleId <=", value, "saleid");
+        public Criteria andEmpidLessThanOrEqualTo(Integer value) {
+            addCriterion("empId <=", value, "empid");
             return (Criteria) this;
         }
 
-        public Criteria andSaleidIn(List<Integer> values) {
-            addCriterion("saleId in", values, "saleid");
+        public Criteria andEmpidIn(List<Integer> values) {
+            addCriterion("empId in", values, "empid");
             return (Criteria) this;
         }
 
-        public Criteria andSaleidNotIn(List<Integer> values) {
-            addCriterion("saleId not in", values, "saleid");
+        public Criteria andEmpidNotIn(List<Integer> values) {
+            addCriterion("empId not in", values, "empid");
             return (Criteria) this;
         }
 
-        public Criteria andSaleidBetween(Integer value1, Integer value2) {
-            addCriterion("saleId between", value1, value2, "saleid");
+        public Criteria andEmpidBetween(Integer value1, Integer value2) {
+            addCriterion("empId between", value1, value2, "empid");
             return (Criteria) this;
         }
 
-        public Criteria andSaleidNotBetween(Integer value1, Integer value2) {
-            addCriterion("saleId not between", value1, value2, "saleid");
-            return (Criteria) this;
-        }
-
-        public Criteria andRepertoryidIsNull() {
-            addCriterion("repertoryId is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRepertoryidIsNotNull() {
-            addCriterion("repertoryId is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRepertoryidEqualTo(Integer value) {
-            addCriterion("repertoryId =", value, "repertoryid");
-            return (Criteria) this;
-        }
-
-        public Criteria andRepertoryidNotEqualTo(Integer value) {
-            addCriterion("repertoryId <>", value, "repertoryid");
-            return (Criteria) this;
-        }
-
-        public Criteria andRepertoryidGreaterThan(Integer value) {
-            addCriterion("repertoryId >", value, "repertoryid");
-            return (Criteria) this;
-        }
-
-        public Criteria andRepertoryidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("repertoryId >=", value, "repertoryid");
-            return (Criteria) this;
-        }
-
-        public Criteria andRepertoryidLessThan(Integer value) {
-            addCriterion("repertoryId <", value, "repertoryid");
-            return (Criteria) this;
-        }
-
-        public Criteria andRepertoryidLessThanOrEqualTo(Integer value) {
-            addCriterion("repertoryId <=", value, "repertoryid");
-            return (Criteria) this;
-        }
-
-        public Criteria andRepertoryidIn(List<Integer> values) {
-            addCriterion("repertoryId in", values, "repertoryid");
-            return (Criteria) this;
-        }
-
-        public Criteria andRepertoryidNotIn(List<Integer> values) {
-            addCriterion("repertoryId not in", values, "repertoryid");
-            return (Criteria) this;
-        }
-
-        public Criteria andRepertoryidBetween(Integer value1, Integer value2) {
-            addCriterion("repertoryId between", value1, value2, "repertoryid");
-            return (Criteria) this;
-        }
-
-        public Criteria andRepertoryidNotBetween(Integer value1, Integer value2) {
-            addCriterion("repertoryId not between", value1, value2, "repertoryid");
+        public Criteria andEmpidNotBetween(Integer value1, Integer value2) {
+            addCriterion("empId not between", value1, value2, "empid");
             return (Criteria) this;
         }
 
@@ -344,123 +285,133 @@ public class FinancingExample {
             return (Criteria) this;
         }
 
-        public Criteria andFinancingmoneyIsNull() {
-            addCriterion("financingMoney is null");
+        public Criteria andLogcontentIsNull() {
+            addCriterion("logContent is null");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingmoneyIsNotNull() {
-            addCriterion("financingMoney is not null");
+        public Criteria andLogcontentIsNotNull() {
+            addCriterion("logContent is not null");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingmoneyEqualTo(Long value) {
-            addCriterion("financingMoney =", value, "financingmoney");
+        public Criteria andLogcontentEqualTo(String value) {
+            addCriterion("logContent =", value, "logcontent");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingmoneyNotEqualTo(Long value) {
-            addCriterion("financingMoney <>", value, "financingmoney");
+        public Criteria andLogcontentNotEqualTo(String value) {
+            addCriterion("logContent <>", value, "logcontent");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingmoneyGreaterThan(Long value) {
-            addCriterion("financingMoney >", value, "financingmoney");
+        public Criteria andLogcontentGreaterThan(String value) {
+            addCriterion("logContent >", value, "logcontent");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingmoneyGreaterThanOrEqualTo(Long value) {
-            addCriterion("financingMoney >=", value, "financingmoney");
+        public Criteria andLogcontentGreaterThanOrEqualTo(String value) {
+            addCriterion("logContent >=", value, "logcontent");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingmoneyLessThan(Long value) {
-            addCriterion("financingMoney <", value, "financingmoney");
+        public Criteria andLogcontentLessThan(String value) {
+            addCriterion("logContent <", value, "logcontent");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingmoneyLessThanOrEqualTo(Long value) {
-            addCriterion("financingMoney <=", value, "financingmoney");
+        public Criteria andLogcontentLessThanOrEqualTo(String value) {
+            addCriterion("logContent <=", value, "logcontent");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingmoneyIn(List<Long> values) {
-            addCriterion("financingMoney in", values, "financingmoney");
+        public Criteria andLogcontentLike(String value) {
+            addCriterion("logContent like", value, "logcontent");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingmoneyNotIn(List<Long> values) {
-            addCriterion("financingMoney not in", values, "financingmoney");
+        public Criteria andLogcontentNotLike(String value) {
+            addCriterion("logContent not like", value, "logcontent");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingmoneyBetween(Long value1, Long value2) {
-            addCriterion("financingMoney between", value1, value2, "financingmoney");
+        public Criteria andLogcontentIn(List<String> values) {
+            addCriterion("logContent in", values, "logcontent");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingmoneyNotBetween(Long value1, Long value2) {
-            addCriterion("financingMoney not between", value1, value2, "financingmoney");
+        public Criteria andLogcontentNotIn(List<String> values) {
+            addCriterion("logContent not in", values, "logcontent");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingtypeIsNull() {
-            addCriterion("financingType is null");
+        public Criteria andLogcontentBetween(String value1, String value2) {
+            addCriterion("logContent between", value1, value2, "logcontent");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingtypeIsNotNull() {
-            addCriterion("financingType is not null");
+        public Criteria andLogcontentNotBetween(String value1, String value2) {
+            addCriterion("logContent not between", value1, value2, "logcontent");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingtypeEqualTo(Short value) {
-            addCriterion("financingType =", value, "financingtype");
+        public Criteria andLogtimeIsNull() {
+            addCriterion("logTime is null");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingtypeNotEqualTo(Short value) {
-            addCriterion("financingType <>", value, "financingtype");
+        public Criteria andLogtimeIsNotNull() {
+            addCriterion("logTime is not null");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingtypeGreaterThan(Short value) {
-            addCriterion("financingType >", value, "financingtype");
+        public Criteria andLogtimeEqualTo(Date value) {
+            addCriterion("logTime =", value, "logtime");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingtypeGreaterThanOrEqualTo(Short value) {
-            addCriterion("financingType >=", value, "financingtype");
+        public Criteria andLogtimeNotEqualTo(Date value) {
+            addCriterion("logTime <>", value, "logtime");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingtypeLessThan(Short value) {
-            addCriterion("financingType <", value, "financingtype");
+        public Criteria andLogtimeGreaterThan(Date value) {
+            addCriterion("logTime >", value, "logtime");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingtypeLessThanOrEqualTo(Short value) {
-            addCriterion("financingType <=", value, "financingtype");
+        public Criteria andLogtimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("logTime >=", value, "logtime");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingtypeIn(List<Short> values) {
-            addCriterion("financingType in", values, "financingtype");
+        public Criteria andLogtimeLessThan(Date value) {
+            addCriterion("logTime <", value, "logtime");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingtypeNotIn(List<Short> values) {
-            addCriterion("financingType not in", values, "financingtype");
+        public Criteria andLogtimeLessThanOrEqualTo(Date value) {
+            addCriterion("logTime <=", value, "logtime");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingtypeBetween(Short value1, Short value2) {
-            addCriterion("financingType between", value1, value2, "financingtype");
+        public Criteria andLogtimeIn(List<Date> values) {
+            addCriterion("logTime in", values, "logtime");
             return (Criteria) this;
         }
 
-        public Criteria andFinancingtypeNotBetween(Short value1, Short value2) {
-            addCriterion("financingType not between", value1, value2, "financingtype");
+        public Criteria andLogtimeNotIn(List<Date> values) {
+            addCriterion("logTime not in", values, "logtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogtimeBetween(Date value1, Date value2) {
+            addCriterion("logTime between", value1, value2, "logtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogtimeNotBetween(Date value1, Date value2) {
+            addCriterion("logTime not between", value1, value2, "logtime");
             return (Criteria) this;
         }
     }

@@ -1,33 +1,47 @@
 package pojo;
-
 public class Position {
-    private Integer positionid;
-
-    private String positionname;
-
-    private Short positionlevel;
-
-    public Integer getPositionid() {
-        return positionid;
+    private Integer positionId;//职务编号
+    private String positionName;//职务名称（经理、操作员、销售员）
+    private Double positionLevel;//职务等级（1：经理、2：操作员、3：销售员）
+    public Position() {
+        super();
+    }
+    public Position(Integer positionId,String positionName,Double positionLevel) {
+        super();
+        this.positionId = positionId;
+        this.positionName = positionName;
+        this.positionLevel = positionLevel;
+    }
+    public Integer getPositionId() {
+        return this.positionId;
     }
 
-    public void setPositionid(Integer positionid) {
-        this.positionid = positionid;
+    public void setPositionId(Integer positionId) {
+        this.positionId = positionId;
     }
 
-    public String getPositionname() {
-        return positionname;
+    public String getPositionName() {
+        return this.positionName;
     }
 
-    public void setPositionname(String positionname) {
-        this.positionname = positionname == null ? null : positionname.trim();
+    public void setPositionName(String positionName) {
+        this.positionName = positionName;
     }
 
-    public Short getPositionlevel() {
-        return positionlevel;
+    public Double getPositionLevel() {
+        return this.positionLevel;
     }
 
-    public void setPositionlevel(Short positionlevel) {
-        this.positionlevel = positionlevel;
+    public void setPositionLevel(Double positionLevel) {
+        this.positionLevel = positionLevel;
+    }
+
+    @Override
+    public String toString() {
+        return "Position{" +
+                "positionId=" + positionId +
+                ", positionName='" + positionName + '\'' +
+                ", positionLevel=" + positionLevel +
+                '}';
     }
 }

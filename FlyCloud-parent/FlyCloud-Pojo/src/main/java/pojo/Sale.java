@@ -1,83 +1,91 @@
 package pojo;
-
 public class Sale {
-    private Integer saleid;
-
-    private Integer customerid;
-
-    private Integer carid;
-
-    private Integer empid;
-
-    private Integer companyid;
-
-    private Integer salecurprice;
-
-    private Short salenum;
-
-    private Short saletype;
-
-    public Integer getSaleid() {
-        return saleid;
+    private Integer empId;//员工编号
+    private Integer companyId;//公司编号
+    private Double saleType;//销售状态（1、未付款，2、已付款）
+    private Integer customerId;//客户编号
+    private Double saleNum;//销售数量
+    private Double saleCurPrice;//销售价格
+    private Integer carId;//汽车编号
+    public Sale() {
+        super();
+    }
+    public Sale(Integer empId,Integer companyId,Double saleType,Integer customerId,Double saleNum,Double saleCurPrice,Integer carId) {
+        super();
+        this.empId = empId;
+        this.companyId = companyId;
+        this.saleType = saleType;
+        this.customerId = customerId;
+        this.saleNum = saleNum;
+        this.saleCurPrice = saleCurPrice;
+        this.carId = carId;
+    }
+    public Integer getEmpId() {
+        return this.empId;
     }
 
-    public void setSaleid(Integer saleid) {
-        this.saleid = saleid;
+    public void setEmpId(Integer empId) {
+        this.empId = empId;
     }
 
-    public Integer getCustomerid() {
-        return customerid;
+    public Integer getCompanyId() {
+        return this.companyId;
     }
 
-    public void setCustomerid(Integer customerid) {
-        this.customerid = customerid;
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
     }
 
-    public Integer getCarid() {
-        return carid;
+    public Double getSaleType() {
+        return this.saleType;
     }
 
-    public void setCarid(Integer carid) {
-        this.carid = carid;
+    public void setSaleType(Double saleType) {
+        this.saleType = saleType;
     }
 
-    public Integer getEmpid() {
-        return empid;
+    public Integer getCustomerId() {
+        return this.customerId;
     }
 
-    public void setEmpid(Integer empid) {
-        this.empid = empid;
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
     }
 
-    public Integer getCompanyid() {
-        return companyid;
+    public Double getSaleNum() {
+        return this.saleNum;
     }
 
-    public void setCompanyid(Integer companyid) {
-        this.companyid = companyid;
+    public void setSaleNum(Double saleNum) {
+        this.saleNum = saleNum;
     }
 
-    public Integer getSalecurprice() {
-        return salecurprice;
+    public Double getSaleCurPrice() {
+        return this.saleCurPrice;
     }
 
-    public void setSalecurprice(Integer salecurprice) {
-        this.salecurprice = salecurprice;
+    public void setSaleCurPrice(Double saleCurPrice) {
+        this.saleCurPrice = saleCurPrice;
     }
 
-    public Short getSalenum() {
-        return salenum;
+    public Integer getCarId() {
+        return this.carId;
     }
 
-    public void setSalenum(Short salenum) {
-        this.salenum = salenum;
+    public void setCarId(Integer carId) {
+        this.carId = carId;
     }
 
-    public Short getSaletype() {
-        return saletype;
-    }
-
-    public void setSaletype(Short saletype) {
-        this.saletype = saletype;
+    @Override
+    public String toString() {
+        return "Sale{" +
+                "empId=" + empId +
+                ", companyId=" + companyId +
+                ", saleType=" + saleType +
+                ", customerId=" + customerId +
+                ", saleNum=" + saleNum +
+                ", saleCurPrice=" + saleCurPrice +
+                ", carId=" + carId +
+                '}';
     }
 }

@@ -1,53 +1,93 @@
 package pojo;
-
+import pojo.Car;
+import pojo.Company;
 public class Carorder {
-    private Integer orderid;
-
-    private Integer carid;
-
-    private Integer companyid;
-
-    private Short ordernum;
-
-    private Short ordertype;
-
-    public Integer getOrderid() {
-        return orderid;
+    private Integer orderId;//订单编号
+    private Double orderType;//订单状态（1：未审核、2：已审核）
+    private Integer companyId;//公司编号
+    private Double orderNum;//车辆数量
+    private Integer carId;//汽车编号
+    private Car car;
+    private Company company;
+    public Carorder() {
+        super();
+    }
+    public Carorder(Integer orderId,Double orderType,Integer companyId,Double orderNum,Integer carId,Car car,Company company) {
+        super();
+        this.orderId = orderId;
+        this.orderType = orderType;
+        this.companyId = companyId;
+        this.orderNum = orderNum;
+        this.carId = carId;
+        this.car = car;
+        this.company = company;
+    }
+    public Integer getOrderId() {
+        return this.orderId;
     }
 
-    public void setOrderid(Integer orderid) {
-        this.orderid = orderid;
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
     }
 
-    public Integer getCarid() {
-        return carid;
+    public Double getOrderType() {
+        return this.orderType;
     }
 
-    public void setCarid(Integer carid) {
-        this.carid = carid;
+    public void setOrderType(Double orderType) {
+        this.orderType = orderType;
     }
 
-    public Integer getCompanyid() {
-        return companyid;
+    public Integer getCompanyId() {
+        return this.companyId;
     }
 
-    public void setCompanyid(Integer companyid) {
-        this.companyid = companyid;
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
     }
 
-    public Short getOrdernum() {
-        return ordernum;
+    public Double getOrderNum() {
+        return this.orderNum;
     }
 
-    public void setOrdernum(Short ordernum) {
-        this.ordernum = ordernum;
+    public void setOrderNum(Double orderNum) {
+        this.orderNum = orderNum;
     }
 
-    public Short getOrdertype() {
-        return ordertype;
+    public Integer getCarId() {
+        return this.carId;
     }
 
-    public void setOrdertype(Short ordertype) {
-        this.ordertype = ordertype;
+    public void setCarId(Integer carId) {
+        this.carId = carId;
+    }
+
+    public Car getCar() {
+        return this.car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
+    public Company getCompany() {
+        return this.company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    @Override
+    public String toString() {
+        return "Carorder{" +
+                "orderId=" + orderId +
+                ", orderType=" + orderType +
+                ", companyId=" + companyId +
+                ", orderNum=" + orderNum +
+                ", carId=" + carId +
+                ", car=" + car +
+                ", company=" + company +
+                '}';
     }
 }

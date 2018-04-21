@@ -1,63 +1,83 @@
 package pojo;
-
+import pojo.Company;
+import pojo.Sale;
+import pojo.Repertory;
 public class Financing {
-    private Integer financingid;
-
-    private Integer saleid;
-
-    private Integer repertoryid;
-
-    private Integer companyid;
-
-    private Long financingmoney;
-
-    private Short financingtype;
-
-    public Integer getFinancingid() {
-        return financingid;
+    private Integer financingId;//财务编号
+    private Double financingMoney;//涉及金额
+    private Double financingType;//财务状态（1：收入，2：支出）
+    private Company company;
+    private Sale sale;
+    private Repertory repertory;
+    public Financing() {
+        super();
+    }
+    public Financing(Integer financingId,Double financingMoney,Double financingType,Company company,Sale sale,Repertory repertory) {
+        super();
+        this.financingId = financingId;
+        this.financingMoney = financingMoney;
+        this.financingType = financingType;
+        this.company = company;
+        this.sale = sale;
+        this.repertory = repertory;
+    }
+    public Integer getFinancingId() {
+        return this.financingId;
     }
 
-    public void setFinancingid(Integer financingid) {
-        this.financingid = financingid;
+    public void setFinancingId(Integer financingId) {
+        this.financingId = financingId;
     }
 
-    public Integer getSaleid() {
-        return saleid;
+    public Double getFinancingMoney() {
+        return this.financingMoney;
     }
 
-    public void setSaleid(Integer saleid) {
-        this.saleid = saleid;
+    public void setFinancingMoney(Double financingMoney) {
+        this.financingMoney = financingMoney;
     }
 
-    public Integer getRepertoryid() {
-        return repertoryid;
+    public Double getFinancingType() {
+        return this.financingType;
     }
 
-    public void setRepertoryid(Integer repertoryid) {
-        this.repertoryid = repertoryid;
+    public void setFinancingType(Double financingType) {
+        this.financingType = financingType;
     }
 
-    public Integer getCompanyid() {
-        return companyid;
+    public Company getCompany() {
+        return this.company;
     }
 
-    public void setCompanyid(Integer companyid) {
-        this.companyid = companyid;
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
-    public Long getFinancingmoney() {
-        return financingmoney;
+    public Sale getSale() {
+        return this.sale;
     }
 
-    public void setFinancingmoney(Long financingmoney) {
-        this.financingmoney = financingmoney;
+    public void setSale(Sale sale) {
+        this.sale = sale;
     }
 
-    public Short getFinancingtype() {
-        return financingtype;
+    public Repertory getRepertory() {
+        return this.repertory;
     }
 
-    public void setFinancingtype(Short financingtype) {
-        this.financingtype = financingtype;
+    public void setRepertory(Repertory repertory) {
+        this.repertory = repertory;
+    }
+
+    @Override
+    public String toString() {
+        return "Financing{" +
+                "financingId=" + financingId +
+                ", financingMoney=" + financingMoney +
+                ", financingType=" + financingType +
+                ", company=" + company +
+                ", sale=" + sale +
+                ", repertory=" + repertory +
+                '}';
     }
 }

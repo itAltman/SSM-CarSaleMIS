@@ -1,56 +1,58 @@
 package pojo;
-
-import java.math.BigDecimal;
-import java.util.Date;
-
 public class Car {
-    private Integer carid;
-
-    private Integer seriesid;
-
-    private String carname;
-
-    private BigDecimal carprice;
-
-    private Date cartime;
-
-    public Integer getCarid() {
-        return carid;
+    private Double carPrice;//汽车价格
+    private String carName;//汽车名称
+    private java.util.Date carTime;//出厂日期
+    private Integer seriesId;//车系编号
+    public Car() {
+        super();
+    }
+    public Car(Double carPrice,String carName,java.util.Date carTime,Integer seriesId) {
+        super();
+        this.carPrice = carPrice;
+        this.carName = carName;
+        this.carTime = carTime;
+        this.seriesId = seriesId;
+    }
+    public Double getCarPrice() {
+        return this.carPrice;
     }
 
-    public void setCarid(Integer carid) {
-        this.carid = carid;
+    public void setCarPrice(Double carPrice) {
+        this.carPrice = carPrice;
     }
 
-    public Integer getSeriesid() {
-        return seriesid;
+    public String getCarName() {
+        return this.carName;
     }
 
-    public void setSeriesid(Integer seriesid) {
-        this.seriesid = seriesid;
+    public void setCarName(String carName) {
+        this.carName = carName;
     }
 
-    public String getCarname() {
-        return carname;
+    public java.util.Date getCarTime() {
+        return this.carTime;
     }
 
-    public void setCarname(String carname) {
-        this.carname = carname == null ? null : carname.trim();
+    public void setCarTime(java.util.Date carTime) {
+        this.carTime = carTime;
     }
 
-    public BigDecimal getCarprice() {
-        return carprice;
+    public Integer getSeriesId() {
+        return this.seriesId;
     }
 
-    public void setCarprice(BigDecimal carprice) {
-        this.carprice = carprice;
+    public void setSeriesId(Integer seriesId) {
+        this.seriesId = seriesId;
     }
 
-    public Date getCartime() {
-        return cartime;
-    }
-
-    public void setCartime(Date cartime) {
-        this.cartime = cartime;
+    @Override
+    public String toString() {
+        return "Car{" +
+                "carPrice=" + carPrice +
+                ", carName='" + carName + '\'' +
+                ", carTime=" + carTime +
+                ", seriesId=" + seriesId +
+                '}';
     }
 }

@@ -1,23 +1,25 @@
 package pojo;
-
 public class Company {
-    private Integer companyid;
-
-    private String companyname;
-
-    public Integer getCompanyid() {
-        return companyid;
+    private String companyName;//公司编号
+    public Company() {
+        super();
+    }
+    public Company(String companyName) {
+        super();
+        this.companyName = companyName;
+    }
+    public String getCompanyName() {
+        return this.companyName;
     }
 
-    public void setCompanyid(Integer companyid) {
-        this.companyid = companyid;
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
-    public String getCompanyname() {
-        return companyname;
-    }
-
-    public void setCompanyname(String companyname) {
-        this.companyname = companyname == null ? null : companyname.trim();
+    @Override
+    public String toString() {
+        return "Company{" +
+                "companyName='" + companyName + '\'' +
+                '}';
     }
 }

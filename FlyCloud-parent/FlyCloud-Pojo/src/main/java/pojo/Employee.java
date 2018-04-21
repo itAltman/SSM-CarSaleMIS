@@ -1,73 +1,80 @@
 package pojo;
-
 public class Employee {
-    private Integer empid;
-
-    private Integer positionid;
-
-    private Integer companyid;
-
-    private String empname;
-
-    private Long empphone;
-
-    private String emppassword;
-
-    private Integer empsalery;
-
-    public Integer getEmpid() {
-        return empid;
+    private Integer companyId;//公司编号
+    private Double empPhone;//登录手机
+    private Double empSalery;//员工工资
+    private Integer positionId;//职务编号
+    private String empName;//员工姓名
+    private String empPassword;//登录密码
+    public Employee() {
+        super();
+    }
+    public Employee(Integer companyId,Double empPhone,Double empSalery,Integer positionId,String empName,String empPassword) {
+        super();
+        this.companyId = companyId;
+        this.empPhone = empPhone;
+        this.empSalery = empSalery;
+        this.positionId = positionId;
+        this.empName = empName;
+        this.empPassword = empPassword;
+    }
+    public Integer getCompanyId() {
+        return this.companyId;
     }
 
-    public void setEmpid(Integer empid) {
-        this.empid = empid;
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
     }
 
-    public Integer getPositionid() {
-        return positionid;
+    public Double getEmpPhone() {
+        return this.empPhone;
     }
 
-    public void setPositionid(Integer positionid) {
-        this.positionid = positionid;
+    public void setEmpPhone(Double empPhone) {
+        this.empPhone = empPhone;
     }
 
-    public Integer getCompanyid() {
-        return companyid;
+    public Double getEmpSalery() {
+        return this.empSalery;
     }
 
-    public void setCompanyid(Integer companyid) {
-        this.companyid = companyid;
+    public void setEmpSalery(Double empSalery) {
+        this.empSalery = empSalery;
     }
 
-    public String getEmpname() {
-        return empname;
+    public Integer getPositionId() {
+        return this.positionId;
     }
 
-    public void setEmpname(String empname) {
-        this.empname = empname == null ? null : empname.trim();
+    public void setPositionId(Integer positionId) {
+        this.positionId = positionId;
     }
 
-    public Long getEmpphone() {
-        return empphone;
+    public String getEmpName() {
+        return this.empName;
     }
 
-    public void setEmpphone(Long empphone) {
-        this.empphone = empphone;
+    public void setEmpName(String empName) {
+        this.empName = empName;
     }
 
-    public String getEmppassword() {
-        return emppassword;
+    public String getEmpPassword() {
+        return this.empPassword;
     }
 
-    public void setEmppassword(String emppassword) {
-        this.emppassword = emppassword == null ? null : emppassword.trim();
+    public void setEmpPassword(String empPassword) {
+        this.empPassword = empPassword;
     }
 
-    public Integer getEmpsalery() {
-        return empsalery;
-    }
-
-    public void setEmpsalery(Integer empsalery) {
-        this.empsalery = empsalery;
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "companyId=" + companyId +
+                ", empPhone=" + empPhone +
+                ", empSalery=" + empSalery +
+                ", positionId=" + positionId +
+                ", empName='" + empName + '\'' +
+                ", empPassword='" + empPassword + '\'' +
+                '}';
     }
 }

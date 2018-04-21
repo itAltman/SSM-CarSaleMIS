@@ -1,33 +1,48 @@
 package pojo;
-
+import pojo.Carbrand;
 public class Carseries {
-    private Integer seriesid;
-
-    private Integer brandid;
-
-    private String seriesname;
-
-    public Integer getSeriesid() {
-        return seriesid;
+    private Integer seriesId;//车系编号
+    private String seriesName;//车系名称
+    private Carbrand carbrand;
+    public Carseries() {
+        super();
+    }
+    public Carseries(Integer seriesId,String seriesName,Carbrand carbrand) {
+        super();
+        this.seriesId = seriesId;
+        this.seriesName = seriesName;
+        this.carbrand = carbrand;
+    }
+    public Integer getSeriesId() {
+        return this.seriesId;
     }
 
-    public void setSeriesid(Integer seriesid) {
-        this.seriesid = seriesid;
+    public void setSeriesId(Integer seriesId) {
+        this.seriesId = seriesId;
     }
 
-    public Integer getBrandid() {
-        return brandid;
+    public String getSeriesName() {
+        return this.seriesName;
     }
 
-    public void setBrandid(Integer brandid) {
-        this.brandid = brandid;
+    public void setSeriesName(String seriesName) {
+        this.seriesName = seriesName;
     }
 
-    public String getSeriesname() {
-        return seriesname;
+    public Carbrand getCarbrand() {
+        return this.carbrand;
     }
 
-    public void setSeriesname(String seriesname) {
-        this.seriesname = seriesname == null ? null : seriesname.trim();
+    public void setCarbrand(Carbrand carbrand) {
+        this.carbrand = carbrand;
+    }
+
+    @Override
+    public String toString() {
+        return "Carseries{" +
+                "seriesId=" + seriesId +
+                ", seriesName='" + seriesName + '\'' +
+                ", carbrand=" + carbrand +
+                '}';
     }
 }

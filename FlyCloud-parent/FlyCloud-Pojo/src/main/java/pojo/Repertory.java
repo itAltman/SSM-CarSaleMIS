@@ -1,65 +1,69 @@
 package pojo;
-
-import java.util.Date;
-
 public class Repertory {
-    private Integer repertoryid;
-
-    private Integer carid;
-
-    private Integer companyid;
-
-    private Integer purchaseprice;
-
-    private Date intime;
-
-    private Short repertorynum;
-
-    public Integer getRepertoryid() {
-        return repertoryid;
+    private java.util.Date inTime;//入库时间
+    private Integer companyId;//公司编号
+    private Double repertoryNum;//库存数量
+    private Double purchasePrice;//含税价格
+    private Integer carId;//汽车编号
+    public Repertory() {
+        super();
+    }
+    public Repertory(java.util.Date inTime,Integer companyId,Double repertoryNum,Double purchasePrice,Integer carId) {
+        super();
+        this.inTime = inTime;
+        this.companyId = companyId;
+        this.repertoryNum = repertoryNum;
+        this.purchasePrice = purchasePrice;
+        this.carId = carId;
+    }
+    public java.util.Date getInTime() {
+        return this.inTime;
     }
 
-    public void setRepertoryid(Integer repertoryid) {
-        this.repertoryid = repertoryid;
+    public void setInTime(java.util.Date inTime) {
+        this.inTime = inTime;
     }
 
-    public Integer getCarid() {
-        return carid;
+    public Integer getCompanyId() {
+        return this.companyId;
     }
 
-    public void setCarid(Integer carid) {
-        this.carid = carid;
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
     }
 
-    public Integer getCompanyid() {
-        return companyid;
+    public Double getRepertoryNum() {
+        return this.repertoryNum;
     }
 
-    public void setCompanyid(Integer companyid) {
-        this.companyid = companyid;
+    public void setRepertoryNum(Double repertoryNum) {
+        this.repertoryNum = repertoryNum;
     }
 
-    public Integer getPurchaseprice() {
-        return purchaseprice;
+    public Double getPurchasePrice() {
+        return this.purchasePrice;
     }
 
-    public void setPurchaseprice(Integer purchaseprice) {
-        this.purchaseprice = purchaseprice;
+    public void setPurchasePrice(Double purchasePrice) {
+        this.purchasePrice = purchasePrice;
     }
 
-    public Date getIntime() {
-        return intime;
+    public Integer getCarId() {
+        return this.carId;
     }
 
-    public void setIntime(Date intime) {
-        this.intime = intime;
+    public void setCarId(Integer carId) {
+        this.carId = carId;
     }
 
-    public Short getRepertorynum() {
-        return repertorynum;
-    }
-
-    public void setRepertorynum(Short repertorynum) {
-        this.repertorynum = repertorynum;
+    @Override
+    public String toString() {
+        return "Repertory{" +
+                "inTime=" + inTime +
+                ", companyId=" + companyId +
+                ", repertoryNum=" + repertoryNum +
+                ", purchasePrice=" + purchasePrice +
+                ", carId=" + carId +
+                '}';
     }
 }

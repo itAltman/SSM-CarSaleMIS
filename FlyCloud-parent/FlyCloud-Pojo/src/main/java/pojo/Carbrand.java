@@ -1,33 +1,36 @@
 package pojo;
-
 public class Carbrand {
-    private Integer brandid;
-
-    private String brandname;
-
-    private String brandnum;
-
-    public Integer getBrandid() {
-        return brandid;
+    private String brandName;//品牌名称
+    private String brandNum;//品牌序号
+    public Carbrand() {
+        super();
+    }
+    public Carbrand(String brandName,String brandNum) {
+        super();
+        this.brandName = brandName;
+        this.brandNum = brandNum;
+    }
+    public String getBrandName() {
+        return this.brandName;
     }
 
-    public void setBrandid(Integer brandid) {
-        this.brandid = brandid;
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
     }
 
-    public String getBrandname() {
-        return brandname;
+    public String getBrandNum() {
+        return this.brandNum;
     }
 
-    public void setBrandname(String brandname) {
-        this.brandname = brandname == null ? null : brandname.trim();
+    public void setBrandNum(String brandNum) {
+        this.brandNum = brandNum;
     }
 
-    public String getBrandnum() {
-        return brandnum;
-    }
-
-    public void setBrandnum(String brandnum) {
-        this.brandnum = brandnum == null ? null : brandnum.trim();
+    @Override
+    public String toString() {
+        return "Carbrand{" +
+                "brandName='" + brandName + '\'' +
+                ", brandNum='" + brandNum + '\'' +
+                '}';
     }
 }

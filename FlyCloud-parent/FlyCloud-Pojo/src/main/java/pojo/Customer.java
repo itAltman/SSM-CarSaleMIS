@@ -1,85 +1,91 @@
 package pojo;
-
-import java.util.Date;
-
 public class Customer {
-    private Integer customerid;
-
-    private Integer companyid;
-
-    private String customername;
-
-    private Long customerphone;
-
-    private String customersex;
-
-    private Short customertype;
-
-    private Date customerbirthday;
-
-    private Date customercreatetime;
-
-    public Integer getCustomerid() {
-        return customerid;
+    private Integer companyId;//公司编号
+    private Double customerPhone;//客户电话
+    private Double customerType;//客户类型（1：个人、2：公司）
+    private java.util.Date customerCreateTime;//创建时间
+    private String customerSex;//客户性别
+    private java.util.Date customerBirthday;//客户生日
+    private String customerName;//客户姓名
+    public Customer() {
+        super();
+    }
+    public Customer(Integer companyId,Double customerPhone,Double customerType,java.util.Date customerCreateTime,String customerSex,java.util.Date customerBirthday,String customerName) {
+        super();
+        this.companyId = companyId;
+        this.customerPhone = customerPhone;
+        this.customerType = customerType;
+        this.customerCreateTime = customerCreateTime;
+        this.customerSex = customerSex;
+        this.customerBirthday = customerBirthday;
+        this.customerName = customerName;
+    }
+    public Integer getCompanyId() {
+        return this.companyId;
     }
 
-    public void setCustomerid(Integer customerid) {
-        this.customerid = customerid;
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
     }
 
-    public Integer getCompanyid() {
-        return companyid;
+    public Double getCustomerPhone() {
+        return this.customerPhone;
     }
 
-    public void setCompanyid(Integer companyid) {
-        this.companyid = companyid;
+    public void setCustomerPhone(Double customerPhone) {
+        this.customerPhone = customerPhone;
     }
 
-    public String getCustomername() {
-        return customername;
+    public Double getCustomerType() {
+        return this.customerType;
     }
 
-    public void setCustomername(String customername) {
-        this.customername = customername == null ? null : customername.trim();
+    public void setCustomerType(Double customerType) {
+        this.customerType = customerType;
     }
 
-    public Long getCustomerphone() {
-        return customerphone;
+    public java.util.Date getCustomerCreateTime() {
+        return this.customerCreateTime;
     }
 
-    public void setCustomerphone(Long customerphone) {
-        this.customerphone = customerphone;
+    public void setCustomerCreateTime(java.util.Date customerCreateTime) {
+        this.customerCreateTime = customerCreateTime;
     }
 
-    public String getCustomersex() {
-        return customersex;
+    public String getCustomerSex() {
+        return this.customerSex;
     }
 
-    public void setCustomersex(String customersex) {
-        this.customersex = customersex == null ? null : customersex.trim();
+    public void setCustomerSex(String customerSex) {
+        this.customerSex = customerSex;
     }
 
-    public Short getCustomertype() {
-        return customertype;
+    public java.util.Date getCustomerBirthday() {
+        return this.customerBirthday;
     }
 
-    public void setCustomertype(Short customertype) {
-        this.customertype = customertype;
+    public void setCustomerBirthday(java.util.Date customerBirthday) {
+        this.customerBirthday = customerBirthday;
     }
 
-    public Date getCustomerbirthday() {
-        return customerbirthday;
+    public String getCustomerName() {
+        return this.customerName;
     }
 
-    public void setCustomerbirthday(Date customerbirthday) {
-        this.customerbirthday = customerbirthday;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
-    public Date getCustomercreatetime() {
-        return customercreatetime;
-    }
-
-    public void setCustomercreatetime(Date customercreatetime) {
-        this.customercreatetime = customercreatetime;
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "companyId=" + companyId +
+                ", customerPhone=" + customerPhone +
+                ", customerType=" + customerType +
+                ", customerCreateTime=" + customerCreateTime +
+                ", customerSex='" + customerSex + '\'' +
+                ", customerBirthday=" + customerBirthday +
+                ", customerName='" + customerName + '\'' +
+                '}';
     }
 }

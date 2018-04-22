@@ -78,16 +78,4 @@ public class Adminlog {
         this.company = company;
     }
 
-    @Override
-    public String toString() {
-        return "Adminlog{" +
-                "logId=" + logId +
-                ", empId=" + empId +
-                ", companyId=" + companyId +
-                ", logContent='" + logContent + '\'' +
-                ", logTime=" + logTime +
-                ", employee=" + employee +
-                ", company=" + company +
-                '}';
-    }
 }

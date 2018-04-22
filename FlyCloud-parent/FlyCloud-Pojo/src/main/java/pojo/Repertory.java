@@ -2,13 +2,13 @@ package pojo;
 public class Repertory {
     private java.util.Date inTime;//入库时间
     private Integer companyId;//公司编号
-    private Double repertoryNum;//库存数量
+    private Integer repertoryNum;//库存数量
     private Double purchasePrice;//含税价格
     private Integer carId;//汽车编号
     public Repertory() {
         super();
     }
-    public Repertory(java.util.Date inTime,Integer companyId,Double repertoryNum,Double purchasePrice,Integer carId) {
+    public Repertory(java.util.Date inTime,Integer companyId,Integer repertoryNum,Double purchasePrice,Integer carId) {
         super();
         this.inTime = inTime;
         this.companyId = companyId;
@@ -32,11 +32,11 @@ public class Repertory {
         this.companyId = companyId;
     }
 
-    public Double getRepertoryNum() {
+    public Integer getRepertoryNum() {
         return this.repertoryNum;
     }
 
-    public void setRepertoryNum(Double repertoryNum) {
+    public void setRepertoryNum(Integer repertoryNum) {
         this.repertoryNum = repertoryNum;
     }
 
@@ -56,14 +56,4 @@ public class Repertory {
         this.carId = carId;
     }
 
-    @Override
-    public String toString() {
-        return "Repertory{" +
-                "inTime=" + inTime +
-                ", companyId=" + companyId +
-                ", repertoryNum=" + repertoryNum +
-                ", purchasePrice=" + purchasePrice +
-                ", carId=" + carId +
-                '}';
-    }
 }

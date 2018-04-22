@@ -17,7 +17,7 @@
       <module name="FlyCloud-Mapper" target="1.5" />
       <module name="FlyCloud-parent" target="1.5" />
       <module name="FlyCloud-Pojo" target="1.5" />
-      <module name="FlyCloud-Service" target="1.5" />
+      <module name="FlyCloud-Service" target="1.6" />
       <module name="FlyCloud-Util" target="1.5" />
       <module name="FlyCloud-Web" target="1.5" />
     </bytecodeTargetLevel>

@@ -46,13 +46,4 @@ public class Car {
         this.seriesId = seriesId;
     }
 
-    @Override
-    public String toString() {
-        return "Car{" +
-                "carPrice=" + carPrice +
-                ", carName='" + carName + '\'' +
-                ", carTime=" + carTime +
-                ", seriesId=" + seriesId +
-                '}';
-    }
 }

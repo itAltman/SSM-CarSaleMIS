@@ -26,11 +26,4 @@ public class Carbrand {
         this.brandNum = brandNum;
     }
 
-    @Override
-    public String toString() {
-        return "Carbrand{" +
-                "brandName='" + brandName + '\'' +
-                ", brandNum='" + brandNum + '\'' +
-                '}';
-    }
 }

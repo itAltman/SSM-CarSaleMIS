@@ -1,6 +1,6 @@
 ﻿/*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2018-04-20 10:13:10                          */
+/* Created on:     2018-04-22 11:01:15                          */
 /*==============================================================*/
 
 
@@ -64,8 +64,8 @@ create table CarOrder
    orderId              int not null comment '订单编号',
    carId                int comment '汽车编号',
    companyId            int comment '公司编号',
-   orderNum             numeric(1,0) comment '车辆数量',
-   orderType            numeric(1,0) comment '订单状态（1：未审核、2：已审核）',
+   orderNum             int comment '车辆数量',
+   orderType            varchar(1) comment '订单状态（1：未审核、2：已审核）',
    primary key (orderId)
 );
 
@@ -119,9 +119,9 @@ create table customer
    customerId           int not null auto_increment comment '客户编号',
    companyId            int not null comment '公司编号',
    customerName         varchar(10) not null comment '客户姓名',
-   customerPhone        numeric(11,0) not null comment '客户电话',
+   customerPhone        varchar(11) not null comment '客户电话',
    customerSex          varchar(2) not null comment '客户性别',
-   customerType         numeric(1,0) not null comment '客户类型（1：个人、2：公司）',
+   customerType         varchar(1) not null comment '客户类型（1：个人、2：公司）',
    customerBirthday     date comment '客户生日',
    customerCreateTime   timestamp not null comment '创建时间',
    primary key (customerId)
@@ -138,9 +138,9 @@ create table employee
    positionId           int not null comment '职务编号',
    companyId            int not null comment '公司编号',
    empName              varchar(10) not null comment '员工姓名',
-   empPhone             numeric(11,0) comment '登录手机',
-   empPassword          varchar(50) comment '登录密码',
-   empSalery            numeric(5,0) comment '员工工资',
+   empPhone             varchar(11) not null comment '登录手机',
+   empPassword          varchar(50) not null comment '登录密码',
+   empSalery            numeric(5,2) not null comment '员工工资',
    primary key (empId)
 );
 
@@ -155,8 +155,8 @@ create table financing
    saleId               int comment '销售编号',
    repertoryId          int comment '库存编号',
    companyId            int comment '公司编号',
-   financingMoney       numeric(10,0) comment '涉及金额',
-   financingType        numeric(1,0) comment '财务状态（1：收入，2：支出）',
+   financingMoney       numeric(10,2) comment '涉及金额',
+   financingType        varchar(1) comment '财务状态（1：收入，2：支出）',
    primary key (financingId)
 );
 
@@ -169,7 +169,7 @@ create table position
 (
    positionId           int not null auto_increment comment '职务编号',
    positionName         varchar(20) not null comment '职务名称（经理、操作员、销售员）',
-   positionLevel        numeric(1,0) not null comment '职务等级（1：经理、2：操作员、3：销售员）',
+   positionLevel        varchar(1) not null comment '职务等级（1：经理、2：操作员、3：销售员）',
    primary key (positionId)
 );
 
@@ -183,9 +183,9 @@ create table repertory
    repertoryId          int not null auto_increment comment '库存编号',
    carId                int not null comment '汽车编号',
    companyId            int not null comment '公司编号',
-   purchasePrice        numeric(8,0) not null comment '含税价格',
+   purchasePrice        numeric(8,2) not null comment '含税价格',
    inTime               date not null comment '入库时间',
-   repertoryNum         numeric(1,0) not null comment '库存数量',
+   repertoryNum         int not null comment '库存数量',
    primary key (repertoryId)
 );
 
@@ -201,9 +201,9 @@ create table sale
    carId                int not null comment '汽车编号',
    empId                int not null comment '员工编号',
    companyId            int comment '公司编号',
-   saleCurPrice         numeric(8,0) not null comment '销售价格',
-   saleNum              numeric(2,0) not null comment '销售数量',
-   saleType             numeric(1,0) not null comment '销售状态（1、未付款，2、已付款）',
+   saleCurPrice         numeric(8,2) not null comment '销售价格',
+   saleNum              int not null comment '销售数量',
+   saleType             varchar(1) not null comment '销售状态（1、未付款，2、已付款）',
    primary key (saleId)
 );
 

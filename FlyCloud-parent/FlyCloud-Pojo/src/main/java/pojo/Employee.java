@@ -1,7 +1,7 @@
 package pojo;
 public class Employee {
     private Integer companyId;//公司编号
-    private Double empPhone;//登录手机
+    private String empPhone;//登录手机
     private Double empSalery;//员工工资
     private Integer positionId;//职务编号
     private String empName;//员工姓名
@@ -9,7 +9,7 @@ public class Employee {
     public Employee() {
         super();
     }
-    public Employee(Integer companyId,Double empPhone,Double empSalery,Integer positionId,String empName,String empPassword) {
+    public Employee(Integer companyId,String empPhone,Double empSalery,Integer positionId,String empName,String empPassword) {
         super();
         this.companyId = companyId;
         this.empPhone = empPhone;
@@ -26,11 +26,11 @@ public class Employee {
         this.companyId = companyId;
     }
 
-    public Double getEmpPhone() {
+    public String getEmpPhone() {
         return this.empPhone;
     }
 
-    public void setEmpPhone(Double empPhone) {
+    public void setEmpPhone(String empPhone) {
         this.empPhone = empPhone;
     }
 
@@ -66,15 +66,4 @@ public class Employee {
         this.empPassword = empPassword;
     }
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "companyId=" + companyId +
-                ", empPhone=" + empPhone +
-                ", empSalery=" + empSalery +
-                ", positionId=" + positionId +
-                ", empName='" + empName + '\'' +
-                ", empPassword='" + empPassword + '\'' +
-                '}';
-    }
 }

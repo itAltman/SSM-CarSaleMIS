@@ -1,8 +1,8 @@
 package pojo;
 public class Customer {
     private Integer companyId;//公司编号
-    private Double customerPhone;//客户电话
-    private Double customerType;//客户类型（1：个人、2：公司）
+    private String customerPhone;//客户电话
+    private String customerType;//客户类型（1：个人、2：公司）
     private java.util.Date customerCreateTime;//创建时间
     private String customerSex;//客户性别
     private java.util.Date customerBirthday;//客户生日
@@ -10,7 +10,7 @@ public class Customer {
     public Customer() {
         super();
     }
-    public Customer(Integer companyId,Double customerPhone,Double customerType,java.util.Date customerCreateTime,String customerSex,java.util.Date customerBirthday,String customerName) {
+    public Customer(Integer companyId,String customerPhone,String customerType,java.util.Date customerCreateTime,String customerSex,java.util.Date customerBirthday,String customerName) {
         super();
         this.companyId = companyId;
         this.customerPhone = customerPhone;
@@ -28,19 +28,19 @@ public class Customer {
         this.companyId = companyId;
     }
 
-    public Double getCustomerPhone() {
+    public String getCustomerPhone() {
         return this.customerPhone;
     }
 
-    public void setCustomerPhone(Double customerPhone) {
+    public void setCustomerPhone(String customerPhone) {
         this.customerPhone = customerPhone;
     }
 
-    public Double getCustomerType() {
+    public String getCustomerType() {
         return this.customerType;
     }
 
-    public void setCustomerType(Double customerType) {
+    public void setCustomerType(String customerType) {
         this.customerType = customerType;
     }
 
@@ -76,16 +76,4 @@ public class Customer {
         this.customerName = customerName;
     }
 
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "companyId=" + companyId +
-                ", customerPhone=" + customerPhone +
-                ", customerType=" + customerType +
-                ", customerCreateTime=" + customerCreateTime +
-                ", customerSex='" + customerSex + '\'' +
-                ", customerBirthday=" + customerBirthday +
-                ", customerName='" + customerName + '\'' +
-                '}';
-    }
 }

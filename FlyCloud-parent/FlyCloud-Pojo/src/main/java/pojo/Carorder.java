@@ -3,16 +3,16 @@ import pojo.Car;
 import pojo.Company;
 public class Carorder {
     private Integer orderId;//订单编号
-    private Double orderType;//订单状态（1：未审核、2：已审核）
+    private String orderType;//订单状态（1：未审核、2：已审核）
     private Integer companyId;//公司编号
-    private Double orderNum;//车辆数量
+    private Integer orderNum;//车辆数量
     private Integer carId;//汽车编号
     private Car car;
     private Company company;
     public Carorder() {
         super();
     }
-    public Carorder(Integer orderId,Double orderType,Integer companyId,Double orderNum,Integer carId,Car car,Company company) {
+    public Carorder(Integer orderId,String orderType,Integer companyId,Integer orderNum,Integer carId,Car car,Company company) {
         super();
         this.orderId = orderId;
         this.orderType = orderType;
@@ -30,11 +30,11 @@ public class Carorder {
         this.orderId = orderId;
     }
 
-    public Double getOrderType() {
+    public String getOrderType() {
         return this.orderType;
     }
 
-    public void setOrderType(Double orderType) {
+    public void setOrderType(String orderType) {
         this.orderType = orderType;
     }
 
@@ -46,11 +46,11 @@ public class Carorder {
         this.companyId = companyId;
     }
 
-    public Double getOrderNum() {
+    public Integer getOrderNum() {
         return this.orderNum;
     }
 
-    public void setOrderNum(Double orderNum) {
+    public void setOrderNum(Integer orderNum) {
         this.orderNum = orderNum;
     }
 
@@ -78,16 +78,4 @@ public class Carorder {
         this.company = company;
     }
 
-    @Override
-    public String toString() {
-        return "Carorder{" +
-                "orderId=" + orderId +
-                ", orderType=" + orderType +
-                ", companyId=" + companyId +
-                ", orderNum=" + orderNum +
-                ", carId=" + carId +
-                ", car=" + car +
-                ", company=" + company +
-                '}';
-    }
 }

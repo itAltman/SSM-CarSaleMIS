@@ -10,10 +10,10 @@
     <version>1.0-SNAPSHOT</version>
 
     <modules>
-        <module>FlyCloud-Util</module>
-        <module>FlyCloud-Service</module>
-        <module>FlyCloud-Mapper</module>
         <module>FlyCloud-Pojo</module>
+        <module>FlyCloud-Util</module>
+        <module>FlyCloud-Mapper</module>
+        <module>FlyCloud-Service</module>
         <module>FlyCloud-Web</module>
     </modules>
 

@@ -37,7 +37,7 @@
     <!-- 配置Mapper扫描 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!-- 设置Mapper扫描包 -->
-        <property name="basePackage" value="ssm.mapper" />
+        <property name="basePackage" value="dao" />
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
     </bean>
 

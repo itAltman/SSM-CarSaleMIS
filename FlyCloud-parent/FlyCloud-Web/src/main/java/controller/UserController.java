@@ -2,11 +2,17 @@ package controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import pojo.Company;
+import pojo.Employee;
+import service.CompanyService;
+import service.EmployeeService;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,12 +23,20 @@ import java.util.Map;
  * @date: 2018-04-22 12:00
  */
 @Controller
-@RequestMapping("user")
+@RequestMapping("/user")
 public class UserController {
     private static Logger logger = LogManager.getLogger();
 
-    @RequestMapping("isExistCompanyName")
-    public @ResponseBody Map<String, String> isExistCompanyName(String companyName){
+    @Resource
+    EmployeeService employeeServiceImpl;
+
+    @RequestMapping("/isExistCompanyName")
+    public @ResponseBody Map<String, String> isExistCompanyName(Company company){
+
+        Employee employee = employeeServiceImpl.selectEmployeeById(1);
+        logger.debug("公司对象：" + employee);
+       /* Company companyObj = companyService.selectCompanyByObj(company);
+        logger.debug("公司对象：" + companyObj);*/
 
         Map<String,String> map = new HashMap();
         map.put("a","bbb");

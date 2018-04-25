@@ -1,4 +1,4 @@
-package service.Impl;
+package service.impl;
 import java.util.List;
 import dao.SaleMapper;
 import pojo.Sale;

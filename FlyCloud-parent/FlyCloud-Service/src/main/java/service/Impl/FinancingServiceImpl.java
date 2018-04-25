@@ -1,4 +1,4 @@
-package service.Impl;
+package service.impl;
 import java.util.List;
 import dao.FinancingMapper;
 import pojo.Financing;

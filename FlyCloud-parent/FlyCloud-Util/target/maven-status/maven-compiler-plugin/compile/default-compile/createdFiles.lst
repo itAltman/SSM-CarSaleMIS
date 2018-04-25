@@ -1,0 +1,4 @@
+common\Assist.class
+generator\GeneratorSqlmap.class
+common\Assist$WhereOrder.class
+common\Assist$WhereRequire.class

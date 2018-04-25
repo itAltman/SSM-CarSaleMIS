@@ -1,0 +1,12 @@
+dao\SaleMapper.class
+dao\FinancingMapper.class
+dao\CompanyMapper.class
+dao\EmployeeMapper.class
+dao\CarMapper.class
+dao\CustomerMapper.class
+dao\CarorderMapper.class
+dao\AdminlogMapper.class
+dao\PositionMapper.class
+dao\CarseriesMapper.class
+dao\RepertoryMapper.class
+dao\CarbrandMapper.class

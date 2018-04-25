@@ -41,7 +41,7 @@
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>classpath:spring/springmvc.xml</param-value>
+      <param-value>classpath:spring/applicationContext-*.xml</param-value>
     </init-param>
     <!-- 配置springmvc什么时候启动，参数必须为整数 -->
     <!-- 如果为0或者大于0，则springMVC随着容器启动而启动 -->

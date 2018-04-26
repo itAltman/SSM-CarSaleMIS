@@ -1,7 +1,7 @@
 package service.impl;
 import java.util.List;
-import dao.EmployeeMapper;
-import pojo.Employee;
+import com.dao.EmployeeMapper;
+import com.pojo.Employee;
 import common.Assist;
 import service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;

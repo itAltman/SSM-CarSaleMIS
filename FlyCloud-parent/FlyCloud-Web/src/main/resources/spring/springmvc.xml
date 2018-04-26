@@ -11,7 +11,8 @@
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
     <!-- 自动扫描  @Controller-->
-    <context:component-scan base-package="controller"/>
+    <context:component-scan base-package="com.controller"/>
+    <context:component-scan base-package="service" />
 
     <!-- 配置注解驱动 -->
     <mvc:annotation-driven />

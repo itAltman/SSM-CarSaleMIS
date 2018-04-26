@@ -1,6 +1,6 @@
 package service;
 import java.util.List;
-import pojo.Position;
+import com.pojo.Position;
 import common.Assist;
 public interface PositionService{
 	/**

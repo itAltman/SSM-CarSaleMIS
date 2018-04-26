@@ -1,6 +1,6 @@
 package service;
 import java.util.List;
-import pojo.Customer;
+import com.pojo.Customer;
 import common.Assist;
 public interface CustomerService{
 	/**

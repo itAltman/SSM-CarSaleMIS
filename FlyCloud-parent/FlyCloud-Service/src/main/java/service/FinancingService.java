@@ -1,6 +1,6 @@
 package service;
 import java.util.List;
-import pojo.Financing;
+import com.pojo.Financing;
 import common.Assist;
 public interface FinancingService{
 	/**

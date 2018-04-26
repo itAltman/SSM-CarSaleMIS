@@ -1,6 +1,6 @@
 package service;
 import java.util.List;
-import pojo.Sale;
+import com.pojo.Sale;
 import common.Assist;
 public interface SaleService{
 	/**

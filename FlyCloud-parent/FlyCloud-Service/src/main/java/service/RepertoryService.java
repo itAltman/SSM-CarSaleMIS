@@ -1,6 +1,6 @@
 package service;
 import java.util.List;
-import pojo.Repertory;
+import com.pojo.Repertory;
 import common.Assist;
 public interface RepertoryService{
 	/**

@@ -1,7 +1,7 @@
 package service.impl;
 import java.util.List;
-import dao.CarMapper;
-import pojo.Car;
+import com.dao.CarMapper;
+import com.pojo.Car;
 import common.Assist;
 import service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;

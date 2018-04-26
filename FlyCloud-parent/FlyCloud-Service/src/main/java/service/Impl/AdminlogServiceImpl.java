@@ -1,7 +1,7 @@
 package service.impl;
 import java.util.List;
-import dao.AdminlogMapper;
-import pojo.Adminlog;
+import com.dao.AdminlogMapper;
+import com.pojo.Adminlog;
 import common.Assist;
 import service.AdminlogService;
 import org.springframework.beans.factory.annotation.Autowired;

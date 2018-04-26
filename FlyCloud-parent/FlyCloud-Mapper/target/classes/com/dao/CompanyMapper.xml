@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.CompanyMapper">
+    <!-- Company的resultMap,column是给数据库列起的别名,它对应property类的属性-->
+    <resultMap id="result_Company_Map" type="com.pojo.Company">
+        <id column="companyId" property="companyId" />
+        <result column="companyName" property="companyName" />
+    </resultMap>
+
+	   <!-- Assist用于辅助工具类setRequires设置的条件,${req.require}表示列名,#{req.value}表示值它是防SQL注入的 -->
+    <sql id="Assist">
+        <where>
+            <foreach collection="require" item="req" separator=" ">
+                ${req.require} 
+                <if test="req.value != null"> #{req.value}</if> 
+                <if test="req.values != null">
+                    <foreach collection="req.values" item="val" separator=","> 
+                        #{val} 
+                    </foreach> 
+                </if> 
+                <if test="req.suffix != null"> ${req.suffix}</if> 
+            </foreach>
+        </where>
+    </sql>
+
+	   <!-- updateAssist用于更新数据的使用它拓展自Assist,用于辅助工具类setRequires设置的条件,${req.require}表示列名,#{req.value}表示值它是防SQL注入的 -->
+    <sql id="updateAssist">
+        <where>
+            <foreach collection="assist.require" item="req" separator=" ">
+                ${req.require} 
+                <if test="req.value != null"> #{req.value}</if> 
+                <if test="req.values != null">
+                    <foreach collection="req.values" item="val" separator=","> 
+                        #{val} 
+                    </foreach> 
+                </if> 
+                <if test="req.suffix != null"> ${req.suffix}</if> 
+            </foreach>
+        </where>
+    </sql>
+
+    <!-- 数据库中表名为:company的列名,as前是数据库的列明,as后是列的别名用于映射成实体类中的属性,需要注意的是别名必须与resultMap中的column别名一致 -->
+    <sql id="company_Column">
+        company.companyId as companyId
+        ,company.companyName as companyName
+    </sql>
+
+    <!--获得类名为:Company对应的数据库表的数据总行数 -->
+    <select id="getCompanyRowCount" parameterType="common.Assist" resultType="java.lang.Long">
+        select count(companyId) from company
+        <if test="require!=null"><include refid="Assist" /></if>
+    </select>
+    <!-- 获得类名为:Company对应数据库中表的数据集合 -->
+    <select id="selectCompany" parameterType="common.Assist"  resultMap="result_Company_Map">
+        select  <if test="distinct !=null">${distinct}</if>
+        <choose>
+            <when test="resultColumn!=null">${resultColumn}</when>
+            <otherwise>
+        <include refid="company_Column" /> 
+            </otherwise>
+        </choose>
+        from company
+        <choose>
+            <when test="rowSize ==null">
+                <if test="require!=null">
+                    <include refid="Assist" />
+                </if>
+                <if test="order !=null">${order}</if>
+            </when>
+            <otherwise>
+                inner join
+                (
+                SELECT companyId as primary_key FROM company
+                <if test="require!=null">
+                    <include refid="Assist" />
+                </if>
+                <if test="order !=null">${order}</if>
+                <choose>
+                    <when test="startRow !=null and rowSize !=null">LIMIT #{startRow},#{rowSize} </when>
+                    <when test="rowSize !=null">LIMIT #{rowSize}</when>
+                 </choose>
+                 ) as tmp
+                 on tmp.primary_key=company.companyId
+            </otherwise>
+        </choose>
+    </select> 
+
+    <!-- 获得一个Company对象,以参数Company对象中不为空的属性作为条件进行查询-->
+    <select id="selectCompanyByObj" parameterType="com.pojo.Company" resultMap="result_Company_Map">
+        select 
+            <include refid="company_Column" /> 
+        from company
+        <where>
+            <if test="companyName != null "> and company.companyName = #{companyName}</if>
+            <if test="companyId != null "> and company.companyId = #{companyId}</if>
+        </where>
+    </select> 
+
+    <!-- 通过Company的id获得对应数据库中表的数据对象-->
+    <select id="selectCompanyById" parameterType="java.lang.Integer" resultMap="result_Company_Map">
+        select 
+            <include refid="company_Column" /> 
+        from company
+        where company.companyId = #{id}
+    </select> 
+
+    <!-- 将Company插入到对应数据库的表中,包括属性值为null的数据-->
+
+    <insert id="insertCompany" parameterType="com.pojo.Company">
+        insert into company(companyId,companyName) 
+        values(#{companyId},#{companyName})
+    </insert>
+
+    <!-- 将Company中属性值不为null的数据,插入到对应数据库的表中-->
+    <insert id="insertNonEmptyCompany" parameterType="com.pojo.Company">
+        insert into company
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="companyId != null">companyId,</if>
+            <if test="companyName != null">companyName,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="companyId != null"> #{companyId},</if>
+            <if test="companyName != null"> #{companyName},</if>
+        </trim>
+    </insert>
+
+    <!-- 将Company批量插入到对应数据库的表中-->
+    <insert id="insertCompanyByBatch" parameterType="ArrayList">
+        insert into company(companyId,companyName) values
+        <foreach collection="list" item="item" index="index" separator="," >
+            (#{item.companyId},#{item.companyName})
+        </foreach>
+    </insert>
+
+    <!-- 通过Company的id将数据库表中对应的数据删除-->
+    <delete id="deleteCompanyById" parameterType="java.lang.Integer">
+        delete from company
+        where companyId = #{id}
+    </delete>
+
+    <!-- 通过辅助工具Assist中的条件将Company对应的数据库表的数据删除-->
+    <delete id="deleteCompany" parameterType="common.Assist">
+        delete from company
+        <if test="require!=null"><include refid="Assist" /></if>
+    </delete>
+
+    <!-- 通过Company的id将Company的数据更新到数据库中对应的表,包括值null的数据-->
+    <update id="updateCompanyById" parameterType="com.pojo.Company">
+        update company set
+            companyName=#{companyName}
+        where companyId=#{companyId}
+    </update>
+
+    <!-- 通过Company的id将Company中属性值不为null的数据更新到数据库对应的表中-->
+    <update id="updateNonEmptyCompanyById" parameterType="com.pojo.Company">
+        update company
+        <set>
+            <if test="companyName != null">
+                companyName=#{companyName},
+            </if>
+        </set>
+        where companyId=#{companyId}
+    </update>
+
+    <!-- 通过辅助工具Assist中的条件将Company中的数据更新到数据库对应的表中,包括值为null的数据-->
+    <update id="updateCompany" parameterType="map">
+        update company
+        <set>
+                companyId=#{enti.companyId},
+                companyName=#{enti.companyName},
+        </set>
+        <if test="assist.require!=null"><include refid="updateAssist" /></if>
+    </update>
+
+    <!-- 通过辅助工具Assist中的条件将Company中属性值不为null的数据更新到数据库对应的表中-->
+    <update id="updateNonEmptyCompany" parameterType="map">
+        update company
+        <set>
+            <if test="enti.companyId != null">
+                companyId=#{enti.companyId},
+            </if>
+            <if test="enti.companyName != null">
+                companyName=#{enti.companyName},
+            </if>
+        </set>
+        <if test="assist.require!=null"><include refid="updateAssist" /></if>
+    </update>
+
+</mapper>

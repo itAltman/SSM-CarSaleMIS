@@ -1,6 +1,6 @@
 package service;
 import java.util.List;
-import pojo.Car;
+import com.pojo.Car;
 import common.Assist;
 public interface CarService{
 	/**

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.CarbrandMapper">
+    <!-- Carbrand的resultMap,column是给数据库列起的别名,它对应property类的属性-->
+    <resultMap id="result_Carbrand_Map" type="com.pojo.Carbrand">
+        <id column="brandId" property="brandId" />
+        <result column="brandName" property="brandName" />
+        <result column="brandNum" property="brandNum" />
+    </resultMap>
+
+	   <!-- Assist用于辅助工具类setRequires设置的条件,${req.require}表示列名,#{req.value}表示值它是防SQL注入的 -->
+    <sql id="Assist">
+        <where>
+            <foreach collection="require" item="req" separator=" ">
+                ${req.require} 
+                <if test="req.value != null"> #{req.value}</if> 
+                <if test="req.values != null">
+                    <foreach collection="req.values" item="val" separator=","> 
+                        #{val} 
+                    </foreach> 
+                </if> 
+                <if test="req.suffix != null"> ${req.suffix}</if> 
+            </foreach>
+        </where>
+    </sql>
+
+	   <!-- updateAssist用于更新数据的使用它拓展自Assist,用于辅助工具类setRequires设置的条件,${req.require}表示列名,#{req.value}表示值它是防SQL注入的 -->
+    <sql id="updateAssist">
+        <where>
+            <foreach collection="assist.require" item="req" separator=" ">
+                ${req.require} 
+                <if test="req.value != null"> #{req.value}</if> 
+                <if test="req.values != null">
+                    <foreach collection="req.values" item="val" separator=","> 
+                        #{val} 
+                    </foreach> 
+                </if> 
+                <if test="req.suffix != null"> ${req.suffix}</if> 
+            </foreach>
+        </where>
+    </sql>
+
+    <!-- 数据库中表名为:carbrand的列名,as前是数据库的列明,as后是列的别名用于映射成实体类中的属性,需要注意的是别名必须与resultMap中的column别名一致 -->
+    <sql id="carbrand_Column">
+        carbrand.brandId as brandId
+        ,carbrand.brandName as brandName
+        ,carbrand.brandNum as brandNum
+    </sql>
+
+    <!--获得类名为:Carbrand对应的数据库表的数据总行数 -->
+    <select id="getCarbrandRowCount" parameterType="common.Assist" resultType="java.lang.Long">
+        select count(brandId) from carbrand
+        <if test="require!=null"><include refid="Assist" /></if>
+    </select>
+    <!-- 获得类名为:Carbrand对应数据库中表的数据集合 -->
+    <select id="selectCarbrand" parameterType="common.Assist"  resultMap="result_Carbrand_Map">
+        select  <if test="distinct !=null">${distinct}</if>
+        <choose>
+            <when test="resultColumn!=null">${resultColumn}</when>
+            <otherwise>
+        <include refid="carbrand_Column" /> 
+            </otherwise>
+        </choose>
+        from carbrand
+        <choose>
+            <when test="rowSize ==null">
+                <if test="require!=null">
+                    <include refid="Assist" />
+                </if>
+                <if test="order !=null">${order}</if>
+            </when>
+            <otherwise>
+                inner join
+                (
+                SELECT brandId as primary_key FROM carbrand
+                <if test="require!=null">
+                    <include refid="Assist" />
+                </if>
+                <if test="order !=null">${order}</if>
+                <choose>
+                    <when test="startRow !=null and rowSize !=null">LIMIT #{startRow},#{rowSize} </when>
+                    <when test="rowSize !=null">LIMIT #{rowSize}</when>
+                 </choose>
+                 ) as tmp
+                 on tmp.primary_key=carbrand.brandId
+            </otherwise>
+        </choose>
+    </select> 
+
+    <!-- 获得一个Carbrand对象,以参数Carbrand对象中不为空的属性作为条件进行查询-->
+    <select id="selectCarbrandByObj" parameterType="com.pojo.Carbrand" resultMap="result_Carbrand_Map">
+        select 
+            <include refid="carbrand_Column" /> 
+        from carbrand
+        <where>
+            <if test="brandNum != null "> and carbrand.brandNum = #{brandNum}</if>
+            <if test="brandName != null "> and carbrand.brandName = #{brandName}</if>
+            <if test="brandId != null "> and carbrand.brandId = #{brandId}</if>
+        </where>
+    </select> 
+
+    <!-- 通过Carbrand的id获得对应数据库中表的数据对象-->
+    <select id="selectCarbrandById" parameterType="java.lang.Integer" resultMap="result_Carbrand_Map">
+        select 
+            <include refid="carbrand_Column" /> 
+        from carbrand
+        where carbrand.brandId = #{id}
+    </select> 
+
+    <!-- 将Carbrand插入到对应数据库的表中,包括属性值为null的数据-->
+
+    <insert id="insertCarbrand" parameterType="com.pojo.Carbrand">
+        insert into carbrand(brandId,brandName,brandNum) 
+        values(#{brandId},#{brandName},#{brandNum})
+    </insert>
+
+    <!-- 将Carbrand中属性值不为null的数据,插入到对应数据库的表中-->
+    <insert id="insertNonEmptyCarbrand" parameterType="com.pojo.Carbrand">
+        insert into carbrand
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="brandId != null">brandId,</if>
+            <if test="brandName != null">brandName,</if>
+            <if test="brandNum != null">brandNum,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="brandId != null"> #{brandId},</if>
+            <if test="brandName != null"> #{brandName},</if>
+            <if test="brandNum != null"> #{brandNum},</if>
+        </trim>
+    </insert>
+
+    <!-- 将Carbrand批量插入到对应数据库的表中-->
+    <insert id="insertCarbrandByBatch" parameterType="ArrayList">
+        insert into carbrand(brandId,brandName,brandNum) values
+        <foreach collection="list" item="item" index="index" separator="," >
+            (#{item.brandId},#{item.brandName},#{item.brandNum})
+        </foreach>
+    </insert>
+
+    <!-- 通过Carbrand的id将数据库表中对应的数据删除-->
+    <delete id="deleteCarbrandById" parameterType="java.lang.Integer">
+        delete from carbrand
+        where brandId = #{id}
+    </delete>
+
+    <!-- 通过辅助工具Assist中的条件将Carbrand对应的数据库表的数据删除-->
+    <delete id="deleteCarbrand" parameterType="common.Assist">
+        delete from carbrand
+        <if test="require!=null"><include refid="Assist" /></if>
+    </delete>
+
+    <!-- 通过Carbrand的id将Carbrand的数据更新到数据库中对应的表,包括值null的数据-->
+    <update id="updateCarbrandById" parameterType="com.pojo.Carbrand">
+        update carbrand set
+            brandName=#{brandName}
+            ,brandNum=#{brandNum}
+        where brandId=#{brandId}
+    </update>
+
+    <!-- 通过Carbrand的id将Carbrand中属性值不为null的数据更新到数据库对应的表中-->
+    <update id="updateNonEmptyCarbrandById" parameterType="com.pojo.Carbrand">
+        update carbrand
+        <set>
+            <if test="brandName != null">
+                brandName=#{brandName},
+            </if>
+            <if test="brandNum != null">
+                brandNum=#{brandNum},
+            </if>
+        </set>
+        where brandId=#{brandId}
+    </update>
+
+    <!-- 通过辅助工具Assist中的条件将Carbrand中的数据更新到数据库对应的表中,包括值为null的数据-->
+    <update id="updateCarbrand" parameterType="map">
+        update carbrand
+        <set>
+                brandId=#{enti.brandId},
+                brandName=#{enti.brandName},
+                brandNum=#{enti.brandNum},
+        </set>
+        <if test="assist.require!=null"><include refid="updateAssist" /></if>
+    </update>
+
+    <!-- 通过辅助工具Assist中的条件将Carbrand中属性值不为null的数据更新到数据库对应的表中-->
+    <update id="updateNonEmptyCarbrand" parameterType="map">
+        update carbrand
+        <set>
+            <if test="enti.brandId != null">
+                brandId=#{enti.brandId},
+            </if>
+            <if test="enti.brandName != null">
+                brandName=#{enti.brandName},
+            </if>
+            <if test="enti.brandNum != null">
+                brandNum=#{enti.brandNum},
+            </if>
+        </set>
+        <if test="assist.require!=null"><include refid="updateAssist" /></if>
+    </update>
+
+</mapper>

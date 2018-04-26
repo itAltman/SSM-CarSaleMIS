@@ -1,6 +1,6 @@
 package service;
 import java.util.List;
-import pojo.Adminlog;
+import com.pojo.Adminlog;
 import common.Assist;
 public interface AdminlogService{
 	/**

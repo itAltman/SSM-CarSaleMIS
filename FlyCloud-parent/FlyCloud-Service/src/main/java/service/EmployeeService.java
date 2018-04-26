@@ -1,6 +1,6 @@
 package service;
 import java.util.List;
-import pojo.Employee;
+import com.pojo.Employee;
 import common.Assist;
 public interface EmployeeService{
 	/**

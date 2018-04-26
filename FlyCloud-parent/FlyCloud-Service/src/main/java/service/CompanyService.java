@@ -1,10 +1,7 @@
 package service;
 import java.util.List;
-
-import org.springframework.stereotype.Service;
-import pojo.Company;
+import com.pojo.Company;
 import common.Assist;
-
 public interface CompanyService{
 	/**
 	 * 获得Company数据的总行数,可以通过辅助工具Assist进行条件查询,如果没有条件则传入null

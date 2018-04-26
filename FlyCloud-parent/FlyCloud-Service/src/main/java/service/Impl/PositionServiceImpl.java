@@ -1,7 +1,7 @@
 package service.impl;
 import java.util.List;
-import dao.PositionMapper;
-import pojo.Position;
+import com.dao.PositionMapper;
+import com.pojo.Position;
 import common.Assist;
 import service.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package service.impl;
 import java.util.List;
-import dao.SaleMapper;
-import pojo.Sale;
+import com.dao.SaleMapper;
+import com.pojo.Sale;
 import common.Assist;
 import service.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;

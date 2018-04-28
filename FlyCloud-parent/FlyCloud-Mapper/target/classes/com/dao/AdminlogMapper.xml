@@ -9,16 +9,18 @@
         <result column="Adminlog2" property="companyId" />
         <result column="Adminlog3" property="logContent" />
         <result column="Adminlog4" property="logTime" />
+        <association property="company" javaType="com.pojo.Company">
+            <id column="Company0" property="companyId" />
+            <result column="Company1" property="companyName" />
+        </association>
         <association property="employee" javaType="com.pojo.Employee">
+            <id column="Employee0" property="empId" />
             <result column="Employee1" property="companyId" />
             <result column="Employee2" property="empPhone" />
             <result column="Employee3" property="empSalery" />
             <result column="Employee4" property="positionId" />
             <result column="Employee5" property="empName" />
             <result column="Employee6" property="empPassword" />
-        </association>
-        <association property="company" javaType="com.pojo.Company">
-            <result column="Company1" property="companyName" />
         </association>
     </resultMap>
 
@@ -29,7 +31,12 @@
         <result column="Adminlog2" property="companyId" />
         <result column="Adminlog3" property="logContent" />
         <result column="Adminlog4" property="logTime" />
+        <association property="company" javaType="com.pojo.Company">
+            <id column="Company0" property="companyId" />
+            <result column="Company1" property="companyName" />
+        </association>
         <association property="employee" javaType="com.pojo.Employee">
+            <id column="Employee0" property="empId" />
             <result column="Employee1" property="companyId" />
             <result column="Employee2" property="empPhone" />
             <result column="Employee3" property="empSalery" />
@@ -37,24 +44,23 @@
             <result column="Employee5" property="empName" />
             <result column="Employee6" property="empPassword" />
         </association>
-        <association property="company" javaType="com.pojo.Company">
-            <result column="Company1" property="companyName" />
-        </association>
+    </resultMap>
+
+    <!-- Company的resultMap,该resultMap是专门用在有多表关联的地方,它保证分页时数据映射不会丢失或者重复 -->
+    <resultMap id="result_CompanyOfPaging_Map" type="com.pojo.Company">
+        <id column="Company0" property="companyId" />
+        <result column="Company1" property="companyName" />
     </resultMap>
 
     <!-- Employee的resultMap,该resultMap是专门用在有多表关联的地方,它保证分页时数据映射不会丢失或者重复 -->
     <resultMap id="result_EmployeeOfPaging_Map" type="com.pojo.Employee">
+        <id column="Employee0" property="empId" />
         <result column="Employee1" property="companyId" />
         <result column="Employee2" property="empPhone" />
         <result column="Employee3" property="empSalery" />
         <result column="Employee4" property="positionId" />
         <result column="Employee5" property="empName" />
         <result column="Employee6" property="empPassword" />
-    </resultMap>
-
-    <!-- Company的resultMap,该resultMap是专门用在有多表关联的地方,它保证分页时数据映射不会丢失或者重复 -->
-    <resultMap id="result_CompanyOfPaging_Map" type="com.pojo.Company">
-        <result column="Company1" property="companyName" />
     </resultMap>
 
 	   <!-- Assist用于辅助工具类setRequires设置的条件,${req.require}表示列名,#{req.value}表示值它是防SQL注入的 -->
@@ -98,6 +104,12 @@
         ,adminlog.logTime as Adminlog4
     </sql>
 
+    <!-- 数据库中表名为:company的列名,as前是数据库的列明,as后是列的别名用于映射成实体类中的属性,需要注意的是别名必须与resultMap中的column别名一致 -->
+    <sql id="company_Column">
+        company.companyId as Company0
+        ,company.companyName as Company1
+    </sql>
+
     <!-- 数据库中表名为:employee的列名,as前是数据库的列明,as后是列的别名用于映射成实体类中的属性,需要注意的是别名必须与resultMap中的column别名一致 -->
     <sql id="employee_Column">
         employee.empId as Employee0
@@ -107,12 +119,6 @@
         ,employee.positionId as Employee4
         ,employee.empName as Employee5
         ,employee.empPassword as Employee6
-    </sql>
-
-    <!-- 数据库中表名为:company的列名,as前是数据库的列明,as后是列的别名用于映射成实体类中的属性,需要注意的是别名必须与resultMap中的column别名一致 -->
-    <sql id="company_Column">
-        company.companyId as Company0
-        ,company.companyName as Company1
     </sql>
 
     <!--获得类名为:Adminlog对应的数据库表的数据总行数 -->
@@ -127,13 +133,13 @@
             <when test="resultColumn!=null">${resultColumn}</when>
             <otherwise>
         <include refid="adminlog_Column" /> 
-        ,<include refid="employee_Column" /> 
         ,<include refid="company_Column" /> 
+        ,<include refid="employee_Column" /> 
             </otherwise>
         </choose>
         from adminlog
-        left join employee on employee.logId=adminlog.logId
-        left join company on company.logId=adminlog.logId
+        left join company on company.companyId=adminlog.companyId
+        left join employee on employee.empId=adminlog.empId
         <choose>
             <when test="rowSize ==null">
                 <if test="require!=null">
@@ -193,11 +199,11 @@
     <select id="selectAdminlogByObj" parameterType="com.pojo.Adminlog" resultMap="result_Adminlog_Map">
         select 
             <include refid="adminlog_Column" /> 
-            ,<include refid="employee_Column" /> 
             ,<include refid="company_Column" /> 
+            ,<include refid="employee_Column" /> 
         from adminlog
-        left join employee on employee.logId=adminlog.logId
-        left join company on company.logId=adminlog.logId
+        left join company on company.companyId=adminlog.companyId
+        left join employee on employee.empId=adminlog.empId
         <where>
             <if test="logTime != null "> and adminlog.logTime = #{logTime}</if>
             <if test="logContent != null "> and adminlog.logContent = #{logContent}</if>
@@ -211,11 +217,11 @@
     <select id="selectAdminlogById" parameterType="java.lang.Integer" resultMap="result_Adminlog_Map">
         select 
             <include refid="adminlog_Column" /> 
-            ,<include refid="employee_Column" /> 
             ,<include refid="company_Column" /> 
+            ,<include refid="employee_Column" /> 
         from adminlog
-        left join employee on employee.logId=adminlog.logId
-        left join company on company.logId=adminlog.logId
+        left join company on company.companyId=adminlog.companyId
+        left join employee on employee.empId=adminlog.empId
         where adminlog.logId = #{id}
     </select> 
 

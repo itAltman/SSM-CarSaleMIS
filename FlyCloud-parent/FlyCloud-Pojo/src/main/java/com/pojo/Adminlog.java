@@ -1,5 +1,4 @@
 package com.pojo;
-
 public class Adminlog {
     private Integer logId;//日志编号
     private Integer empId;//员工编号

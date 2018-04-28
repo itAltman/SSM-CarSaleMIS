@@ -1,5 +1,4 @@
 package com.pojo;
-
 public class Sale {
     private Integer saleId;//销售编号
     private Integer empId;//员工编号

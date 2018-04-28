@@ -1,5 +1,4 @@
 package com.pojo;
-
 public class Carorder {
     private Integer orderId;//订单编号
     private String orderType;//订单状态（1：未审核、2：已审核）

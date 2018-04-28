@@ -9,7 +9,7 @@
     </typeAliases>
 
     <!-- 引入mapper的映射文件 -->
-    <mappers>
+    <!--<mappers>
         <package name="com.dao"/>
-    </mappers>
+    </mappers>-->
 </configuration>

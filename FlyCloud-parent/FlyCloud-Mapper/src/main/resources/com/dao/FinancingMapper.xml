@@ -11,9 +11,11 @@
         <result column="Financing4" property="repertoryId" />
         <result column="Financing5" property="financingType" />
         <association property="company" javaType="com.pojo.Company">
+            <id column="Company0" property="companyId" />
             <result column="Company1" property="companyName" />
         </association>
         <association property="sale" javaType="com.pojo.Sale">
+            <id column="Sale0" property="saleId" />
             <result column="Sale1" property="empId" />
             <result column="Sale2" property="companyId" />
             <result column="Sale3" property="saleType" />
@@ -23,6 +25,7 @@
             <result column="Sale7" property="carId" />
         </association>
         <association property="repertory" javaType="com.pojo.Repertory">
+            <id column="Repertory0" property="repertoryId" />
             <result column="Repertory1" property="inTime" />
             <result column="Repertory2" property="companyId" />
             <result column="Repertory3" property="repertoryNum" />
@@ -40,9 +43,11 @@
         <result column="Financing4" property="repertoryId" />
         <result column="Financing5" property="financingType" />
         <association property="company" javaType="com.pojo.Company">
+            <id column="Company0" property="companyId" />
             <result column="Company1" property="companyName" />
         </association>
         <association property="sale" javaType="com.pojo.Sale">
+            <id column="Sale0" property="saleId" />
             <result column="Sale1" property="empId" />
             <result column="Sale2" property="companyId" />
             <result column="Sale3" property="saleType" />
@@ -52,6 +57,7 @@
             <result column="Sale7" property="carId" />
         </association>
         <association property="repertory" javaType="com.pojo.Repertory">
+            <id column="Repertory0" property="repertoryId" />
             <result column="Repertory1" property="inTime" />
             <result column="Repertory2" property="companyId" />
             <result column="Repertory3" property="repertoryNum" />
@@ -62,11 +68,13 @@
 
     <!-- Company的resultMap,该resultMap是专门用在有多表关联的地方,它保证分页时数据映射不会丢失或者重复 -->
     <resultMap id="result_CompanyOfPaging_Map" type="com.pojo.Company">
+        <id column="Company0" property="companyId" />
         <result column="Company1" property="companyName" />
     </resultMap>
 
     <!-- Sale的resultMap,该resultMap是专门用在有多表关联的地方,它保证分页时数据映射不会丢失或者重复 -->
     <resultMap id="result_SaleOfPaging_Map" type="com.pojo.Sale">
+        <id column="Sale0" property="saleId" />
         <result column="Sale1" property="empId" />
         <result column="Sale2" property="companyId" />
         <result column="Sale3" property="saleType" />
@@ -78,6 +86,7 @@
 
     <!-- Repertory的resultMap,该resultMap是专门用在有多表关联的地方,它保证分页时数据映射不会丢失或者重复 -->
     <resultMap id="result_RepertoryOfPaging_Map" type="com.pojo.Repertory">
+        <id column="Repertory0" property="repertoryId" />
         <result column="Repertory1" property="inTime" />
         <result column="Repertory2" property="companyId" />
         <result column="Repertory3" property="repertoryNum" />
@@ -173,9 +182,9 @@
             </otherwise>
         </choose>
         from financing
-        left join company on company.financingId=financing.financingId
-        left join sale on sale.financingId=financing.financingId
-        left join repertory on repertory.financingId=financing.financingId
+        left join company on company.companyId=financing.companyId
+        left join sale on sale.saleId=financing.saleId
+        left join repertory on repertory.repertoryId=financing.repertoryId
         <choose>
             <when test="rowSize ==null">
                 <if test="require!=null">
@@ -239,9 +248,9 @@
             ,<include refid="sale_Column" /> 
             ,<include refid="repertory_Column" /> 
         from financing
-        left join company on company.financingId=financing.financingId
-        left join sale on sale.financingId=financing.financingId
-        left join repertory on repertory.financingId=financing.financingId
+        left join company on company.companyId=financing.companyId
+        left join sale on sale.saleId=financing.saleId
+        left join repertory on repertory.repertoryId=financing.repertoryId
         <where>
             <if test="financingType != null "> and financing.financingType = #{financingType}</if>
             <if test="repertoryId != null "> and financing.repertoryId = #{repertoryId}</if>
@@ -260,9 +269,9 @@
             ,<include refid="sale_Column" /> 
             ,<include refid="repertory_Column" /> 
         from financing
-        left join company on company.financingId=financing.financingId
-        left join sale on sale.financingId=financing.financingId
-        left join repertory on repertory.financingId=financing.financingId
+        left join company on company.companyId=financing.companyId
+        left join sale on sale.saleId=financing.saleId
+        left join repertory on repertory.repertoryId=financing.repertoryId
         where financing.financingId = #{id}
     </select> 
 

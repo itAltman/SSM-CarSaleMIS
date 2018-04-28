@@ -1,5 +1,6 @@
 package com.pojo;
 public class Customer {
+    private Integer customerId;//客户编号
     private Integer companyId;//公司编号
     private String customerPhone;//客户电话
     private String customerType;//客户类型（1：个人、2：公司）
@@ -7,11 +8,13 @@ public class Customer {
     private String customerSex;//客户性别
     private java.util.Date customerBirthday;//客户生日
     private String customerName;//客户姓名
+    private Company company;
     public Customer() {
         super();
     }
-    public Customer(Integer companyId,String customerPhone,String customerType,java.util.Date customerCreateTime,String customerSex,java.util.Date customerBirthday,String customerName) {
+    public Customer(Integer customerId,Integer companyId,String customerPhone,String customerType,java.util.Date customerCreateTime,String customerSex,java.util.Date customerBirthday,String customerName,Company company) {
         super();
+        this.customerId = customerId;
         this.companyId = companyId;
         this.customerPhone = customerPhone;
         this.customerType = customerType;
@@ -19,7 +22,16 @@ public class Customer {
         this.customerSex = customerSex;
         this.customerBirthday = customerBirthday;
         this.customerName = customerName;
+        this.company = company;
     }
+    public Integer getCustomerId() {
+        return this.customerId;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
+    }
+
     public Integer getCompanyId() {
         return this.companyId;
     }
@@ -74,6 +86,14 @@ public class Customer {
 
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
+    }
+
+    public Company getCompany() {
+        return this.company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
 }

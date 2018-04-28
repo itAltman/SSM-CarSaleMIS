@@ -12,10 +12,12 @@
         <result column="Employee5" property="empName" />
         <result column="Employee6" property="empPassword" />
         <association property="position" javaType="com.pojo.Position">
+            <id column="Position0" property="positionId" />
             <result column="Position1" property="positionName" />
             <result column="Position2" property="positionLevel" />
         </association>
         <association property="company" javaType="com.pojo.Company">
+            <id column="Company0" property="companyId" />
             <result column="Company1" property="companyName" />
         </association>
     </resultMap>
@@ -30,22 +32,26 @@
         <result column="Employee5" property="empName" />
         <result column="Employee6" property="empPassword" />
         <association property="position" javaType="com.pojo.Position">
+            <id column="Position0" property="positionId" />
             <result column="Position1" property="positionName" />
             <result column="Position2" property="positionLevel" />
         </association>
         <association property="company" javaType="com.pojo.Company">
+            <id column="Company0" property="companyId" />
             <result column="Company1" property="companyName" />
         </association>
     </resultMap>
 
     <!-- Position的resultMap,该resultMap是专门用在有多表关联的地方,它保证分页时数据映射不会丢失或者重复 -->
     <resultMap id="result_PositionOfPaging_Map" type="com.pojo.Position">
+        <id column="Position0" property="positionId" />
         <result column="Position1" property="positionName" />
         <result column="Position2" property="positionLevel" />
     </resultMap>
 
     <!-- Company的resultMap,该resultMap是专门用在有多表关联的地方,它保证分页时数据映射不会丢失或者重复 -->
     <resultMap id="result_CompanyOfPaging_Map" type="com.pojo.Company">
+        <id column="Company0" property="companyId" />
         <result column="Company1" property="companyName" />
     </resultMap>
 
@@ -122,8 +128,8 @@
             </otherwise>
         </choose>
         from employee
-        left join position on position.empId=employee.empId
-        left join company on company.empId=employee.empId
+        left join position on position.positionId=employee.positionId
+        left join company on company.companyId=employee.companyId
         <choose>
             <when test="rowSize ==null">
                 <if test="require!=null">
@@ -186,8 +192,8 @@
             ,<include refid="position_Column" /> 
             ,<include refid="company_Column" /> 
         from employee
-        left join position on position.empId=employee.empId
-        left join company on company.empId=employee.empId
+        left join position on position.positionId=employee.positionId
+        left join company on company.companyId=employee.companyId
         <where>
             <if test="empPassword != null "> and employee.empPassword = #{empPassword}</if>
             <if test="empName != null "> and employee.empName = #{empName}</if>
@@ -206,8 +212,8 @@
             ,<include refid="position_Column" /> 
             ,<include refid="company_Column" /> 
         from employee
-        left join position on position.empId=employee.empId
-        left join company on company.empId=employee.empId
+        left join position on position.positionId=employee.positionId
+        left join company on company.companyId=employee.companyId
         where employee.empId = #{id}
     </select> 
 

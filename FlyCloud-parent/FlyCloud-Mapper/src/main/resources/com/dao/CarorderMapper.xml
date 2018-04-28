@@ -9,14 +9,16 @@
         <result column="Carorder2" property="companyId" />
         <result column="Carorder3" property="orderNum" />
         <result column="Carorder4" property="carId" />
+        <association property="company" javaType="com.pojo.Company">
+            <id column="Company0" property="companyId" />
+            <result column="Company1" property="companyName" />
+        </association>
         <association property="car" javaType="com.pojo.Car">
+            <id column="Car0" property="carId" />
             <result column="Car1" property="carPrice" />
             <result column="Car2" property="carName" />
             <result column="Car3" property="carTime" />
             <result column="Car4" property="seriesId" />
-        </association>
-        <association property="company" javaType="com.pojo.Company">
-            <result column="Company1" property="companyName" />
         </association>
     </resultMap>
 
@@ -27,28 +29,32 @@
         <result column="Carorder2" property="companyId" />
         <result column="Carorder3" property="orderNum" />
         <result column="Carorder4" property="carId" />
+        <association property="company" javaType="com.pojo.Company">
+            <id column="Company0" property="companyId" />
+            <result column="Company1" property="companyName" />
+        </association>
         <association property="car" javaType="com.pojo.Car">
+            <id column="Car0" property="carId" />
             <result column="Car1" property="carPrice" />
             <result column="Car2" property="carName" />
             <result column="Car3" property="carTime" />
             <result column="Car4" property="seriesId" />
         </association>
-        <association property="company" javaType="com.pojo.Company">
-            <result column="Company1" property="companyName" />
-        </association>
-    </resultMap>
-
-    <!-- Car的resultMap,该resultMap是专门用在有多表关联的地方,它保证分页时数据映射不会丢失或者重复 -->
-    <resultMap id="result_CarOfPaging_Map" type="com.pojo.Car">
-        <result column="Car1" property="carPrice" />
-        <result column="Car2" property="carName" />
-        <result column="Car3" property="carTime" />
-        <result column="Car4" property="seriesId" />
     </resultMap>
 
     <!-- Company的resultMap,该resultMap是专门用在有多表关联的地方,它保证分页时数据映射不会丢失或者重复 -->
     <resultMap id="result_CompanyOfPaging_Map" type="com.pojo.Company">
+        <id column="Company0" property="companyId" />
         <result column="Company1" property="companyName" />
+    </resultMap>
+
+    <!-- Car的resultMap,该resultMap是专门用在有多表关联的地方,它保证分页时数据映射不会丢失或者重复 -->
+    <resultMap id="result_CarOfPaging_Map" type="com.pojo.Car">
+        <id column="Car0" property="carId" />
+        <result column="Car1" property="carPrice" />
+        <result column="Car2" property="carName" />
+        <result column="Car3" property="carTime" />
+        <result column="Car4" property="seriesId" />
     </resultMap>
 
 	   <!-- Assist用于辅助工具类setRequires设置的条件,${req.require}表示列名,#{req.value}表示值它是防SQL注入的 -->
@@ -92,6 +98,12 @@
         ,carorder.carId as Carorder4
     </sql>
 
+    <!-- 数据库中表名为:company的列名,as前是数据库的列明,as后是列的别名用于映射成实体类中的属性,需要注意的是别名必须与resultMap中的column别名一致 -->
+    <sql id="company_Column">
+        company.companyId as Company0
+        ,company.companyName as Company1
+    </sql>
+
     <!-- 数据库中表名为:car的列名,as前是数据库的列明,as后是列的别名用于映射成实体类中的属性,需要注意的是别名必须与resultMap中的column别名一致 -->
     <sql id="car_Column">
         car.carId as Car0
@@ -99,12 +111,6 @@
         ,car.carName as Car2
         ,car.carTime as Car3
         ,car.seriesId as Car4
-    </sql>
-
-    <!-- 数据库中表名为:company的列名,as前是数据库的列明,as后是列的别名用于映射成实体类中的属性,需要注意的是别名必须与resultMap中的column别名一致 -->
-    <sql id="company_Column">
-        company.companyId as Company0
-        ,company.companyName as Company1
     </sql>
 
     <!--获得类名为:Carorder对应的数据库表的数据总行数 -->
@@ -119,13 +125,13 @@
             <when test="resultColumn!=null">${resultColumn}</when>
             <otherwise>
         <include refid="carorder_Column" /> 
-        ,<include refid="car_Column" /> 
         ,<include refid="company_Column" /> 
+        ,<include refid="car_Column" /> 
             </otherwise>
         </choose>
         from carorder
-        left join car on car.orderId=carorder.orderId
-        left join company on company.orderId=carorder.orderId
+        left join company on company.companyId=carorder.companyId
+        left join car on car.carId=carorder.carId
         <choose>
             <when test="rowSize ==null">
                 <if test="require!=null">
@@ -185,11 +191,11 @@
     <select id="selectCarorderByObj" parameterType="com.pojo.Carorder" resultMap="result_Carorder_Map">
         select 
             <include refid="carorder_Column" /> 
-            ,<include refid="car_Column" /> 
             ,<include refid="company_Column" /> 
+            ,<include refid="car_Column" /> 
         from carorder
-        left join car on car.orderId=carorder.orderId
-        left join company on company.orderId=carorder.orderId
+        left join company on company.companyId=carorder.companyId
+        left join car on car.carId=carorder.carId
         <where>
             <if test="carId != null "> and carorder.carId = #{carId}</if>
             <if test="orderNum != null "> and carorder.orderNum = #{orderNum}</if>
@@ -203,11 +209,11 @@
     <select id="selectCarorderById" parameterType="java.lang.Integer" resultMap="result_Carorder_Map">
         select 
             <include refid="carorder_Column" /> 
-            ,<include refid="car_Column" /> 
             ,<include refid="company_Column" /> 
+            ,<include refid="car_Column" /> 
         from carorder
-        left join car on car.orderId=carorder.orderId
-        left join company on company.orderId=carorder.orderId
+        left join company on company.companyId=carorder.companyId
+        left join car on car.carId=carorder.carId
         where carorder.orderId = #{id}
     </select> 
 

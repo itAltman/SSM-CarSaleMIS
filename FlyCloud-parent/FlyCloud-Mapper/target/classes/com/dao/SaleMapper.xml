@@ -13,6 +13,7 @@
         <result column="Sale6" property="saleCurPrice" />
         <result column="Sale7" property="carId" />
         <association property="employee" javaType="com.pojo.Employee">
+            <id column="Employee0" property="empId" />
             <result column="Employee1" property="companyId" />
             <result column="Employee2" property="empPhone" />
             <result column="Employee3" property="empSalery" />
@@ -21,9 +22,11 @@
             <result column="Employee6" property="empPassword" />
         </association>
         <association property="company" javaType="com.pojo.Company">
+            <id column="Company0" property="companyId" />
             <result column="Company1" property="companyName" />
         </association>
         <association property="customer" javaType="com.pojo.Customer">
+            <id column="Customer0" property="customerId" />
             <result column="Customer1" property="companyId" />
             <result column="Customer2" property="customerPhone" />
             <result column="Customer3" property="customerType" />
@@ -33,6 +36,7 @@
             <result column="Customer7" property="customerName" />
         </association>
         <association property="car" javaType="com.pojo.Car">
+            <id column="Car0" property="carId" />
             <result column="Car1" property="carPrice" />
             <result column="Car2" property="carName" />
             <result column="Car3" property="carTime" />
@@ -51,6 +55,7 @@
         <result column="Sale6" property="saleCurPrice" />
         <result column="Sale7" property="carId" />
         <association property="employee" javaType="com.pojo.Employee">
+            <id column="Employee0" property="empId" />
             <result column="Employee1" property="companyId" />
             <result column="Employee2" property="empPhone" />
             <result column="Employee3" property="empSalery" />
@@ -59,9 +64,11 @@
             <result column="Employee6" property="empPassword" />
         </association>
         <association property="company" javaType="com.pojo.Company">
+            <id column="Company0" property="companyId" />
             <result column="Company1" property="companyName" />
         </association>
         <association property="customer" javaType="com.pojo.Customer">
+            <id column="Customer0" property="customerId" />
             <result column="Customer1" property="companyId" />
             <result column="Customer2" property="customerPhone" />
             <result column="Customer3" property="customerType" />
@@ -71,6 +78,7 @@
             <result column="Customer7" property="customerName" />
         </association>
         <association property="car" javaType="com.pojo.Car">
+            <id column="Car0" property="carId" />
             <result column="Car1" property="carPrice" />
             <result column="Car2" property="carName" />
             <result column="Car3" property="carTime" />
@@ -80,6 +88,7 @@
 
     <!-- Employee的resultMap,该resultMap是专门用在有多表关联的地方,它保证分页时数据映射不会丢失或者重复 -->
     <resultMap id="result_EmployeeOfPaging_Map" type="com.pojo.Employee">
+        <id column="Employee0" property="empId" />
         <result column="Employee1" property="companyId" />
         <result column="Employee2" property="empPhone" />
         <result column="Employee3" property="empSalery" />
@@ -90,11 +99,13 @@
 
     <!-- Company的resultMap,该resultMap是专门用在有多表关联的地方,它保证分页时数据映射不会丢失或者重复 -->
     <resultMap id="result_CompanyOfPaging_Map" type="com.pojo.Company">
+        <id column="Company0" property="companyId" />
         <result column="Company1" property="companyName" />
     </resultMap>
 
     <!-- Customer的resultMap,该resultMap是专门用在有多表关联的地方,它保证分页时数据映射不会丢失或者重复 -->
     <resultMap id="result_CustomerOfPaging_Map" type="com.pojo.Customer">
+        <id column="Customer0" property="customerId" />
         <result column="Customer1" property="companyId" />
         <result column="Customer2" property="customerPhone" />
         <result column="Customer3" property="customerType" />
@@ -106,6 +117,7 @@
 
     <!-- Car的resultMap,该resultMap是专门用在有多表关联的地方,它保证分页时数据映射不会丢失或者重复 -->
     <resultMap id="result_CarOfPaging_Map" type="com.pojo.Car">
+        <id column="Car0" property="carId" />
         <result column="Car1" property="carPrice" />
         <result column="Car2" property="carName" />
         <result column="Car3" property="carTime" />
@@ -213,10 +225,10 @@
             </otherwise>
         </choose>
         from sale
-        left join employee on employee.saleId=sale.saleId
-        left join company on company.saleId=sale.saleId
-        left join customer on customer.saleId=sale.saleId
-        left join car on car.saleId=sale.saleId
+        left join employee on employee.empId=sale.empId
+        left join company on company.companyId=sale.companyId
+        left join customer on customer.customerId=sale.customerId
+        left join car on car.carId=sale.carId
         <choose>
             <when test="rowSize ==null">
                 <if test="require!=null">
@@ -281,10 +293,10 @@
             ,<include refid="customer_Column" /> 
             ,<include refid="car_Column" /> 
         from sale
-        left join employee on employee.saleId=sale.saleId
-        left join company on company.saleId=sale.saleId
-        left join customer on customer.saleId=sale.saleId
-        left join car on car.saleId=sale.saleId
+        left join employee on employee.empId=sale.empId
+        left join company on company.companyId=sale.companyId
+        left join customer on customer.customerId=sale.customerId
+        left join car on car.carId=sale.carId
         <where>
             <if test="carId != null "> and sale.carId = #{carId}</if>
             <if test="saleCurPrice != null "> and sale.saleCurPrice = #{saleCurPrice}</if>
@@ -306,10 +318,10 @@
             ,<include refid="customer_Column" /> 
             ,<include refid="car_Column" /> 
         from sale
-        left join employee on employee.saleId=sale.saleId
-        left join company on company.saleId=sale.saleId
-        left join customer on customer.saleId=sale.saleId
-        left join car on car.saleId=sale.saleId
+        left join employee on employee.empId=sale.empId
+        left join company on company.companyId=sale.companyId
+        left join customer on customer.customerId=sale.customerId
+        left join car on car.carId=sale.carId
         where sale.saleId = #{id}
     </select> 
 

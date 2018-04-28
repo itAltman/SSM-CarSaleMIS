@@ -10,6 +10,7 @@
         <result column="Car3" property="carTime" />
         <result column="Car4" property="seriesId" />
         <association property="carseries" javaType="com.pojo.Carseries">
+            <id column="Carseries0" property="seriesId" />
             <result column="Carseries1" property="seriesName" />
             <result column="Carseries2" property="brandId" />
         </association>
@@ -23,6 +24,7 @@
         <result column="Car3" property="carTime" />
         <result column="Car4" property="seriesId" />
         <association property="carseries" javaType="com.pojo.Carseries">
+            <id column="Carseries0" property="seriesId" />
             <result column="Carseries1" property="seriesName" />
             <result column="Carseries2" property="brandId" />
         </association>
@@ -30,6 +32,7 @@
 
     <!-- Carseries的resultMap,该resultMap是专门用在有多表关联的地方,它保证分页时数据映射不会丢失或者重复 -->
     <resultMap id="result_CarseriesOfPaging_Map" type="com.pojo.Carseries">
+        <id column="Carseries0" property="seriesId" />
         <result column="Carseries1" property="seriesName" />
         <result column="Carseries2" property="brandId" />
     </resultMap>
@@ -98,7 +101,7 @@
             </otherwise>
         </choose>
         from car
-        left join carseries on carseries.carId=car.carId
+        left join carseries on carseries.seriesId=car.seriesId
         <choose>
             <when test="rowSize ==null">
                 <if test="require!=null">
@@ -160,7 +163,7 @@
             <include refid="car_Column" /> 
             ,<include refid="carseries_Column" /> 
         from car
-        left join carseries on carseries.carId=car.carId
+        left join carseries on carseries.seriesId=car.seriesId
         <where>
             <if test="seriesId != null "> and car.seriesId = #{seriesId}</if>
             <if test="carTime != null "> and car.carTime = #{carTime}</if>
@@ -176,7 +179,7 @@
             <include refid="car_Column" /> 
             ,<include refid="carseries_Column" /> 
         from car
-        left join carseries on carseries.carId=car.carId
+        left join carseries on carseries.seriesId=car.seriesId
         where car.carId = #{id}
     </select> 
 

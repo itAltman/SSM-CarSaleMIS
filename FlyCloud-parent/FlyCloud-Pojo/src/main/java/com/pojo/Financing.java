@@ -1,5 +1,4 @@
 package com.pojo;
-
 public class Financing {
     private Integer financingId;//财务编号
     private Integer companyId;//公司编号

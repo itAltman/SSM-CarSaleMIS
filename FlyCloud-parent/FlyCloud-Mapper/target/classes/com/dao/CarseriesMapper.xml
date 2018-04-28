@@ -8,6 +8,7 @@
         <result column="Carseries1" property="seriesName" />
         <result column="Carseries2" property="brandId" />
         <association property="carbrand" javaType="com.pojo.Carbrand">
+            <id column="Carbrand0" property="brandId" />
             <result column="Carbrand1" property="brandName" />
             <result column="Carbrand2" property="brandNum" />
         </association>
@@ -19,6 +20,7 @@
         <result column="Carseries1" property="seriesName" />
         <result column="Carseries2" property="brandId" />
         <association property="carbrand" javaType="com.pojo.Carbrand">
+            <id column="Carbrand0" property="brandId" />
             <result column="Carbrand1" property="brandName" />
             <result column="Carbrand2" property="brandNum" />
         </association>
@@ -26,6 +28,7 @@
 
     <!-- Carbrand的resultMap,该resultMap是专门用在有多表关联的地方,它保证分页时数据映射不会丢失或者重复 -->
     <resultMap id="result_CarbrandOfPaging_Map" type="com.pojo.Carbrand">
+        <id column="Carbrand0" property="brandId" />
         <result column="Carbrand1" property="brandName" />
         <result column="Carbrand2" property="brandNum" />
     </resultMap>
@@ -92,7 +95,7 @@
             </otherwise>
         </choose>
         from carseries
-        left join carbrand on carbrand.seriesId=carseries.seriesId
+        left join carbrand on carbrand.brandId=carseries.brandId
         <choose>
             <when test="rowSize ==null">
                 <if test="require!=null">
@@ -154,7 +157,7 @@
             <include refid="carseries_Column" /> 
             ,<include refid="carbrand_Column" /> 
         from carseries
-        left join carbrand on carbrand.seriesId=carseries.seriesId
+        left join carbrand on carbrand.brandId=carseries.brandId
         <where>
             <if test="brandId != null "> and carseries.brandId = #{brandId}</if>
             <if test="seriesName != null "> and carseries.seriesName = #{seriesName}</if>
@@ -168,7 +171,7 @@
             <include refid="carseries_Column" /> 
             ,<include refid="carbrand_Column" /> 
         from carseries
-        left join carbrand on carbrand.seriesId=carseries.seriesId
+        left join carbrand on carbrand.brandId=carseries.brandId
         where carseries.seriesId = #{id}
     </select> 
 

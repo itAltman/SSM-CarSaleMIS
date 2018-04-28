@@ -1,15 +1,13 @@
 package service.impl;
 import java.util.List;
-
 import com.dao.CompanyMapper;
 import com.pojo.Company;
 import common.Assist;
+import service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import service.CompanyService;
-
 @Service
-public class CompanyServiceImpl implements CompanyService {
+public class CompanyServiceImpl implements CompanyService{
     @Autowired
     private CompanyMapper companyMapper;
     @Override

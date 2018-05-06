@@ -13,6 +13,8 @@ public class Customer {
     private String customerName;//客户姓名
     private String birthdayFormat;//客户生日的格式化类型
     private String CreateTimeFormat;//创建时间的格式化类型
+    private String typeFormat;//客户类型的格式化类型
+
     private Company company;
     public Customer() {
         super();
@@ -30,12 +32,21 @@ public class Customer {
         this.company = company;
     }
 
+    public String getTypeFormat() {
+        String str = null;
+        if ("1".equals(customerType)){
+            str = "个人";
+        } else if ("2".equals(customerType)){
+            str = "公司";
+        }
+        return str;
+    }
     public String getBirthdayFormat() {
         return new SimpleDateFormat("yyyy/MM/dd").format(customerBirthday);
     }
 
     public String getCreateTimeFormat() {
-        return new SimpleDateFormat("yyyy/MM/dd").format(customerCreateTime);
+        return new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(customerCreateTime);
     }
 
     public Integer getCustomerId() {

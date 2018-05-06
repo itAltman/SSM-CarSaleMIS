@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/FlyCloud-Mapper/FlyCloud-Mapper.iml" filepath="$PROJECT_DIR$/FlyCloud-Mapper/FlyCloud-Mapper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FlyCloud-Pojo/FlyCloud-Pojo.iml" filepath="$PROJECT_DIR$/FlyCloud-Pojo/FlyCloud-Pojo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FlyCloud-Service/FlyCloud-Service.iml" filepath="$PROJECT_DIR$/FlyCloud-Service/FlyCloud-Service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FlyCloud-Util/FlyCloud-Util.iml" filepath="$PROJECT_DIR$/FlyCloud-Util/FlyCloud-Util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FlyCloud-Web/FlyCloud-Web.iml" filepath="$PROJECT_DIR$/FlyCloud-Web/FlyCloud-Web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FlyCloud-parent.iml" filepath="$PROJECT_DIR$/FlyCloud-parent.iml" />
+    </modules>
+  </component>
+</project>

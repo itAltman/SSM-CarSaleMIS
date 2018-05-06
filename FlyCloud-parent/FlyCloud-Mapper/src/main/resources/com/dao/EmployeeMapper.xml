@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.EmployeeMapper">
+    <!-- Employee的resultMap,column是给数据库列起的别名,它对应property类的属性-->
+    <resultMap id="result_Employee_Map" type="com.pojo.Employee">
+        <!-- 当你看到column=类名+数字0123时不要问这是什么鬼,请看文档==>  http://mybatiscmeu.com/  ,中=>修改属性页说明==>表的别名   ;它是MyBatis-CMEU生成多表关联时防止列名超长或者列名重复的策略,可以自义定表的别名,就会以表的别名_表列名命名  -->
+        <id column="Employee0" property="empId" />
+        <result column="Employee1" property="companyId" />
+        <result column="Employee2" property="empPhone" />
+        <result column="Employee3" property="empSalery" />
+        <result column="Employee4" property="positionId" />
+        <result column="Employee5" property="empName" />
+        <result column="Employee6" property="empPassword" />
+        <association property="position" javaType="com.pojo.Position">
+            <id column="Position0" property="positionId" />
+            <result column="Position1" property="positionName" />
+            <result column="Position2" property="positionLevel" />
+        </association>
+        <association property="company" javaType="com.pojo.Company">
+            <id column="Company0" property="companyId" />
+            <result column="Company1" property="companyName" />
+        </association>
+    </resultMap>
+
+    <!-- Employee的resultMap,该resultMap是专门用在有多表关联的地方,它保证分页时数据映射不会丢失或者重复 -->
+    <resultMap id="result_EmployeeOfPaging_Map" type="com.pojo.Employee">
+        <id column="Employee0" property="empId" />
+        <result column="Employee1" property="companyId" />
+        <result column="Employee2" property="empPhone" />
+        <result column="Employee3" property="empSalery" />
+        <result column="Employee4" property="positionId" />
+        <result column="Employee5" property="empName" />
+        <result column="Employee6" property="empPassword" />
+        <association property="position" javaType="com.pojo.Position">
+            <id column="Position0" property="positionId" />
+            <result column="Position1" property="positionName" />
+            <result column="Position2" property="positionLevel" />
+        </association>
+        <association property="company" javaType="com.pojo.Company">
+            <id column="Company0" property="companyId" />
+            <result column="Company1" property="companyName" />
+        </association>
+    </resultMap>
+
+    <!-- Position的resultMap,该resultMap是专门用在有多表关联的地方,它保证分页时数据映射不会丢失或者重复 -->
+    <resultMap id="result_PositionOfPaging_Map" type="com.pojo.Position">
+        <id column="Position0" property="positionId" />
+        <result column="Position1" property="positionName" />
+        <result column="Position2" property="positionLevel" />
+    </resultMap>
+
+    <!-- Company的resultMap,该resultMap是专门用在有多表关联的地方,它保证分页时数据映射不会丢失或者重复 -->
+    <resultMap id="result_CompanyOfPaging_Map" type="com.pojo.Company">
+        <id column="Company0" property="companyId" />
+        <result column="Company1" property="companyName" />
+    </resultMap>
+
+	   <!-- Assist用于辅助工具类setRequires设置的条件,${req.require}表示列名,#{req.value}表示值它是防SQL注入的 -->
+    <sql id="Assist">
+        <where>
+            <foreach collection="require" item="req" separator=" ">
+                ${req.require} 
+                <if test="req.value != null"> #{req.value}</if> 
+                <if test="req.values != null">
+                    <foreach collection="req.values" item="val" separator=","> 
+                        #{val} 
+                    </foreach> 
+                </if> 
+                <if test="req.suffix != null"> ${req.suffix}</if> 
+            </foreach>
+        </where>
+    </sql>
+
+	   <!-- updateAssist用于更新数据的使用它拓展自Assist,用于辅助工具类setRequires设置的条件,${req.require}表示列名,#{req.value}表示值它是防SQL注入的 -->
+    <sql id="updateAssist">
+        <where>
+            <foreach collection="assist.require" item="req" separator=" ">
+                ${req.require} 
+                <if test="req.value != null"> #{req.value}</if> 
+                <if test="req.values != null">
+                    <foreach collection="req.values" item="val" separator=","> 
+                        #{val} 
+                    </foreach> 
+                </if> 
+                <if test="req.suffix != null"> ${req.suffix}</if> 
+            </foreach>
+        </where>
+    </sql>
+
+    <!-- 数据库中表名为:employee的列名,as前是数据库的列明,as后是列的别名用于映射成实体类中的属性,需要注意的是别名必须与resultMap中的column别名一致 -->
+    <sql id="employee_Column">
+        employee.empId as Employee0
+        ,employee.companyId as Employee1
+        ,employee.empPhone as Employee2
+        ,employee.empSalery as Employee3
+        ,employee.positionId as Employee4
+        ,employee.empName as Employee5
+        ,employee.empPassword as Employee6
+    </sql>
+
+    <!-- 数据库中表名为:position的列名,as前是数据库的列明,as后是列的别名用于映射成实体类中的属性,需要注意的是别名必须与resultMap中的column别名一致 -->
+    <sql id="position_Column">
+        position.positionId as Position0
+        ,position.positionName as Position1
+        ,position.positionLevel as Position2
+    </sql>
+
+    <!-- 数据库中表名为:company的列名,as前是数据库的列明,as后是列的别名用于映射成实体类中的属性,需要注意的是别名必须与resultMap中的column别名一致 -->
+    <sql id="company_Column">
+        company.companyId as Company0
+        ,company.companyName as Company1
+    </sql>
+
+    <!--获得类名为:Employee对应的数据库表的数据总行数 -->
+    <select id="getEmployeeRowCount" parameterType="common.Assist" resultType="java.lang.Long">
+        select count(empId) from employee
+        <if test="require!=null"><include refid="Assist" /></if>
+    </select>
+    <!-- 获得类名为:Employee对应数据库中表的数据集合 -->
+    <select id="selectEmployee" parameterType="common.Assist"  resultMap="result_Employee_Map">
+        select  <if test="distinct !=null">${distinct}</if>
+        <choose>
+            <when test="resultColumn!=null">${resultColumn}</when>
+            <otherwise>
+        <include refid="employee_Column" /> 
+        ,<include refid="position_Column" /> 
+        ,<include refid="company_Column" /> 
+            </otherwise>
+        </choose>
+        from employee
+        left join position on position.positionId=employee.positionId
+        left join company on company.companyId=employee.companyId
+        <choose>
+            <when test="rowSize ==null">
+                <if test="require!=null">
+                    <include refid="Assist" />
+                </if>
+                <if test="order !=null">${order}</if>
+            </when>
+            <otherwise>
+                inner join
+                (
+                SELECT empId as primary_key FROM employee
+                <if test="require!=null">
+                    <include refid="Assist" />
+                </if>
+                <if test="order !=null">${order}</if>
+                <choose>
+                    <when test="startRow !=null and rowSize !=null">LIMIT #{startRow},#{rowSize} </when>
+                    <when test="rowSize !=null">LIMIT #{rowSize}</when>
+                 </choose>
+                 ) as tmp
+                 on tmp.primary_key=employee.empId
+            </otherwise>
+        </choose>
+    </select> 
+
+    <!-- 获得类名为:Employee对应数据库中表的数据集合,该查询语句用于多表关联分页查询使用 -->
+    <select id="selectEmployeeOfPaging" parameterType="common.Assist"  resultMap="result_EmployeeOfPaging_Map">
+        select  <if test="distinct !=null">${distinct}</if>
+        <include refid="employee_Column" /> 
+        from employee
+        <choose>
+            <when test="rowSize ==null">
+                <if test="require!=null">
+                    <include refid="Assist" />
+                </if>
+                <if test="order !=null">${order}</if>
+            </when>
+            <otherwise>
+                inner join
+                (
+                SELECT empId as primary_key FROM employee
+                <if test="require!=null">
+                    <include refid="Assist" />
+                </if>
+                <if test="order !=null">${order}</if>
+                <choose>
+                    <when test="startRow !=null and rowSize !=null">LIMIT #{startRow},#{rowSize} </when>
+                    <when test="rowSize !=null">LIMIT #{rowSize}</when>
+                 </choose>
+                 ) as tmp
+                 on tmp.primary_key=employee.empId
+            </otherwise>
+        </choose>
+    </select> 
+
+    <!-- 获得一个Employee对象,以参数Employee对象中不为空的属性作为条件进行查询-->
+    <select id="selectEmployeeByObj" parameterType="com.pojo.Employee" resultMap="result_Employee_Map">
+        select 
+            <include refid="employee_Column" /> 
+            ,<include refid="position_Column" /> 
+            ,<include refid="company_Column" /> 
+        from employee
+        left join position on position.positionId=employee.positionId
+        left join company on company.companyId=employee.companyId
+        <where>
+            <if test="empPassword != null "> and employee.empPassword = #{empPassword}</if>
+            <if test="empName != null "> and employee.empName = #{empName}</if>
+            <if test="positionId != null "> and employee.positionId = #{positionId}</if>
+            <if test="empSalery != null "> and employee.empSalery = #{empSalery}</if>
+            <if test="empPhone != null "> and employee.empPhone = #{empPhone}</if>
+            <if test="companyId != null "> and employee.companyId = #{companyId}</if>
+            <if test="empId != null "> and employee.empId = #{empId}</if>
+        </where>
+    </select> 
+
+    <!-- 通过Employee的id获得对应数据库中表的数据对象-->
+    <select id="selectEmployeeById" parameterType="java.lang.Integer" resultMap="result_Employee_Map">
+        select 
+            <include refid="employee_Column" /> 
+            ,<include refid="position_Column" /> 
+            ,<include refid="company_Column" /> 
+        from employee
+        left join position on position.positionId=employee.positionId
+        left join company on company.companyId=employee.companyId
+        where employee.empId = #{id}
+    </select> 
+
+    <!-- 将Employee插入到对应数据库的表中,包括属性值为null的数据-->
+
+    <insert id="insertEmployee" parameterType="com.pojo.Employee">
+        insert into employee(empId,companyId,empPhone,empSalery,positionId,empName,empPassword) 
+        values(#{empId},#{companyId},#{empPhone},#{empSalery},#{positionId},#{empName},#{empPassword})
+    </insert>
+
+    <!-- 将Employee中属性值不为null的数据,插入到对应数据库的表中-->
+    <insert id="insertNonEmptyEmployee" parameterType="com.pojo.Employee">
+        insert into employee
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="empId != null">empId,</if>
+            <if test="companyId != null">companyId,</if>
+            <if test="empPhone != null">empPhone,</if>
+            <if test="empSalery != null">empSalery,</if>
+            <if test="positionId != null">positionId,</if>
+            <if test="empName != null">empName,</if>
+            <if test="empPassword != null">empPassword,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="empId != null"> #{empId},</if>
+            <if test="companyId != null"> #{companyId},</if>
+            <if test="empPhone != null"> #{empPhone},</if>
+            <if test="empSalery != null"> #{empSalery},</if>
+            <if test="positionId != null"> #{positionId},</if>
+            <if test="empName != null"> #{empName},</if>
+            <if test="empPassword != null"> #{empPassword},</if>
+        </trim>
+    </insert>
+
+    <!-- 将Employee批量插入到对应数据库的表中-->
+    <insert id="insertEmployeeByBatch" parameterType="ArrayList">
+        insert into employee(empId,companyId,empPhone,empSalery,positionId,empName,empPassword) values
+        <foreach collection="list" item="item" index="index" separator="," >
+            (#{item.empId},#{item.companyId},#{item.empPhone},#{item.empSalery},#{item.positionId},#{item.empName},#{item.empPassword})
+        </foreach>
+    </insert>
+
+    <!-- 通过Employee的id将数据库表中对应的数据删除-->
+    <delete id="deleteEmployeeById" parameterType="java.lang.Integer">
+        delete from employee
+        where empId = #{id}
+    </delete>
+
+    <!-- 通过辅助工具Assist中的条件将Employee对应的数据库表的数据删除-->
+    <delete id="deleteEmployee" parameterType="common.Assist">
+        delete from employee
+        <if test="require!=null"><include refid="Assist" /></if>
+    </delete>
+
+    <!-- 通过Employee的id将Employee的数据更新到数据库中对应的表,包括值null的数据-->
+    <update id="updateEmployeeById" parameterType="com.pojo.Employee">
+        update employee set
+            companyId=#{companyId}
+            ,empPhone=#{empPhone}
+            ,empSalery=#{empSalery}
+            ,positionId=#{positionId}
+            ,empName=#{empName}
+            ,empPassword=#{empPassword}
+        where empId=#{empId}
+    </update>
+
+    <!-- 通过Employee的id将Employee中属性值不为null的数据更新到数据库对应的表中-->
+    <update id="updateNonEmptyEmployeeById" parameterType="com.pojo.Employee">
+        update employee
+        <set>
+            <if test="companyId != null">
+                companyId=#{companyId},
+            </if>
+            <if test="empPhone != null">
+                empPhone=#{empPhone},
+            </if>
+            <if test="empSalery != null">
+                empSalery=#{empSalery},
+            </if>
+            <if test="positionId != null">
+                positionId=#{positionId},
+            </if>
+            <if test="empName != null">
+                empName=#{empName},
+            </if>
+            <if test="empPassword != null">
+                empPassword=#{empPassword},
+            </if>
+        </set>
+        where empId=#{empId}
+    </update>
+
+    <!-- 通过辅助工具Assist中的条件将Employee中的数据更新到数据库对应的表中,包括值为null的数据-->
+    <update id="updateEmployee" parameterType="map">
+        update employee
+        <set>
+                empId=#{enti.empId},
+                companyId=#{enti.companyId},
+                empPhone=#{enti.empPhone},
+                empSalery=#{enti.empSalery},
+                positionId=#{enti.positionId},
+                empName=#{enti.empName},
+                empPassword=#{enti.empPassword},
+        </set>
+        <if test="assist.require!=null"><include refid="updateAssist" /></if>
+    </update>
+
+    <!-- 通过辅助工具Assist中的条件将Employee中属性值不为null的数据更新到数据库对应的表中-->
+    <update id="updateNonEmptyEmployee" parameterType="map">
+        update employee
+        <set>
+            <if test="enti.empId != null">
+                empId=#{enti.empId},
+            </if>
+            <if test="enti.companyId != null">
+                companyId=#{enti.companyId},
+            </if>
+            <if test="enti.empPhone != null">
+                empPhone=#{enti.empPhone},
+            </if>
+            <if test="enti.empSalery != null">
+                empSalery=#{enti.empSalery},
+            </if>
+            <if test="enti.positionId != null">
+                positionId=#{enti.positionId},
+            </if>
+            <if test="enti.empName != null">
+                empName=#{enti.empName},
+            </if>
+            <if test="enti.empPassword != null">
+                empPassword=#{enti.empPassword},
+            </if>
+        </set>
+        <if test="assist.require!=null"><include refid="updateAssist" /></if>
+    </update>
+
+</mapper>

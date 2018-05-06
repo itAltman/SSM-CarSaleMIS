@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.RepertoryMapper">
+    <!-- Repertory的resultMap,column是给数据库列起的别名,它对应property类的属性-->
+    <resultMap id="result_Repertory_Map" type="com.pojo.Repertory">
+        <!-- 当你看到column=类名+数字0123时不要问这是什么鬼,请看文档==>  http://mybatiscmeu.com/  ,中=>修改属性页说明==>表的别名   ;它是MyBatis-CMEU生成多表关联时防止列名超长或者列名重复的策略,可以自义定表的别名,就会以表的别名_表列名命名  -->
+        <id column="Repertory0" property="repertoryId" />
+        <result column="Repertory1" property="inTime" />
+        <result column="Repertory2" property="companyId" />
+        <result column="Repertory3" property="repertoryNum" />
+        <result column="Repertory4" property="purchasePrice" />
+        <result column="Repertory5" property="carId" />
+        <association property="company" javaType="com.pojo.Company">
+            <id column="Company0" property="companyId" />
+            <result column="Company1" property="companyName" />
+        </association>
+        <association property="car" javaType="com.pojo.Car">
+            <id column="Car0" property="carId" />
+            <result column="Car1" property="carPrice" />
+            <result column="Car2" property="carName" />
+            <result column="Car3" property="carTime" />
+            <result column="Car4" property="seriesId" />
+        </association>
+    </resultMap>
+
+    <!-- Repertory的resultMap,该resultMap是专门用在有多表关联的地方,它保证分页时数据映射不会丢失或者重复 -->
+    <resultMap id="result_RepertoryOfPaging_Map" type="com.pojo.Repertory">
+        <id column="Repertory0" property="repertoryId" />
+        <result column="Repertory1" property="inTime" />
+        <result column="Repertory2" property="companyId" />
+        <result column="Repertory3" property="repertoryNum" />
+        <result column="Repertory4" property="purchasePrice" />
+        <result column="Repertory5" property="carId" />
+        <association property="company" javaType="com.pojo.Company">
+            <id column="Company0" property="companyId" />
+            <result column="Company1" property="companyName" />
+        </association>
+        <association property="car" javaType="com.pojo.Car">
+            <id column="Car0" property="carId" />
+            <result column="Car1" property="carPrice" />
+            <result column="Car2" property="carName" />
+            <result column="Car3" property="carTime" />
+            <result column="Car4" property="seriesId" />
+        </association>
+    </resultMap>
+
+    <!-- Company的resultMap,该resultMap是专门用在有多表关联的地方,它保证分页时数据映射不会丢失或者重复 -->
+    <resultMap id="result_CompanyOfPaging_Map" type="com.pojo.Company">
+        <id column="Company0" property="companyId" />
+        <result column="Company1" property="companyName" />
+    </resultMap>
+
+    <!-- Car的resultMap,该resultMap是专门用在有多表关联的地方,它保证分页时数据映射不会丢失或者重复 -->
+    <resultMap id="result_CarOfPaging_Map" type="com.pojo.Car">
+        <id column="Car0" property="carId" />
+        <result column="Car1" property="carPrice" />
+        <result column="Car2" property="carName" />
+        <result column="Car3" property="carTime" />
+        <result column="Car4" property="seriesId" />
+    </resultMap>
+
+	   <!-- Assist用于辅助工具类setRequires设置的条件,${req.require}表示列名,#{req.value}表示值它是防SQL注入的 -->
+    <sql id="Assist">
+        <where>
+            <foreach collection="require" item="req" separator=" ">
+                ${req.require} 
+                <if test="req.value != null"> #{req.value}</if> 
+                <if test="req.values != null">
+                    <foreach collection="req.values" item="val" separator=","> 
+                        #{val} 
+                    </foreach> 
+                </if> 
+                <if test="req.suffix != null"> ${req.suffix}</if> 
+            </foreach>
+        </where>
+    </sql>
+
+	   <!-- updateAssist用于更新数据的使用它拓展自Assist,用于辅助工具类setRequires设置的条件,${req.require}表示列名,#{req.value}表示值它是防SQL注入的 -->
+    <sql id="updateAssist">
+        <where>
+            <foreach collection="assist.require" item="req" separator=" ">
+                ${req.require} 
+                <if test="req.value != null"> #{req.value}</if> 
+                <if test="req.values != null">
+                    <foreach collection="req.values" item="val" separator=","> 
+                        #{val} 
+                    </foreach> 
+                </if> 
+                <if test="req.suffix != null"> ${req.suffix}</if> 
+            </foreach>
+        </where>
+    </sql>
+
+    <!-- 数据库中表名为:repertory的列名,as前是数据库的列明,as后是列的别名用于映射成实体类中的属性,需要注意的是别名必须与resultMap中的column别名一致 -->
+    <sql id="repertory_Column">
+        repertory.repertoryId as Repertory0
+        ,repertory.inTime as Repertory1
+        ,repertory.companyId as Repertory2
+        ,repertory.repertoryNum as Repertory3
+        ,repertory.purchasePrice as Repertory4
+        ,repertory.carId as Repertory5
+    </sql>
+
+    <!-- 数据库中表名为:company的列名,as前是数据库的列明,as后是列的别名用于映射成实体类中的属性,需要注意的是别名必须与resultMap中的column别名一致 -->
+    <sql id="company_Column">
+        company.companyId as Company0
+        ,company.companyName as Company1
+    </sql>
+
+    <!-- 数据库中表名为:car的列名,as前是数据库的列明,as后是列的别名用于映射成实体类中的属性,需要注意的是别名必须与resultMap中的column别名一致 -->
+    <sql id="car_Column">
+        car.carId as Car0
+        ,car.carPrice as Car1
+        ,car.carName as Car2
+        ,car.carTime as Car3
+        ,car.seriesId as Car4
+    </sql>
+
+    <!--获得类名为:Repertory对应的数据库表的数据总行数 -->
+    <select id="getRepertoryRowCount" parameterType="common.Assist" resultType="java.lang.Long">
+        select count(repertoryId) from repertory
+        <if test="require!=null"><include refid="Assist" /></if>
+    </select>
+    <!-- 获得类名为:Repertory对应数据库中表的数据集合 -->
+    <select id="selectRepertory" parameterType="common.Assist"  resultMap="result_Repertory_Map">
+        select  <if test="distinct !=null">${distinct}</if>
+        <choose>
+            <when test="resultColumn!=null">${resultColumn}</when>
+            <otherwise>
+        <include refid="repertory_Column" /> 
+        ,<include refid="company_Column" /> 
+        ,<include refid="car_Column" /> 
+            </otherwise>
+        </choose>
+        from repertory
+        left join company on company.companyId=repertory.companyId
+        left join car on car.carId=repertory.carId
+        <choose>
+            <when test="rowSize ==null">
+                <if test="require!=null">
+                    <include refid="Assist" />
+                </if>
+                <if test="order !=null">${order}</if>
+            </when>
+            <otherwise>
+                inner join
+                (
+                SELECT repertoryId as primary_key FROM repertory
+                <if test="require!=null">
+                    <include refid="Assist" />
+                </if>
+                <if test="order !=null">${order}</if>
+                <choose>
+                    <when test="startRow !=null and rowSize !=null">LIMIT #{startRow},#{rowSize} </when>
+                    <when test="rowSize !=null">LIMIT #{rowSize}</when>
+                 </choose>
+                 ) as tmp
+                 on tmp.primary_key=repertory.repertoryId
+            </otherwise>
+        </choose>
+    </select> 
+
+    <!-- 获得类名为:Repertory对应数据库中表的数据集合,该查询语句用于多表关联分页查询使用 -->
+    <select id="selectRepertoryOfPaging" parameterType="common.Assist"  resultMap="result_RepertoryOfPaging_Map">
+        select  <if test="distinct !=null">${distinct}</if>
+        <include refid="repertory_Column" /> 
+        from repertory
+        <choose>
+            <when test="rowSize ==null">
+                <if test="require!=null">
+                    <include refid="Assist" />
+                </if>
+                <if test="order !=null">${order}</if>
+            </when>
+            <otherwise>
+                inner join
+                (
+                SELECT repertoryId as primary_key FROM repertory
+                <if test="require!=null">
+                    <include refid="Assist" />
+                </if>
+                <if test="order !=null">${order}</if>
+                <choose>
+                    <when test="startRow !=null and rowSize !=null">LIMIT #{startRow},#{rowSize} </when>
+                    <when test="rowSize !=null">LIMIT #{rowSize}</when>
+                 </choose>
+                 ) as tmp
+                 on tmp.primary_key=repertory.repertoryId
+            </otherwise>
+        </choose>
+    </select> 
+
+    <!-- 获得一个Repertory对象,以参数Repertory对象中不为空的属性作为条件进行查询-->
+    <select id="selectRepertoryByObj" parameterType="com.pojo.Repertory" resultMap="result_Repertory_Map">
+        select 
+            <include refid="repertory_Column" /> 
+            ,<include refid="company_Column" /> 
+            ,<include refid="car_Column" /> 
+        from repertory
+        left join company on company.companyId=repertory.companyId
+        left join car on car.carId=repertory.carId
+        <where>
+            <if test="carId != null "> and repertory.carId = #{carId}</if>
+            <if test="purchasePrice != null "> and repertory.purchasePrice = #{purchasePrice}</if>
+            <if test="repertoryNum != null "> and repertory.repertoryNum = #{repertoryNum}</if>
+            <if test="companyId != null "> and repertory.companyId = #{companyId}</if>
+            <if test="inTime != null "> and repertory.inTime = #{inTime}</if>
+            <if test="repertoryId != null "> and repertory.repertoryId = #{repertoryId}</if>
+        </where>
+    </select> 
+
+    <!-- 通过Repertory的id获得对应数据库中表的数据对象-->
+    <select id="selectRepertoryById" parameterType="java.lang.Integer" resultMap="result_Repertory_Map">
+        select 
+            <include refid="repertory_Column" /> 
+            ,<include refid="company_Column" /> 
+            ,<include refid="car_Column" /> 
+        from repertory
+        left join company on company.companyId=repertory.companyId
+        left join car on car.carId=repertory.carId
+        where repertory.repertoryId = #{id}
+    </select> 
+
+    <!-- 将Repertory插入到对应数据库的表中,包括属性值为null的数据-->
+
+    <insert id="insertRepertory" parameterType="com.pojo.Repertory">
+        insert into repertory(repertoryId,inTime,companyId,repertoryNum,purchasePrice,carId) 
+        values(#{repertoryId},#{inTime},#{companyId},#{repertoryNum},#{purchasePrice},#{carId})
+    </insert>
+
+    <!-- 将Repertory中属性值不为null的数据,插入到对应数据库的表中-->
+    <insert id="insertNonEmptyRepertory" parameterType="com.pojo.Repertory">
+        insert into repertory
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="repertoryId != null">repertoryId,</if>
+            <if test="inTime != null">inTime,</if>
+            <if test="companyId != null">companyId,</if>
+            <if test="repertoryNum != null">repertoryNum,</if>
+            <if test="purchasePrice != null">purchasePrice,</if>
+            <if test="carId != null">carId,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="repertoryId != null"> #{repertoryId},</if>
+            <if test="inTime != null"> #{inTime},</if>
+            <if test="companyId != null"> #{companyId},</if>
+            <if test="repertoryNum != null"> #{repertoryNum},</if>
+            <if test="purchasePrice != null"> #{purchasePrice},</if>
+            <if test="carId != null"> #{carId},</if>
+        </trim>
+    </insert>
+
+    <!-- 将Repertory批量插入到对应数据库的表中-->
+    <insert id="insertRepertoryByBatch" parameterType="ArrayList">
+        insert into repertory(repertoryId,inTime,companyId,repertoryNum,purchasePrice,carId) values
+        <foreach collection="list" item="item" index="index" separator="," >
+            (#{item.repertoryId},#{item.inTime},#{item.companyId},#{item.repertoryNum},#{item.purchasePrice},#{item.carId})
+        </foreach>
+    </insert>
+
+    <!-- 通过Repertory的id将数据库表中对应的数据删除-->
+    <delete id="deleteRepertoryById" parameterType="java.lang.Integer">
+        delete from repertory
+        where repertoryId = #{id}
+    </delete>
+
+    <!-- 通过辅助工具Assist中的条件将Repertory对应的数据库表的数据删除-->
+    <delete id="deleteRepertory" parameterType="common.Assist">
+        delete from repertory
+        <if test="require!=null"><include refid="Assist" /></if>
+    </delete>
+
+    <!-- 通过Repertory的id将Repertory的数据更新到数据库中对应的表,包括值null的数据-->
+    <update id="updateRepertoryById" parameterType="com.pojo.Repertory">
+        update repertory set
+            inTime=#{inTime}
+            ,companyId=#{companyId}
+            ,repertoryNum=#{repertoryNum}
+            ,purchasePrice=#{purchasePrice}
+            ,carId=#{carId}
+        where repertoryId=#{repertoryId}
+    </update>
+
+    <!-- 通过Repertory的id将Repertory中属性值不为null的数据更新到数据库对应的表中-->
+    <update id="updateNonEmptyRepertoryById" parameterType="com.pojo.Repertory">
+        update repertory
+        <set>
+            <if test="inTime != null">
+                inTime=#{inTime},
+            </if>
+            <if test="companyId != null">
+                companyId=#{companyId},
+            </if>
+            <if test="repertoryNum != null">
+                repertoryNum=#{repertoryNum},
+            </if>
+            <if test="purchasePrice != null">
+                purchasePrice=#{purchasePrice},
+            </if>
+            <if test="carId != null">
+                carId=#{carId},
+            </if>
+        </set>
+        where repertoryId=#{repertoryId}
+    </update>
+
+    <!-- 通过辅助工具Assist中的条件将Repertory中的数据更新到数据库对应的表中,包括值为null的数据-->
+    <update id="updateRepertory" parameterType="map">
+        update repertory
+        <set>
+                repertoryId=#{enti.repertoryId},
+                inTime=#{enti.inTime},
+                companyId=#{enti.companyId},
+                repertoryNum=#{enti.repertoryNum},
+                purchasePrice=#{enti.purchasePrice},
+                carId=#{enti.carId},
+        </set>
+        <if test="assist.require!=null"><include refid="updateAssist" /></if>
+    </update>
+
+    <!-- 通过辅助工具Assist中的条件将Repertory中属性值不为null的数据更新到数据库对应的表中-->
+    <update id="updateNonEmptyRepertory" parameterType="map">
+        update repertory
+        <set>
+            <if test="enti.repertoryId != null">
+                repertoryId=#{enti.repertoryId},
+            </if>
+            <if test="enti.inTime != null">
+                inTime=#{enti.inTime},
+            </if>
+            <if test="enti.companyId != null">
+                companyId=#{enti.companyId},
+            </if>
+            <if test="enti.repertoryNum != null">
+                repertoryNum=#{enti.repertoryNum},
+            </if>
+            <if test="enti.purchasePrice != null">
+                purchasePrice=#{enti.purchasePrice},
+            </if>
+            <if test="enti.carId != null">
+                carId=#{enti.carId},
+            </if>
+        </set>
+        <if test="assist.require!=null"><include refid="updateAssist" /></if>
+    </update>
+
+</mapper>

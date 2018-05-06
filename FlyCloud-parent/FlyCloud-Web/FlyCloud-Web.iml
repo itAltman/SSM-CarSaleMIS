@@ -52,6 +52,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="aliyun-java-sdk-core-3.2.2" level="project" />
+    <orderEntry type="library" name="gson-2.8.0" level="project" />
     <orderEntry type="module" module-name="FlyCloud-Service" />
     <orderEntry type="module" module-name="FlyCloud-Mapper" />
     <orderEntry type="module" module-name="FlyCloud-Pojo" />

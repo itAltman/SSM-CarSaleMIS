@@ -34,6 +34,7 @@
     <!-- 引入js文件 -->
     <script type="text/javascript" src="../js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="../js/login.js"></script>
+    <script type="text/javascript" src="../js/register.js"></script>
 
 </head>
 
@@ -49,7 +50,8 @@
                     <input id="projectName" type="hidden" project="${pageContext.request.contextPath}">
                     <h1>登&nbsp;&nbsp;录</h1>
                     <div>
-                        <input id="CompanyName_login" type="text" class="form-control" placeholder="企业名称" required="required" />
+                        <input id="CompanyName_login" type="text" class="form-control" placeholder="企业名称"
+                               required="required" />
                     </div>
                     <div>
                         <select id="PositionName_login" class="form-control">
@@ -60,16 +62,20 @@
                     </div>
                     <br/>
                     <div>
-                        <input id="EmpName_login" type="text" class="form-control" placeholder="员工名称" required="required" />
+                        <input id="EmpName_login" type="text" class="form-control" placeholder="员工名称"
+                               required="required" />
                     </div>
                     <div>
-                        <input id="PhoneNumber_login" type="text" class="form-control" placeholder="手机号码" required="required" />
+                        <input id="PhoneNumber_login" type="text" class="form-control"
+                               maxlength="11" placeholder="手机号码:请输入正确的11位手机号码"
+                               required="required" />
                     </div>
                     <div>
-                        <input id="Password_login" type="password" class="form-control" placeholder="登录密码" required="required" />
+                        <input id="Password_login" type="password" class="form-control" placeholder="登录密码"
+                               required="required" />
                     </div>
                     <div>
-                        <a id="but_login" class="btn btn-default submit" href="index.html">登录</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a id="but_login" class="btn btn-default">登录</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <a href="#signup" class="to_register"> 注册 </a>
                     </div>
 
@@ -94,23 +100,28 @@
                 <form>
                     <h1>注&nbsp;&nbsp;册</h1>
                     <div>
-                        <input id="CompanyName_register" type="text" class="form-control" placeholder="企业名称" required="required" />
+                        <input id="CompanyName_register" type="text" class="form-control" placeholder="企业名称"
+                               required="required" />
                     </div>
                     <div>
-                        <input id="EmpName_register" type="text" class="form-control" placeholder="员工姓名" required="required" />
+                        <input id="EmpName_register" type="text" class="form-control" placeholder="员工姓名"
+                               required="required" />
                     </div>
                     <div>
-                        <input id="PhoneNumber_register" type="text" class="form-control" placeholder="手机号码" required="required" />
+                        <input id="PhoneNumber_register" type="text" class="form-control" placeholder="手机号码"
+                               maxlength="11" required="required" />
                     </div>
                     <div>
-                        <input id="Password_register" type="password" class="form-control" placeholder="登录密码" required="required" />
+                        <input id="Password_register" type="password" class="form-control" placeholder="登录密码"
+                               required="required" />
                     </div>
                     <div>
-                        <input id="authcode_input" type="text" class="form-control"  placeholder="验证码" required="required"/>
+                        <input id="authcode_input" type="text" class="form-control"  placeholder="验证码"
+                               required="required" v=""/>
                         <button id="authcode_button" class="btn btn-primary"> 发送验证码 </button>
                     </div>
                     <div>
-                        <a id="btn_register" class="btn btn-default submit" href="index.html"> 注册 </a>
+                        <a id="btn_register" class="btn btn-default"> 注册 </a>
                     </div>
 
                     <div class="clearfix"></div>

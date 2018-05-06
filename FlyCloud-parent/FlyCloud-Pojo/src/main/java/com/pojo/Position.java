@@ -36,4 +36,12 @@ public class Position {
         this.positionLevel = positionLevel;
     }
 
+    @Override
+    public String toString() {
+        return "Position{" +
+                "positionId=" + positionId +
+                ", positionName='" + positionName + '\'' +
+                ", positionLevel='" + positionLevel + '\'' +
+                '}';
+    }
 }

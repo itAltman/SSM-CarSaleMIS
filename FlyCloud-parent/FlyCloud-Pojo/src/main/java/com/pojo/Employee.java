@@ -96,4 +96,18 @@ public class Employee {
         this.position = position;
     }
 
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "empId=" + empId +
+                ", companyId=" + companyId +
+                ", empPhone='" + empPhone + '\'' +
+                ", empSalery=" + empSalery +
+                ", positionId=" + positionId +
+                ", empName='" + empName + '\'' +
+                ", empPassword='" + empPassword + '\'' +
+                ", company=" + company +
+                ", position=" + position +
+                '}';
+    }
 }

@@ -1,4 +1,7 @@
 package com.pojo;
+
+import java.text.SimpleDateFormat;
+
 public class Customer {
     private Integer customerId;//客户编号
     private Integer companyId;//公司编号
@@ -8,6 +11,8 @@ public class Customer {
     private String customerSex;//客户性别
     private java.util.Date customerBirthday;//客户生日
     private String customerName;//客户姓名
+    private String birthdayFormat;//客户生日的格式化类型
+    private String CreateTimeFormat;//创建时间的格式化类型
     private Company company;
     public Customer() {
         super();
@@ -24,6 +29,15 @@ public class Customer {
         this.customerName = customerName;
         this.company = company;
     }
+
+    public String getBirthdayFormat() {
+        return new SimpleDateFormat("yyyy/MM/dd").format(customerBirthday);
+    }
+
+    public String getCreateTimeFormat() {
+        return new SimpleDateFormat("yyyy/MM/dd").format(customerCreateTime);
+    }
+
     public Integer getCustomerId() {
         return this.customerId;
     }
@@ -96,4 +110,20 @@ public class Customer {
         this.company = company;
     }
 
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "customerId=" + customerId +
+                ", companyId=" + companyId +
+                ", customerPhone='" + customerPhone + '\'' +
+                ", customerType='" + customerType + '\'' +
+                ", customerCreateTime=" + customerCreateTime +
+                ", customerSex='" + customerSex + '\'' +
+                ", customerBirthday=" + customerBirthday +
+                ", customerName='" + customerName + '\'' +
+                ", birthdayFormat='" + birthdayFormat + '\'' +
+                ", CreateTimeFormat='" + CreateTimeFormat + '\'' +
+                ", company=" + company +
+                '}';
+    }
 }

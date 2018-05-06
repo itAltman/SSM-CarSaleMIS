@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="aliyun-java-sdk-core-3.2.2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/FlyCloud-Web/src/main/webapp/WEB-INF/lib/aliyun-java-sdk-core-3.2.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FlyCloud-Web/src/main/webapp/WEB-INF/lib/aliyun-java-sdk-dybaseapi-1.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FlyCloud-Web/src/main/webapp/WEB-INF/lib/aliyun-java-sdk-dysmsapi-1.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

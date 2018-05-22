@@ -46,4 +46,13 @@ public class Carseries {
         this.carbrand = carbrand;
     }
 
+    @Override
+    public String toString() {
+        return "Carseries{" +
+                "seriesId=" + seriesId +
+                ", seriesName='" + seriesName + '\'' +
+                ", brandId=" + brandId +
+                ", carbrand=" + carbrand +
+                '}';
+    }
 }

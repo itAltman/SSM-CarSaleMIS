@@ -1,6 +1,6 @@
 ﻿/*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2018-04-22 11:01:15                          */
+/* Created on:     2018-05-09 10:45:01                          */
 /*==============================================================*/
 
 
@@ -66,6 +66,7 @@ create table CarOrder
    companyId            int comment '公司编号',
    orderNum             int comment '车辆数量',
    orderType            varchar(1) comment '订单状态（1：未审核、2：已审核）',
+   orderTotalPrice      numeric(10,2) comment '订单总价',
    primary key (orderId)
 );
 
@@ -92,7 +93,7 @@ create table car
    carId                int not null auto_increment comment '汽车编号',
    seriesId             int not null comment '车系编号',
    carName              varchar(32) not null comment '汽车名称',
-   carPrice             numeric(8,2) not null comment '汽车价格',
+   carPrice             numeric(10,2) not null comment '汽车价格',
    carTime              date not null comment '出厂日期',
    primary key (carId)
 );
@@ -140,7 +141,7 @@ create table employee
    empName              varchar(10) not null comment '员工姓名',
    empPhone             varchar(11) not null comment '登录手机',
    empPassword          varchar(50) not null comment '登录密码',
-   empSalery            numeric(5,2) not null comment '员工工资',
+   empSalery            numeric(10,2) not null comment '员工工资',
    primary key (empId)
 );
 
@@ -157,6 +158,7 @@ create table financing
    companyId            int comment '公司编号',
    financingMoney       numeric(10,2) comment '涉及金额',
    financingType        varchar(1) comment '财务状态（1：收入，2：支出）',
+   financingTime        timestamp comment '生成时间',
    primary key (financingId)
 );
 
@@ -183,7 +185,7 @@ create table repertory
    repertoryId          int not null auto_increment comment '库存编号',
    carId                int not null comment '汽车编号',
    companyId            int not null comment '公司编号',
-   purchasePrice        numeric(8,2) not null comment '含税价格',
+   purchasePrice        numeric(10,2) not null comment '含税价格',
    inTime               date not null comment '入库时间',
    repertoryNum         int not null comment '库存数量',
    primary key (repertoryId)
@@ -201,9 +203,11 @@ create table sale
    carId                int not null comment '汽车编号',
    empId                int not null comment '员工编号',
    companyId            int comment '公司编号',
-   saleCurPrice         numeric(8,2) not null comment '销售价格',
+   saleCurPrice         numeric(10,2) not null comment '销售价格',
    saleNum              int not null comment '销售数量',
    saleType             varchar(1) not null comment '销售状态（1、未付款，2、已付款）',
+   saleTotalPrice       numeric(10,2) comment '销售总价',
+   saleTime             timestamp comment '销售时间',
    primary key (saleId)
 );
 

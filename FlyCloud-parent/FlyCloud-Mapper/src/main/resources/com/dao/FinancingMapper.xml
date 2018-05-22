@@ -9,7 +9,8 @@
         <result column="Financing2" property="financingMoney" />
         <result column="Financing3" property="saleId" />
         <result column="Financing4" property="repertoryId" />
-        <result column="Financing5" property="financingType" />
+        <result column="Financing5" property="financingTime" />
+        <result column="Financing6" property="financingType" />
         <association property="company" javaType="com.pojo.Company">
             <id column="Company0" property="companyId" />
             <result column="Company1" property="companyName" />
@@ -18,11 +19,13 @@
             <id column="Sale0" property="saleId" />
             <result column="Sale1" property="empId" />
             <result column="Sale2" property="companyId" />
-            <result column="Sale3" property="saleType" />
-            <result column="Sale4" property="customerId" />
-            <result column="Sale5" property="saleNum" />
-            <result column="Sale6" property="saleCurPrice" />
-            <result column="Sale7" property="carId" />
+            <result column="Sale3" property="saleTime" />
+            <result column="Sale4" property="saleType" />
+            <result column="Sale5" property="customerId" />
+            <result column="Sale6" property="saleTotalPrice" />
+            <result column="Sale7" property="saleNum" />
+            <result column="Sale8" property="saleCurPrice" />
+            <result column="Sale9" property="carId" />
         </association>
         <association property="repertory" javaType="com.pojo.Repertory">
             <id column="Repertory0" property="repertoryId" />
@@ -41,7 +44,8 @@
         <result column="Financing2" property="financingMoney" />
         <result column="Financing3" property="saleId" />
         <result column="Financing4" property="repertoryId" />
-        <result column="Financing5" property="financingType" />
+        <result column="Financing5" property="financingTime" />
+        <result column="Financing6" property="financingType" />
         <association property="company" javaType="com.pojo.Company">
             <id column="Company0" property="companyId" />
             <result column="Company1" property="companyName" />
@@ -50,11 +54,13 @@
             <id column="Sale0" property="saleId" />
             <result column="Sale1" property="empId" />
             <result column="Sale2" property="companyId" />
-            <result column="Sale3" property="saleType" />
-            <result column="Sale4" property="customerId" />
-            <result column="Sale5" property="saleNum" />
-            <result column="Sale6" property="saleCurPrice" />
-            <result column="Sale7" property="carId" />
+            <result column="Sale3" property="saleTime" />
+            <result column="Sale4" property="saleType" />
+            <result column="Sale5" property="customerId" />
+            <result column="Sale6" property="saleTotalPrice" />
+            <result column="Sale7" property="saleNum" />
+            <result column="Sale8" property="saleCurPrice" />
+            <result column="Sale9" property="carId" />
         </association>
         <association property="repertory" javaType="com.pojo.Repertory">
             <id column="Repertory0" property="repertoryId" />
@@ -77,11 +83,13 @@
         <id column="Sale0" property="saleId" />
         <result column="Sale1" property="empId" />
         <result column="Sale2" property="companyId" />
-        <result column="Sale3" property="saleType" />
-        <result column="Sale4" property="customerId" />
-        <result column="Sale5" property="saleNum" />
-        <result column="Sale6" property="saleCurPrice" />
-        <result column="Sale7" property="carId" />
+        <result column="Sale3" property="saleTime" />
+        <result column="Sale4" property="saleType" />
+        <result column="Sale5" property="customerId" />
+        <result column="Sale6" property="saleTotalPrice" />
+        <result column="Sale7" property="saleNum" />
+        <result column="Sale8" property="saleCurPrice" />
+        <result column="Sale9" property="carId" />
     </resultMap>
 
     <!-- Repertory的resultMap,该resultMap是专门用在有多表关联的地方,它保证分页时数据映射不会丢失或者重复 -->
@@ -133,7 +141,8 @@
         ,financing.financingMoney as Financing2
         ,financing.saleId as Financing3
         ,financing.repertoryId as Financing4
-        ,financing.financingType as Financing5
+        ,financing.financingTime as Financing5
+        ,financing.financingType as Financing6
     </sql>
 
     <!-- 数据库中表名为:company的列名,as前是数据库的列明,as后是列的别名用于映射成实体类中的属性,需要注意的是别名必须与resultMap中的column别名一致 -->
@@ -147,11 +156,13 @@
         sale.saleId as Sale0
         ,sale.empId as Sale1
         ,sale.companyId as Sale2
-        ,sale.saleType as Sale3
-        ,sale.customerId as Sale4
-        ,sale.saleNum as Sale5
-        ,sale.saleCurPrice as Sale6
-        ,sale.carId as Sale7
+        ,sale.saleTime as Sale3
+        ,sale.saleType as Sale4
+        ,sale.customerId as Sale5
+        ,sale.saleTotalPrice as Sale6
+        ,sale.saleNum as Sale7
+        ,sale.saleCurPrice as Sale8
+        ,sale.carId as Sale9
     </sql>
 
     <!-- 数据库中表名为:repertory的列名,as前是数据库的列明,as后是列的别名用于映射成实体类中的属性,需要注意的是别名必须与resultMap中的column别名一致 -->
@@ -253,6 +264,7 @@
         left join repertory on repertory.repertoryId=financing.repertoryId
         <where>
             <if test="financingType != null "> and financing.financingType = #{financingType}</if>
+            <if test="financingTime != null "> and financing.financingTime = #{financingTime}</if>
             <if test="repertoryId != null "> and financing.repertoryId = #{repertoryId}</if>
             <if test="saleId != null "> and financing.saleId = #{saleId}</if>
             <if test="financingMoney != null "> and financing.financingMoney = #{financingMoney}</if>
@@ -278,8 +290,8 @@
     <!-- 将Financing插入到对应数据库的表中,包括属性值为null的数据-->
 
     <insert id="insertFinancing" parameterType="com.pojo.Financing">
-        insert into financing(financingId,companyId,financingMoney,saleId,repertoryId,financingType) 
-        values(#{financingId},#{companyId},#{financingMoney},#{saleId},#{repertoryId},#{financingType})
+        insert into financing(financingId,companyId,financingMoney,saleId,repertoryId,financingTime,financingType) 
+        values(#{financingId},#{companyId},#{financingMoney},#{saleId},#{repertoryId},#{financingTime},#{financingType})
     </insert>
 
     <!-- 将Financing中属性值不为null的数据,插入到对应数据库的表中-->
@@ -291,6 +303,7 @@
             <if test="financingMoney != null">financingMoney,</if>
             <if test="saleId != null">saleId,</if>
             <if test="repertoryId != null">repertoryId,</if>
+            <if test="financingTime != null">financingTime,</if>
             <if test="financingType != null">financingType,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -299,15 +312,16 @@
             <if test="financingMoney != null"> #{financingMoney},</if>
             <if test="saleId != null"> #{saleId},</if>
             <if test="repertoryId != null"> #{repertoryId},</if>
+            <if test="financingTime != null"> #{financingTime},</if>
             <if test="financingType != null"> #{financingType},</if>
         </trim>
     </insert>
 
     <!-- 将Financing批量插入到对应数据库的表中-->
     <insert id="insertFinancingByBatch" parameterType="ArrayList">
-        insert into financing(financingId,companyId,financingMoney,saleId,repertoryId,financingType) values
+        insert into financing(financingId,companyId,financingMoney,saleId,repertoryId,financingTime,financingType) values
         <foreach collection="list" item="item" index="index" separator="," >
-            (#{item.financingId},#{item.companyId},#{item.financingMoney},#{item.saleId},#{item.repertoryId},#{item.financingType})
+            (#{item.financingId},#{item.companyId},#{item.financingMoney},#{item.saleId},#{item.repertoryId},#{item.financingTime},#{item.financingType})
         </foreach>
     </insert>
 
@@ -330,6 +344,7 @@
             ,financingMoney=#{financingMoney}
             ,saleId=#{saleId}
             ,repertoryId=#{repertoryId}
+            ,financingTime=#{financingTime}
             ,financingType=#{financingType}
         where financingId=#{financingId}
     </update>
@@ -350,6 +365,9 @@
             <if test="repertoryId != null">
                 repertoryId=#{repertoryId},
             </if>
+            <if test="financingTime != null">
+                financingTime=#{financingTime},
+            </if>
             <if test="financingType != null">
                 financingType=#{financingType},
             </if>
@@ -366,6 +384,7 @@
                 financingMoney=#{enti.financingMoney},
                 saleId=#{enti.saleId},
                 repertoryId=#{enti.repertoryId},
+                financingTime=#{enti.financingTime},
                 financingType=#{enti.financingType},
         </set>
         <if test="assist.require!=null"><include refid="updateAssist" /></if>
@@ -389,6 +408,9 @@
             </if>
             <if test="enti.repertoryId != null">
                 repertoryId=#{enti.repertoryId},
+            </if>
+            <if test="enti.financingTime != null">
+                financingTime=#{enti.financingTime},
             </if>
             <if test="enti.financingType != null">
                 financingType=#{enti.financingType},

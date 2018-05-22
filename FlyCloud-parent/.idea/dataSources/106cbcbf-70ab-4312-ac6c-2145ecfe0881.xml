@@ -1,0 +1,650 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="flycloud@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.4">
+    <root id="1"/>
+    <schema id="2" parent="1" name="flycloud">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="crm_32"/>
+    <schema id="4" parent="1" name="hibernate_32"/>
+    <schema id="5" parent="1" name="hutubill"/>
+    <schema id="6" parent="1" name="information_schema"/>
+    <schema id="7" parent="1" name="mybatis"/>
+    <schema id="8" parent="1" name="mysql"/>
+    <schema id="9" parent="1" name="performance_schema"/>
+    <schema id="10" parent="1" name="test"/>
+    <schema id="11" parent="1" name="tmaill"/>
+    <schema id="12" parent="1" name="tmall"/>
+    <schema id="13" parent="1" name="web08"/>
+    <schema id="14" parent="1" name="web09"/>
+    <schema id="15" parent="1" name="web13"/>
+    <schema id="16" parent="1" name="web15"/>
+    <schema id="17" parent="1" name="web17"/>
+    <schema id="18" parent="1" name="web19"/>
+    <schema id="19" parent="1" name="web20"/>
+    <table id="20" parent="2" name="adminlog">
+      <Comment>日志表</Comment>
+    </table>
+    <table id="21" parent="2" name="car">
+      <Comment>汽车表</Comment>
+    </table>
+    <table id="22" parent="2" name="carbrand">
+      <Comment>汽车品牌表</Comment>
+    </table>
+    <table id="23" parent="2" name="carorder">
+      <Comment>订单表</Comment>
+    </table>
+    <table id="24" parent="2" name="carseries">
+      <Comment>汽车车系表</Comment>
+    </table>
+    <table id="25" parent="2" name="company">
+      <Comment>公司表</Comment>
+    </table>
+    <table id="26" parent="2" name="customer">
+      <Comment>客户表</Comment>
+    </table>
+    <table id="27" parent="2" name="employee">
+      <Comment>员工表</Comment>
+    </table>
+    <table id="28" parent="2" name="financing">
+      <Comment>财务表</Comment>
+    </table>
+    <table id="29" parent="2" name="position">
+      <Comment>职务表</Comment>
+    </table>
+    <table id="30" parent="2" name="repertory">
+      <Comment>库存表</Comment>
+    </table>
+    <table id="31" parent="2" name="sale">
+      <Comment>销售表</Comment>
+    </table>
+    <column id="32" parent="20" name="logId">
+      <Position>1</Position>
+      <Comment>日志编号</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="33" parent="20" name="empId">
+      <Position>2</Position>
+      <Comment>员工编号</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="34" parent="20" name="companyId">
+      <Position>3</Position>
+      <Comment>公司编号</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="35" parent="20" name="logContent">
+      <Position>4</Position>
+      <Comment>操作内容</Comment>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="36" parent="20" name="logTime">
+      <Position>5</Position>
+      <Comment>操作时间</Comment>
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+    </column>
+    <index id="37" parent="20" name="FK_companyId_log">
+      <ColNames>companyId</ColNames>
+    </index>
+    <index id="38" parent="20" name="FK_empId_log">
+      <ColNames>empId</ColNames>
+    </index>
+    <key id="39" parent="20" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>logId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="40" parent="20" name="FK_empId_log">
+      <ColNames>empId</ColNames>
+      <RefSchemaName>flycloud</RefSchemaName>
+      <RefTableName>employee</RefTableName>
+      <RefColNames>empId</RefColNames>
+    </foreign-key>
+    <foreign-key id="41" parent="20" name="FK_companyId_log">
+      <ColNames>companyId</ColNames>
+      <RefSchemaName>flycloud</RefSchemaName>
+      <RefTableName>company</RefTableName>
+      <RefColNames>companyId</RefColNames>
+    </foreign-key>
+    <column id="42" parent="21" name="carId">
+      <Position>1</Position>
+      <Comment>汽车编号</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="43" parent="21" name="seriesId">
+      <Position>2</Position>
+      <Comment>车系编号</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="44" parent="21" name="carName">
+      <Position>3</Position>
+      <Comment>汽车名称</Comment>
+      <DataType>varchar(32)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="45" parent="21" name="carPrice">
+      <Position>4</Position>
+      <Comment>汽车价格</Comment>
+      <DataType>decimal(8,2)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="46" parent="21" name="carTime">
+      <Position>5</Position>
+      <Comment>出厂日期</Comment>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="47" parent="21" name="FK_seriesId">
+      <ColNames>seriesId</ColNames>
+    </index>
+    <key id="48" parent="21" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>carId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="49" parent="21" name="FK_seriesId">
+      <ColNames>seriesId</ColNames>
+      <RefSchemaName>flycloud</RefSchemaName>
+      <RefTableName>carseries</RefTableName>
+      <RefColNames>seriesId</RefColNames>
+    </foreign-key>
+    <column id="50" parent="22" name="brandId">
+      <Position>1</Position>
+      <Comment>品牌编号</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="51" parent="22" name="brandName">
+      <Position>2</Position>
+      <Comment>品牌名称</Comment>
+      <DataType>varchar(32)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="52" parent="22" name="brandNum">
+      <Position>3</Position>
+      <Comment>品牌序号</Comment>
+      <DataType>varchar(2)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="53" parent="22" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>brandId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="54" parent="23" name="orderId">
+      <Position>1</Position>
+      <Comment>订单编号</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="55" parent="23" name="carId">
+      <Position>2</Position>
+      <Comment>汽车编号</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="56" parent="23" name="companyId">
+      <Position>3</Position>
+      <Comment>公司编号</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="57" parent="23" name="orderNum">
+      <Position>4</Position>
+      <Comment>车辆数量</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="58" parent="23" name="orderType">
+      <Position>5</Position>
+      <Comment>订单状态（1：未审核、2：已审核）</Comment>
+      <DataType>varchar(1)|0</DataType>
+    </column>
+    <index id="59" parent="23" name="FK_carId_order">
+      <ColNames>carId</ColNames>
+    </index>
+    <index id="60" parent="23" name="FK_companyId_order">
+      <ColNames>companyId</ColNames>
+    </index>
+    <key id="61" parent="23" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>orderId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="62" parent="23" name="FK_carId_order">
+      <ColNames>carId</ColNames>
+      <RefSchemaName>flycloud</RefSchemaName>
+      <RefTableName>car</RefTableName>
+      <RefColNames>carId</RefColNames>
+    </foreign-key>
+    <foreign-key id="63" parent="23" name="FK_companyId_order">
+      <ColNames>companyId</ColNames>
+      <RefSchemaName>flycloud</RefSchemaName>
+      <RefTableName>company</RefTableName>
+      <RefColNames>companyId</RefColNames>
+    </foreign-key>
+    <column id="64" parent="24" name="seriesId">
+      <Position>1</Position>
+      <Comment>车系编号</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="65" parent="24" name="brandId">
+      <Position>2</Position>
+      <Comment>品牌编号</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="66" parent="24" name="seriesName">
+      <Position>3</Position>
+      <Comment>车系名称</Comment>
+      <DataType>varchar(32)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="67" parent="24" name="FK_brandId">
+      <ColNames>brandId</ColNames>
+    </index>
+    <key id="68" parent="24" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>seriesId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="69" parent="24" name="FK_brandId">
+      <ColNames>brandId</ColNames>
+      <RefSchemaName>flycloud</RefSchemaName>
+      <RefTableName>carbrand</RefTableName>
+      <RefColNames>brandId</RefColNames>
+    </foreign-key>
+    <column id="70" parent="25" name="companyId">
+      <Position>1</Position>
+      <Comment>公司编号</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="71" parent="25" name="companyName">
+      <Position>2</Position>
+      <Comment>公司名称</Comment>
+      <DataType>varchar(40)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;&apos;</DefaultExpression>
+    </column>
+    <key id="72" parent="25" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>companyId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="73" parent="26" name="customerId">
+      <Position>1</Position>
+      <Comment>客户编号</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="74" parent="26" name="companyId">
+      <Position>2</Position>
+      <Comment>公司编号</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="75" parent="26" name="customerName">
+      <Position>3</Position>
+      <Comment>客户姓名</Comment>
+      <DataType>varchar(10)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="76" parent="26" name="customerPhone">
+      <Position>4</Position>
+      <Comment>客户电话</Comment>
+      <DataType>varchar(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="77" parent="26" name="customerSex">
+      <Position>5</Position>
+      <Comment>客户性别</Comment>
+      <DataType>varchar(2)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="78" parent="26" name="customerType">
+      <Position>6</Position>
+      <Comment>客户类型（1：个人、2：公司）</Comment>
+      <DataType>varchar(1)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="79" parent="26" name="customerBirthday">
+      <Position>7</Position>
+      <Comment>客户生日</Comment>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="80" parent="26" name="customerCreateTime">
+      <Position>8</Position>
+      <Comment>创建时间</Comment>
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+    </column>
+    <index id="81" parent="26" name="FK_companyId_cus">
+      <ColNames>companyId</ColNames>
+    </index>
+    <key id="82" parent="26" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>customerId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="83" parent="26" name="FK_companyId_cus">
+      <ColNames>companyId</ColNames>
+      <RefSchemaName>flycloud</RefSchemaName>
+      <RefTableName>company</RefTableName>
+      <RefColNames>companyId</RefColNames>
+    </foreign-key>
+    <column id="84" parent="27" name="empId">
+      <Position>1</Position>
+      <Comment>员工编号</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="85" parent="27" name="positionId">
+      <Position>2</Position>
+      <Comment>职务编号</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="86" parent="27" name="companyId">
+      <Position>3</Position>
+      <Comment>公司编号</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="87" parent="27" name="empName">
+      <Position>4</Position>
+      <Comment>员工姓名</Comment>
+      <DataType>varchar(10)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="88" parent="27" name="empPhone">
+      <Position>5</Position>
+      <Comment>登录手机</Comment>
+      <DataType>varchar(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="89" parent="27" name="empPassword">
+      <Position>6</Position>
+      <Comment>登录密码</Comment>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="90" parent="27" name="empSalery">
+      <Position>7</Position>
+      <Comment>员工工资</Comment>
+      <DataType>decimal(8,2)|0</DataType>
+    </column>
+    <index id="91" parent="27" name="FK_companyId_emp">
+      <ColNames>companyId</ColNames>
+    </index>
+    <index id="92" parent="27" name="FK_positionId">
+      <ColNames>positionId</ColNames>
+    </index>
+    <key id="93" parent="27" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>empId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="94" parent="27" name="FK_positionId">
+      <ColNames>positionId</ColNames>
+      <RefSchemaName>flycloud</RefSchemaName>
+      <RefTableName>position</RefTableName>
+      <RefColNames>positionId</RefColNames>
+    </foreign-key>
+    <foreign-key id="95" parent="27" name="FK_companyId_emp">
+      <ColNames>companyId</ColNames>
+      <RefSchemaName>flycloud</RefSchemaName>
+      <RefTableName>company</RefTableName>
+      <RefColNames>companyId</RefColNames>
+    </foreign-key>
+    <column id="96" parent="28" name="financingId">
+      <Position>1</Position>
+      <Comment>财务编号</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="97" parent="28" name="saleId">
+      <Position>2</Position>
+      <Comment>销售编号</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="98" parent="28" name="repertoryId">
+      <Position>3</Position>
+      <Comment>库存编号</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="99" parent="28" name="companyId">
+      <Position>4</Position>
+      <Comment>公司编号</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="100" parent="28" name="financingMoney">
+      <Position>5</Position>
+      <Comment>涉及金额</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="101" parent="28" name="financingType">
+      <Position>6</Position>
+      <Comment>财务状态（1：收入，2：支出）</Comment>
+      <DataType>varchar(1)|0</DataType>
+    </column>
+    <index id="102" parent="28" name="FK_companyId_financing">
+      <ColNames>companyId</ColNames>
+    </index>
+    <index id="103" parent="28" name="FK_repertoryId">
+      <ColNames>repertoryId</ColNames>
+    </index>
+    <index id="104" parent="28" name="FK_saleId">
+      <ColNames>saleId</ColNames>
+    </index>
+    <key id="105" parent="28" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>financingId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="106" parent="28" name="FK_saleId">
+      <ColNames>saleId</ColNames>
+      <RefSchemaName>flycloud</RefSchemaName>
+      <RefTableName>sale</RefTableName>
+      <RefColNames>saleId</RefColNames>
+    </foreign-key>
+    <foreign-key id="107" parent="28" name="FK_repertoryId">
+      <ColNames>repertoryId</ColNames>
+      <RefSchemaName>flycloud</RefSchemaName>
+      <RefTableName>repertory</RefTableName>
+      <RefColNames>repertoryId</RefColNames>
+    </foreign-key>
+    <foreign-key id="108" parent="28" name="FK_companyId_financing">
+      <ColNames>companyId</ColNames>
+      <RefSchemaName>flycloud</RefSchemaName>
+      <RefTableName>company</RefTableName>
+      <RefColNames>companyId</RefColNames>
+    </foreign-key>
+    <column id="109" parent="29" name="positionId">
+      <Position>1</Position>
+      <Comment>职务编号</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="110" parent="29" name="positionName">
+      <Position>2</Position>
+      <Comment>职务名称（经理、操作员、销售员）</Comment>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="111" parent="29" name="positionLevel">
+      <Position>3</Position>
+      <Comment>职务等级（1：经理、2：操作员、3：销售员）</Comment>
+      <DataType>varchar(1)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="112" parent="29" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>positionId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="113" parent="30" name="repertoryId">
+      <Position>1</Position>
+      <Comment>库存编号</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="114" parent="30" name="carId">
+      <Position>2</Position>
+      <Comment>汽车编号</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="115" parent="30" name="companyId">
+      <Position>3</Position>
+      <Comment>公司编号</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="116" parent="30" name="purchasePrice">
+      <Position>4</Position>
+      <Comment>含税价格</Comment>
+      <DataType>decimal(8,2)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="117" parent="30" name="inTime">
+      <Position>5</Position>
+      <Comment>入库时间</Comment>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="118" parent="30" name="repertoryNum">
+      <Position>6</Position>
+      <Comment>库存数量</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="119" parent="30" name="FK_carId_repertory">
+      <ColNames>carId</ColNames>
+    </index>
+    <index id="120" parent="30" name="FK_companyId_repertory">
+      <ColNames>companyId</ColNames>
+    </index>
+    <key id="121" parent="30" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>repertoryId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="122" parent="30" name="FK_carId_repertory">
+      <ColNames>carId</ColNames>
+      <RefSchemaName>flycloud</RefSchemaName>
+      <RefTableName>car</RefTableName>
+      <RefColNames>carId</RefColNames>
+    </foreign-key>
+    <foreign-key id="123" parent="30" name="FK_companyId_repertory">
+      <ColNames>companyId</ColNames>
+      <RefSchemaName>flycloud</RefSchemaName>
+      <RefTableName>company</RefTableName>
+      <RefColNames>companyId</RefColNames>
+    </foreign-key>
+    <column id="124" parent="31" name="saleId">
+      <Position>1</Position>
+      <Comment>销售编号</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="125" parent="31" name="customerId">
+      <Position>2</Position>
+      <Comment>客户编号</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="126" parent="31" name="carId">
+      <Position>3</Position>
+      <Comment>汽车编号</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="127" parent="31" name="empId">
+      <Position>4</Position>
+      <Comment>员工编号</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="128" parent="31" name="companyId">
+      <Position>5</Position>
+      <Comment>公司编号</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="129" parent="31" name="saleCurPrice">
+      <Position>6</Position>
+      <Comment>销售价格</Comment>
+      <DataType>decimal(8,2)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="130" parent="31" name="saleNum">
+      <Position>7</Position>
+      <Comment>销售数量</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="131" parent="31" name="saleType">
+      <Position>8</Position>
+      <Comment>销售状态（1、未付款，2、已付款）</Comment>
+      <DataType>varchar(1)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="132" parent="31" name="FK_carId_sale">
+      <ColNames>carId</ColNames>
+    </index>
+    <index id="133" parent="31" name="FK_companyId_sale">
+      <ColNames>companyId</ColNames>
+    </index>
+    <index id="134" parent="31" name="FK_customerId">
+      <ColNames>customerId</ColNames>
+    </index>
+    <index id="135" parent="31" name="FK_empId_sale">
+      <ColNames>empId</ColNames>
+    </index>
+    <key id="136" parent="31" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>saleId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="137" parent="31" name="FK_customerId">
+      <ColNames>customerId</ColNames>
+      <RefSchemaName>flycloud</RefSchemaName>
+      <RefTableName>customer</RefTableName>
+      <RefColNames>customerId</RefColNames>
+    </foreign-key>
+    <foreign-key id="138" parent="31" name="FK_carId_sale">
+      <ColNames>carId</ColNames>
+      <RefSchemaName>flycloud</RefSchemaName>
+      <RefTableName>car</RefTableName>
+      <RefColNames>carId</RefColNames>
+    </foreign-key>
+    <foreign-key id="139" parent="31" name="FK_empId_sale">
+      <ColNames>empId</ColNames>
+      <RefSchemaName>flycloud</RefSchemaName>
+      <RefTableName>employee</RefTableName>
+      <RefColNames>empId</RefColNames>
+    </foreign-key>
+    <foreign-key id="140" parent="31" name="FK_companyId_sale">
+      <ColNames>companyId</ColNames>
+      <RefSchemaName>flycloud</RefSchemaName>
+      <RefTableName>company</RefTableName>
+      <RefColNames>companyId</RefColNames>
+    </foreign-key>
+  </database-model>
+</dataSource>

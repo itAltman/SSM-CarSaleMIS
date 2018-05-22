@@ -11,7 +11,6 @@ $(function () {
     var Password_register = $('#Password_register');//密码
     var authcode_input = $('#authcode_input');//验证码
 
-
     /**
      * 电话正则表达式：只能是11位数字
      * 密码正则表达式：只能是6-16位大小写字母和数字
@@ -35,6 +34,8 @@ $(function () {
             var phoneNumber_reg = PhoneNumber_register.val();
             var password_reg = Password_register.val();
             var authcode_reg = authcode_input.val();
+
+            /*var psw = $.md5(password_reg);//md5加密*/
 
             /**
              * 先增加公司信息
@@ -101,7 +102,9 @@ $(function () {
                 console.log(resultRegister);
                 authcode_input.attr('v',resultRegister);
             });
+
     });
+
 
     /*异步判断企业名称是否存在*/
     $('#CompanyName_register').blur(function () {

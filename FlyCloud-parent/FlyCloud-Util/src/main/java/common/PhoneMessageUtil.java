@@ -102,25 +102,6 @@ public class PhoneMessageUtil {
 
         StringBuffer pwd = new StringBuffer("");
         Random r = new Random();
-       /* while (count < pwd_len) {
-            //生成随机数，取绝对值，防止生成负数，
-            i = Math.abs(r.nextInt(maxNum));  //生成的数最大为36-1
-            if (i >= 0 && i < str.length) {
-                pwd.append(str[i]);
-                count++;
-            }
-        }*/
-        /*
-        count=0;
-        while (count < 2) {
-            //生成随机数，取绝对值，防止生成负数，
-            i = Math.abs(r.nextInt(7));  //生成的数最大为7-1
-            if (i >= 0 && i < upChar.length) {
-                pwd.append(upChar[i]);
-                count++;
-            }
-        }
-        */
         count=0;
         while (count < pwd_len) {
             //生成随机数，取绝对值，防止生成负数，
@@ -130,16 +111,7 @@ public class PhoneMessageUtil {
                 count++;
             }
         }
-        /*
-        count=0;
-        while (count < 2) {
-            //生成随机数，取绝对值，防止生成负数，
-            i = Math.abs(r.nextInt(maxNum));  //生成的数最大为10-1
-            if (i >= 0 && i < speChar.length) {
-                pwd.append(speChar[i]);
-                count++;
-            }
-        }*/
+
         return pwd.toString();
     }
 

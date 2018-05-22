@@ -36,4 +36,12 @@ public class Carbrand {
         this.brandNum = brandNum;
     }
 
+    @Override
+    public String toString() {
+        return "Carbrand{" +
+                "brandId=" + brandId +
+                ", brandName='" + brandName + '\'' +
+                ", brandNum='" + brandNum + '\'' +
+                '}';
+    }
 }

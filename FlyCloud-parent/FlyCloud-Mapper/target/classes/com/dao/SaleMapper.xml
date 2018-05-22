@@ -7,11 +7,13 @@
         <id column="Sale0" property="saleId" />
         <result column="Sale1" property="empId" />
         <result column="Sale2" property="companyId" />
-        <result column="Sale3" property="saleType" />
-        <result column="Sale4" property="customerId" />
-        <result column="Sale5" property="saleNum" />
-        <result column="Sale6" property="saleCurPrice" />
-        <result column="Sale7" property="carId" />
+        <result column="Sale3" property="saleTime" />
+        <result column="Sale4" property="saleType" />
+        <result column="Sale5" property="customerId" />
+        <result column="Sale6" property="saleTotalPrice" />
+        <result column="Sale7" property="saleNum" />
+        <result column="Sale8" property="saleCurPrice" />
+        <result column="Sale9" property="carId" />
         <association property="employee" javaType="com.pojo.Employee">
             <id column="Employee0" property="empId" />
             <result column="Employee1" property="companyId" />
@@ -49,11 +51,13 @@
         <id column="Sale0" property="saleId" />
         <result column="Sale1" property="empId" />
         <result column="Sale2" property="companyId" />
-        <result column="Sale3" property="saleType" />
-        <result column="Sale4" property="customerId" />
-        <result column="Sale5" property="saleNum" />
-        <result column="Sale6" property="saleCurPrice" />
-        <result column="Sale7" property="carId" />
+        <result column="Sale3" property="saleTime" />
+        <result column="Sale4" property="saleType" />
+        <result column="Sale5" property="customerId" />
+        <result column="Sale6" property="saleTotalPrice" />
+        <result column="Sale7" property="saleNum" />
+        <result column="Sale8" property="saleCurPrice" />
+        <result column="Sale9" property="carId" />
         <association property="employee" javaType="com.pojo.Employee">
             <id column="Employee0" property="empId" />
             <result column="Employee1" property="companyId" />
@@ -161,11 +165,13 @@
         sale.saleId as Sale0
         ,sale.empId as Sale1
         ,sale.companyId as Sale2
-        ,sale.saleType as Sale3
-        ,sale.customerId as Sale4
-        ,sale.saleNum as Sale5
-        ,sale.saleCurPrice as Sale6
-        ,sale.carId as Sale7
+        ,sale.saleTime as Sale3
+        ,sale.saleType as Sale4
+        ,sale.customerId as Sale5
+        ,sale.saleTotalPrice as Sale6
+        ,sale.saleNum as Sale7
+        ,sale.saleCurPrice as Sale8
+        ,sale.carId as Sale9
     </sql>
 
     <!-- 数据库中表名为:employee的列名,as前是数据库的列明,as后是列的别名用于映射成实体类中的属性,需要注意的是别名必须与resultMap中的column别名一致 -->
@@ -301,8 +307,10 @@
             <if test="carId != null "> and sale.carId = #{carId}</if>
             <if test="saleCurPrice != null "> and sale.saleCurPrice = #{saleCurPrice}</if>
             <if test="saleNum != null "> and sale.saleNum = #{saleNum}</if>
+            <if test="saleTotalPrice != null "> and sale.saleTotalPrice = #{saleTotalPrice}</if>
             <if test="customerId != null "> and sale.customerId = #{customerId}</if>
             <if test="saleType != null "> and sale.saleType = #{saleType}</if>
+            <if test="saleTime != null "> and sale.saleTime = #{saleTime}</if>
             <if test="companyId != null "> and sale.companyId = #{companyId}</if>
             <if test="empId != null "> and sale.empId = #{empId}</if>
             <if test="saleId != null "> and sale.saleId = #{saleId}</if>
@@ -328,8 +336,8 @@
     <!-- 将Sale插入到对应数据库的表中,包括属性值为null的数据-->
 
     <insert id="insertSale" parameterType="com.pojo.Sale">
-        insert into sale(saleId,empId,companyId,saleType,customerId,saleNum,saleCurPrice,carId) 
-        values(#{saleId},#{empId},#{companyId},#{saleType},#{customerId},#{saleNum},#{saleCurPrice},#{carId})
+        insert into sale(saleId,empId,companyId,saleTime,saleType,customerId,saleTotalPrice,saleNum,saleCurPrice,carId) 
+        values(#{saleId},#{empId},#{companyId},#{saleTime},#{saleType},#{customerId},#{saleTotalPrice},#{saleNum},#{saleCurPrice},#{carId})
     </insert>
 
     <!-- 将Sale中属性值不为null的数据,插入到对应数据库的表中-->
@@ -339,8 +347,10 @@
             <if test="saleId != null">saleId,</if>
             <if test="empId != null">empId,</if>
             <if test="companyId != null">companyId,</if>
+            <if test="saleTime != null">saleTime,</if>
             <if test="saleType != null">saleType,</if>
             <if test="customerId != null">customerId,</if>
+            <if test="saleTotalPrice != null">saleTotalPrice,</if>
             <if test="saleNum != null">saleNum,</if>
             <if test="saleCurPrice != null">saleCurPrice,</if>
             <if test="carId != null">carId,</if>
@@ -349,8 +359,10 @@
             <if test="saleId != null"> #{saleId},</if>
             <if test="empId != null"> #{empId},</if>
             <if test="companyId != null"> #{companyId},</if>
+            <if test="saleTime != null"> #{saleTime},</if>
             <if test="saleType != null"> #{saleType},</if>
             <if test="customerId != null"> #{customerId},</if>
+            <if test="saleTotalPrice != null"> #{saleTotalPrice},</if>
             <if test="saleNum != null"> #{saleNum},</if>
             <if test="saleCurPrice != null"> #{saleCurPrice},</if>
             <if test="carId != null"> #{carId},</if>
@@ -359,9 +371,9 @@
 
     <!-- 将Sale批量插入到对应数据库的表中-->
     <insert id="insertSaleByBatch" parameterType="ArrayList">
-        insert into sale(saleId,empId,companyId,saleType,customerId,saleNum,saleCurPrice,carId) values
+        insert into sale(saleId,empId,companyId,saleTime,saleType,customerId,saleTotalPrice,saleNum,saleCurPrice,carId) values
         <foreach collection="list" item="item" index="index" separator="," >
-            (#{item.saleId},#{item.empId},#{item.companyId},#{item.saleType},#{item.customerId},#{item.saleNum},#{item.saleCurPrice},#{item.carId})
+            (#{item.saleId},#{item.empId},#{item.companyId},#{item.saleTime},#{item.saleType},#{item.customerId},#{item.saleTotalPrice},#{item.saleNum},#{item.saleCurPrice},#{item.carId})
         </foreach>
     </insert>
 
@@ -382,8 +394,10 @@
         update sale set
             empId=#{empId}
             ,companyId=#{companyId}
+            ,saleTime=#{saleTime}
             ,saleType=#{saleType}
             ,customerId=#{customerId}
+            ,saleTotalPrice=#{saleTotalPrice}
             ,saleNum=#{saleNum}
             ,saleCurPrice=#{saleCurPrice}
             ,carId=#{carId}
@@ -400,11 +414,17 @@
             <if test="companyId != null">
                 companyId=#{companyId},
             </if>
+            <if test="saleTime != null">
+                saleTime=#{saleTime},
+            </if>
             <if test="saleType != null">
                 saleType=#{saleType},
             </if>
             <if test="customerId != null">
                 customerId=#{customerId},
+            </if>
+            <if test="saleTotalPrice != null">
+                saleTotalPrice=#{saleTotalPrice},
             </if>
             <if test="saleNum != null">
                 saleNum=#{saleNum},
@@ -426,8 +446,10 @@
                 saleId=#{enti.saleId},
                 empId=#{enti.empId},
                 companyId=#{enti.companyId},
+                saleTime=#{enti.saleTime},
                 saleType=#{enti.saleType},
                 customerId=#{enti.customerId},
+                saleTotalPrice=#{enti.saleTotalPrice},
                 saleNum=#{enti.saleNum},
                 saleCurPrice=#{enti.saleCurPrice},
                 carId=#{enti.carId},
@@ -448,11 +470,17 @@
             <if test="enti.companyId != null">
                 companyId=#{enti.companyId},
             </if>
+            <if test="enti.saleTime != null">
+                saleTime=#{enti.saleTime},
+            </if>
             <if test="enti.saleType != null">
                 saleType=#{enti.saleType},
             </if>
             <if test="enti.customerId != null">
                 customerId=#{enti.customerId},
+            </if>
+            <if test="enti.saleTotalPrice != null">
+                saleTotalPrice=#{enti.saleTotalPrice},
             </if>
             <if test="enti.saleNum != null">
                 saleNum=#{enti.saleNum},

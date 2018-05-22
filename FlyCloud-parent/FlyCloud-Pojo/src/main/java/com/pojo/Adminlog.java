@@ -1,4 +1,7 @@
 package com.pojo;
+
+import java.text.SimpleDateFormat;
+
 public class Adminlog {
     private Integer logId;//日志编号
     private Integer empId;//员工编号
@@ -19,6 +22,9 @@ public class Adminlog {
         this.logTime = logTime;
         this.employee = employee;
         this.company = company;
+    }
+    public String getLogTimeFormat(){
+        return new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(logTime);
     }
     public Integer getLogId() {
         return this.logId;
@@ -76,4 +82,16 @@ public class Adminlog {
         this.company = company;
     }
 
+    @Override
+    public String toString() {
+        return "Adminlog{" +
+                "logId=" + logId +
+                ", empId=" + empId +
+                ", companyId=" + companyId +
+                ", logContent='" + logContent + '\'' +
+                ", logTime=" + logTime +
+                ", employee=" + employee +
+                ", company=" + company +
+                '}';
+    }
 }

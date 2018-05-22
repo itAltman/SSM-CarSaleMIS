@@ -12,7 +12,6 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import static org.junit.Assert.*;
 /**
  * @description: 测试公司dao层
  * @author: Altman

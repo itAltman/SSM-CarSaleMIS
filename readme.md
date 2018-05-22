@@ -41,19 +41,6 @@
 > 日志信息——查询系统操作日志  
 > 员工管理——查询员工、添加员工、修改员工信息  
 
-
-### 更新日志
-2018-04-18  
-> 需求分析
-
-2018-04-19  
-> **1.搭建Maven管理框架**  
-> FlyCloud-parent  父工程
->>     FlyCloud-Web  war包
->>     FlyCloud-Service  jar包
->>     FlyCloud-Mapper  jar包
->>     FlyCloud-Pojo  jar包
->>     FlyCloud-Util  jar包
-> **2.前端主页设计**
-
+运行之后的访问路径：http://localhost:8080/FlyCloud/jsp/login.jsp
+用户信息在employee表里面有
 

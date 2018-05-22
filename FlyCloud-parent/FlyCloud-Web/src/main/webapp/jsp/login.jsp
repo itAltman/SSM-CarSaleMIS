@@ -31,11 +31,6 @@
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
 
-    <!-- 引入js文件 -->
-    <script type="text/javascript" src="../js/jquery-1.7.2.min.js"></script>
-    <script type="text/javascript" src="../js/login.js"></script>
-    <script type="text/javascript" src="../js/register.js"></script>
-
 </head>
 
 <body class="login" id="login_page">
@@ -118,7 +113,7 @@
                     <div>
                         <input id="authcode_input" type="text" class="form-control"  placeholder="验证码"
                                required="required" v=""/>
-                        <button id="authcode_button" class="btn btn-primary"> 发送验证码 </button>
+                        <button id="authcode_button" class="btn btn-primary">免费获取验证码</button>
                     </div>
                     <div>
                         <a id="btn_register" class="btn btn-default"> 注册 </a>
@@ -145,4 +140,11 @@
     </div>
 </div>
 </body>
+
+<!-- 引入js文件 -->
+<script type="text/javascript" src="../js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../js/md5.js"></script>
+<script type="text/javascript" src="../js/login.js"></script>
+<script type="text/javascript" src="../js/register.js"></script>
+
 </html>

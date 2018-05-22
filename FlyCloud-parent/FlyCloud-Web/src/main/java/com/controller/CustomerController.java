@@ -1,8 +1,10 @@
 package com.controller;
 
+import com.pojo.Adminlog;
 import com.pojo.Customer;
 import com.pojo.Employee;
 import common.Assist;
+import common.MyConst;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import service.AdminlogService;
 import service.CustomerService;
 import service.EmployeeService;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +35,8 @@ public class CustomerController {
     CustomerService customerService;
     @Autowired
     EmployeeService employeeService;
-
+    @Autowired
+    AdminlogService adminlogService;
     /**
      * @description: 根据客户id删除客户信息
      * @param:
@@ -51,6 +56,17 @@ public class CustomerController {
         } else {
             logger.debug("删除客户失败:" + count);
         }
+
+        Employee employeeById = employeeService.selectEmployeeById(Integer.parseInt(empId));
+
+        //添加日志管理信息
+        Adminlog adminlog = new Adminlog();
+        adminlog.setEmpId(Integer.parseInt(empId));
+        adminlog.setCompanyId(employeeById.getCompanyId());
+        adminlog.setLogContent("删除了客户信息");
+        adminlog.setLogTime(new Date());
+        int i = adminlogService.insertAdminlog(adminlog);
+        logger.debug("添加了"+i+"条日志管理记录");
 
         logger.debug("结束--根据客户id删除客户信息的方法");
         return "redirect:/customer/getAllCustomer.action?empId="+empId;
@@ -75,6 +91,17 @@ public class CustomerController {
         } else {
             logger.debug("修改客户失败:" + count);
         }
+
+        Employee employeeById = employeeService.selectEmployeeById(Integer.parseInt(empId));
+
+        //添加日志管理信息
+        Adminlog adminlog = new Adminlog();
+        adminlog.setEmpId(Integer.parseInt(empId));
+        adminlog.setCompanyId(employeeById.getCompanyId());
+        adminlog.setLogContent("修改了客户信息");
+        adminlog.setLogTime(new Date());
+        int i = adminlogService.insertAdminlog(adminlog);
+        logger.debug("添加了"+i+"条日志管理记录");
 
         logger.debug("结束--添加客户资料的方法");
         return "redirect:/customer/getAllCustomer.action?empId="+empId;
@@ -121,8 +148,19 @@ public class CustomerController {
             logger.debug("添加客户失败:" + count);
         }
 
+        Employee employeeById = employeeService.selectEmployeeById(Integer.parseInt(empId));
+
+        //添加日志管理信息
+        Adminlog adminlog = new Adminlog();
+        adminlog.setEmpId(Integer.parseInt(empId));
+        adminlog.setCompanyId(employeeById.getCompanyId());
+        adminlog.setLogContent("添加了客户");
+        adminlog.setLogTime(new Date());
+        int i = adminlogService.insertAdminlog(adminlog);
+        logger.debug("添加了"+i+"条日志管理记录");
+
         logger.debug("结束--添加客户资料的方法");
-        return "redirect:/customer/getAllCustomer.action?empId="+empId;
+        return "redirect:../customer/getAllCustomer.action?empId="+empId;
     }
 
     /** 
@@ -138,6 +176,7 @@ public class CustomerController {
 
         //根据用户id查询用户，并获取到公司编号companyId
         Employee employeeById = employeeService.selectEmployeeById(Integer.parseInt(empId));
+        Integer positionId = employeeById.getPositionId();
         Integer companyId = employeeById.getCompanyId();
 
         //根据登录用户的公司编号查询所有的
@@ -150,7 +189,21 @@ public class CustomerController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("emp",employeeById);
         modelAndView.addObject("customerList",customerList);
-        modelAndView.setViewName("customerList");
+
+        if (positionId == MyConst.ADMINPOSITION){
+            modelAndView.setViewName("AdminCustomerList");//经理权限
+        } else if (positionId == MyConst.EMPPOSITION) {
+            modelAndView.setViewName("EmpCustomerList");//操作员权限
+        }
+
+        //添加日志管理信息
+        Adminlog adminlog = new Adminlog();
+        adminlog.setEmpId(Integer.parseInt(empId));
+        adminlog.setCompanyId(employeeById.getCompanyId());
+        adminlog.setLogContent("查询了所有的客户资料");
+        adminlog.setLogTime(new Date());
+        int i = adminlogService.insertAdminlog(adminlog);
+        logger.debug("添加了"+i+"条日志管理记录");
 
         logger.debug("结束--查询客户资料的方法");
         return modelAndView;

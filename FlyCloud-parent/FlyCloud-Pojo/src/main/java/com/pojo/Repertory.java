@@ -1,4 +1,7 @@
 package com.pojo;
+
+import java.text.SimpleDateFormat;
+
 public class Repertory {
     private Integer repertoryId;//库存编号
     private java.util.Date inTime;//入库时间
@@ -8,6 +11,7 @@ public class Repertory {
     private Integer carId;//汽车编号
     private Company company;
     private Car car;
+    private String inTimeFormat; //入库时间格式化
     public Repertory() {
         super();
     }
@@ -22,6 +26,11 @@ public class Repertory {
         this.company = company;
         this.car = car;
     }
+
+    public String getInTimeFormat() {
+        return new SimpleDateFormat("yyyy/MM/dd").format(inTime);
+    }
+
     public Integer getRepertoryId() {
         return this.repertoryId;
     }
@@ -86,4 +95,17 @@ public class Repertory {
         this.car = car;
     }
 
+    @Override
+    public String toString() {
+        return "Repertory{" +
+                "repertoryId=" + repertoryId +
+                ", inTime=" + inTime +
+                ", companyId=" + companyId +
+                ", repertoryNum=" + repertoryNum +
+                ", purchasePrice=" + purchasePrice +
+                ", carId=" + carId +
+                ", company=" + company +
+                ", car=" + car +
+                '}';
+    }
 }

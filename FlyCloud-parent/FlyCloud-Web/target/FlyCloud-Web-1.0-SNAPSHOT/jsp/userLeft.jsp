@@ -12,7 +12,9 @@
         <img src="../images/img.jpg" alt="..." class="img-circle profile_img">
     </div>
     <div class="profile_info">
-        <span>欢迎您的到来,</span>
+        <span>欢迎您,</span>
         <h2>${emp.empName} ！</h2>
     </div>
+    <div>&nbsp;&nbsp;&nbsp;&nbsp;${emp.company.companyName}</div>
+
 </div>

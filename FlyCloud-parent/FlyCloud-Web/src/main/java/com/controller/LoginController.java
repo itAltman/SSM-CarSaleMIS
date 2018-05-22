@@ -1,8 +1,10 @@
 package com.controller;
 
+import com.pojo.Adminlog;
 import com.pojo.Company;
 import com.pojo.Employee;
 import common.Assist;
+import common.MyConst;
 import common.PhoneMessageUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,9 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import service.AdminlogService;
 import service.CompanyService;
 import service.EmployeeService;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,6 +38,8 @@ public class LoginController {
     CompanyService companyService;
     @Autowired
     EmployeeService employeeService;
+    @Autowired
+    AdminlogService adminlogService;
 
     PhoneMessageUtil phoneMessageUtil = new PhoneMessageUtil();
 
@@ -54,11 +60,20 @@ public class LoginController {
         logger.debug("根据id查询员工对象为：" + employeeById);
 
         Integer positionId = employeeById.getPositionId();
-        if (positionId == 1){
-            modelAndView.setViewName("mainAdmin");//经理权限
-        } else if (positionId == 2) {
-            modelAndView.setViewName("mainEmp");//操作员权限
+        if (positionId == MyConst.ADMINPOSITION){
+            modelAndView.setViewName("AdminMain");//经理权限
+        } else if (positionId == MyConst.EMPPOSITION) {
+            modelAndView.setViewName("EmpMain");//操作员权限
         }
+
+        //添加日志管理信息
+        Adminlog adminlog = new Adminlog();
+        adminlog.setEmpId(Integer.parseInt(empId));
+        adminlog.setCompanyId(employeeById.getCompanyId());
+        adminlog.setLogContent("访问首页");
+        adminlog.setLogTime(new Date());
+        int i = adminlogService.insertAdminlog(adminlog);
+        logger.debug("添加了"+i+"条日志管理记录");
 
         modelAndView.addObject("emp",employeeById);
         logger.debug("结束--根据id查询员工对象的方法");
@@ -134,7 +149,7 @@ public class LoginController {
         logger.debug("开始--发送手机短信的方法");
         Map<String,String> map = new HashMap<String, String>();
 
-        String authcode = phoneMessageUtil.genRandomNum(6);
+        String authcode = phoneMessageUtil.genRandomNum(4);
         logger.debug("手机验证码,生成验证码:"+authcode);
 
         if(phoneMessageUtil.sandMassage(authcode,empPhoneNumber)){
@@ -161,6 +176,7 @@ public class LoginController {
     @ResponseBody
     public Map<String, String> isLoginSuccess(Employee employee){
         logger.debug("开始--验证是否登录成功的方法");
+        logger.debug("前台获取到的employee为："+employee);
         Map<String,String> map = new HashMap<String, String>();
 
         //设置参数条件
@@ -179,6 +195,16 @@ public class LoginController {
             Employee employeeByObj = employeeService.selectEmployeeByObj(employee);
             Integer empId = employeeByObj.getEmpId();
             map.put("resultLogin",empId.toString());
+
+            //添加日志管理信息
+            Adminlog adminlog = new Adminlog();
+            adminlog.setEmpId(empId);
+            adminlog.setCompanyId(employeeByObj.getCompanyId());
+            adminlog.setLogContent("登录系统");
+            adminlog.setLogTime(new Date());
+            int i = adminlogService.insertAdminlog(adminlog);
+            logger.debug("添加了"+i+"条日志管理记录");
+
         } else {
             logger.debug("验证失败，拒绝登录");
             map.put("resultLogin","false");

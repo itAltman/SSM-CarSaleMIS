@@ -1,5 +1,4 @@
 $(function () {
-
     /*获取工程名称*/
     var projectName = $('#projectName').attr('project');
     console.log(projectName);
@@ -10,7 +9,6 @@ $(function () {
     var EmpName_login = $('#EmpName_login');//员工名称
     var PhoneNumber_login = $('#PhoneNumber_login');//员工电话
     var Password_login = $('#Password_login');//密码
-
 
     /*电话正则表达式*/
     var telphonePar = /^1[3|4|5|7|8][0-9]{9}$/;
@@ -31,6 +29,8 @@ $(function () {
             var empName = EmpName_login.val();
             var phoneNumber_login = PhoneNumber_login.val();
             var password_login = Password_login.val();
+
+            /*var psw = $.md5(password_login);//md5加密*/
 
             /*发送get请求获取公司编号*/
             $.getJSON(

@@ -16,11 +16,6 @@
             <artifactId>FlyCloud-Pojo</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        <dependency>
-            <groupId>com.atm</groupId>
-            <artifactId>FlyCloud-Util</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
     </dependencies>
 
 
